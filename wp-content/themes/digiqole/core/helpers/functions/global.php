@@ -341,7 +341,16 @@ function digiqole_video_embed($url){
 	$embed_url = '';
     if(strpos($url, 'facebook.com/') !== false) {
         //it is FB video
-        $embed_url ='https://www.facebook.com/plugins/video.php?href='.rawurlencode($url).'&show_text=1&width=200';
+        // $embed_url ='https://www.facebook.com/plugins/video.php?href='.rawurlencode($url).'&show_text=1&width=200';
+		
+		//it is Youtube video
+		$video_id = explode("v=",$url)[0];
+		
+		if(strpos($video_id, 'video_id=') !== false){
+			$video_id = explode("video_id=",$video_id);
+		}
+		$embed_url ='https://www.facebook.com/v2.5/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fvideo.php%3Fv%3D'.$video_id[1];
+
     }else if(strpos($url, 'vimeo.com/') !== false) {
         //it is Vimeo video
         $video_id = explode("vimeo.com/",$url)[1];
@@ -478,7 +487,7 @@ function digiqole_get_excerpt($count = 100 ) {
    }
    $blog_read_more = digiqole_option('blog_read_more','yes');
    if($blog_read_more=='yes'){
-      $excerpt = wp_kses_post($excerpt .'<a class="readmore-btn" href="'.esc_url(get_the_permalink()).'">'. $blog_read_more_text. '<i class="icon icon-arrow-right"> </i></a>');
+      $excerpt = digiqole_kses($excerpt .'<a class="readmore-btn" href="'.esc_url(get_the_permalink()).'">'. $blog_read_more_text. '<i class="icon icon-arrow-right"> </i></a>');
    }
   
    return $excerpt;

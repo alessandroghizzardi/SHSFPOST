@@ -21,9 +21,13 @@ $show_author_avator = isset($settings['show_author_avator'])?
                      $settings['show_author_avator'] 
                      :'no';
 
+ $col_reverse = (isset($settings['col_reverse'])) 
+                     ? $settings['col_reverse'] 
+                     : 'no'; 
+
 ?>
 
-<div class="post-block-style post-float row">
+<div class="post-block-style post-float row <?php echo esc_attr(($col_reverse == 'yes')? 'flex-row-reverse' : ''); ?>">
       <div class="col-md-6 order-md-last">
          <div class="post-thumb">
             <a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail('digiqole-medium'); ?></a>
@@ -68,7 +72,7 @@ $show_author_avator = isset($settings['show_author_avator'])?
                <?php } ?>   
                </div>
                <?php if($show_desc=='yes'): ?>
-                  <p> <?php echo esc_html(wp_trim_words(get_the_content(),$post_content_crop,'')); ?> </p>
+                  <p> <?php echo esc_html(wp_trim_words(get_the_excerpt(),$post_content_crop,'')); ?> </p>
                <?php endif; ?>
 
                <?php if($readmore != '') { ?>

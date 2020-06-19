@@ -298,6 +298,10 @@ class Digiqole_Post_Slider_Widget extends Widget_Base {
                         'latestpost'      =>esc_html__( 'Latest posts', 'digiqole' ),
                         'popularposts'    =>esc_html__( 'Popular posts', 'digiqole' ),
                         'mostdiscussed'    =>esc_html__( 'Most discussed', 'digiqole' ),
+                        'title'       =>esc_html__( 'Title', 'digiqole' ),
+                        'name'       =>esc_html__( 'Name', 'digiqole' ),
+                        'rand'       =>esc_html__( 'Random', 'digiqole' ),
+                        'ID'       =>esc_html__( 'ID', 'digiqole' ),
                     ],
             ]
         );
@@ -630,18 +634,30 @@ class Digiqole_Post_Slider_Widget extends Widget_Base {
 
        } 
 
-        switch($settings['post_sortby']){
+       switch($settings['post_sortby']){
          case 'popularposts':
-             $arg['meta_key'] = 'newszone_post_views_count';
-             $arg['orderby'] = 'meta_value_num';
+              $arg['meta_key'] = 'newszone_post_views_count';
+              $arg['orderby'] = 'meta_value_num';
          break;
          case 'mostdiscussed':
-             $arg['orderby'] = 'comment_count';
+              $arg['orderby'] = 'comment_count';
+         break;
+         case 'title':
+             $arg['orderby'] = 'title';
+         break;
+         case 'ID':
+             $arg['orderby'] = 'ID';
+         break;
+         case 'rand':
+             $arg['orderby'] = 'rand';
+         break;
+         case 'name':
+             $arg['orderby'] = 'name';
          break;
          default:
-             $arg['orderby'] = 'date';
+              $arg['orderby'] = 'date';
          break;
-     }
+      }
      $settings['ts_image_size'] = 'post-thumbnail';
 
         //$settings['show_author'] = 'no';

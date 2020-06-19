@@ -50,7 +50,7 @@
                      
                $digiqole_logo_url= esc_url(
                      digiqole_src(
-                        'general_dark_logo',
+                        'general_light_logo',
                         DIGIQOLE_IMG . '/logo/logo-light.png'
                      )
                   );

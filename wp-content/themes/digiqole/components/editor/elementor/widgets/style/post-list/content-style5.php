@@ -71,7 +71,7 @@
                </div>
                <?php if($show_desc == 'yes'): ?>
                     <p> 
-                        <?php echo esc_html(wp_trim_words(get_the_content(),$post_content_crop,'')); ?>
+                        <?php echo esc_html(wp_trim_words(get_the_excerpt(),$post_content_crop,'')); ?>
                    </p>
                <?php endif; ?> 
          

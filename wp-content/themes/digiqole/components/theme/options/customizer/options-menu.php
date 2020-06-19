@@ -47,8 +47,13 @@ $options =[
                     'desc'	           => esc_html__( 'sub menu color.', 'digiqole' ),
                     'type'	           => 'color-picker',
                 ],
-         
 
+                'humberger_color' => [
+                    'label'	        => esc_html__( 'Humberger Color', 'digiqole' ),
+                    'desc'	           => esc_html__( 'only for tab and mobile device', 'digiqole' ),
+                    'type'	           => 'color-picker',
+                ],
+         
                 'menu_font'    => array(
                     'type' => 'typography-v2',
                     'label' => esc_html__('Menu Font', 'digiqole'),

@@ -316,6 +316,17 @@ class Digiqole_Post_List_Widget extends Widget_Base {
 
             ]
         );
+      $this->add_control(
+            'col_reverse',
+            [
+                'label' => esc_html__('Column Reverse', 'digiqole'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__('Yes', 'digiqole'),
+                'label_off' => esc_html__('No', 'digiqole'),
+                'default' => 'no',
+                'condition' => [ 'grid_style' => ['style4'] ]
+            ]
+        );
         $this->add_control(
          'show_rating',
             [
@@ -361,6 +372,10 @@ class Digiqole_Post_List_Widget extends Widget_Base {
                         'latestpost'      =>esc_html__( 'Latest posts', 'digiqole' ),
                         'popularposts'    =>esc_html__( 'Popular posts', 'digiqole' ),
                         'mostdiscussed'    =>esc_html__( 'Most discussed', 'digiqole' ),
+                        'title'       =>esc_html__( 'Title', 'digiqole' ),
+                        'name'       =>esc_html__( 'Name', 'digiqole' ),
+                        'rand'       =>esc_html__( 'Random', 'digiqole' ),
+                        'ID'       =>esc_html__( 'ID', 'digiqole' ),
                     ],
             ]
         );
@@ -640,6 +655,7 @@ class Digiqole_Post_List_Widget extends Widget_Base {
         $show_view_count    = $settings['show_view_count'];
         $post_meta_style    = $settings['post_meta_style'];
         $show_border        = $settings['show_border'];
+        $col_reverse        = $settings['col_reverse'];
         $readmore           = ''; 
 
         $arg = [
@@ -657,18 +673,30 @@ class Digiqole_Post_List_Widget extends Widget_Base {
        }
 
          
-        switch($settings['post_sortby']){
-            case 'popularposts':
-                $arg['meta_key'] = 'newszone_post_views_count';
-                $arg['orderby'] = 'meta_value_num';
-            break;
-            case 'mostdiscussed':
-                $arg['orderby'] = 'comment_count';
-            break;
-            default:
-                $arg['orderby'] = 'date';
-            break;
-        }
+       switch($settings['post_sortby']){
+         case 'popularposts':
+              $arg['meta_key'] = 'newszone_post_views_count';
+              $arg['orderby'] = 'meta_value_num';
+         break;
+         case 'mostdiscussed':
+              $arg['orderby'] = 'comment_count';
+         break;
+         case 'title':
+             $arg['orderby'] = 'title';
+         break;
+         case 'ID':
+             $arg['orderby'] = 'ID';
+         break;
+         case 'rand':
+             $arg['orderby'] = 'rand';
+         break;
+         case 'name':
+             $arg['orderby'] = 'name';
+         break;
+         default:
+              $arg['orderby'] = 'date';
+         break;
+      }
         $settings['ts_image_size'] = 'post-thumbnail';
         $query = new \WP_Query( $arg ); ?>
      
@@ -708,7 +736,7 @@ class Digiqole_Post_List_Widget extends Widget_Base {
                      <?php endwhile; ?>
                </div>    
          <?php elseif($settings['grid_style'] =='style4'): ?>  
-            <div class="ts-grid-item-4 post-list-4 <?php echo esc_attr(($show_border == 'yes')? 'show-border' : ''); ?>">
+            <div class="ts-grid-item-4 post-list-4  <?php echo esc_attr(($show_border == 'yes')? 'show-border' : ''); ?>">
                <?php while ($query->have_posts()) : $query->the_post(); ?>
                         
                   <?php  require 'style/post-list/content-style4.php'; ?>

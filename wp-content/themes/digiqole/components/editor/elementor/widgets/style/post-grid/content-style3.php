@@ -4,6 +4,10 @@
                      ?$settings['show_desc'] 
                      :'yes';
 
+      $post_content_crop =   (isset($settings['post_content_crop']))?
+                     $settings['post_content_crop']
+                     :20;
+
       $ts_image_size	= (isset($settings['ts_image_size']))
                            ? $settings['ts_image_size']
                            : 'full';  

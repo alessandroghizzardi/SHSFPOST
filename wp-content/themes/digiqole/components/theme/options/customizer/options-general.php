@@ -7,6 +7,28 @@ $options =[
     'general_settings' => [
             'title'		 => esc_html__( 'General settings', 'digiqole' ),
             'options'	 => [
+               'preloader_show' => [
+                  'type'			 => 'switch',
+                  'label'		    => esc_html__( 'Preloader show', 'digiqole' ),
+                  'desc'			 => esc_html__( 'Do you want to show preloader on your site ?', 'digiqole' ),
+                  'value'         => 'no',
+                  'left-choice'	 => [
+                     'value'     => 'yes',
+                     'label'	   => esc_html__( 'Yes', 'digiqole' ),
+                  ],
+                  'right-choice'	 => [
+                     'value'	 => 'no',
+                     'label'	 => esc_html__( 'No', 'digiqole' ),
+                  ],
+                ],
+                'preloader_logo' => [
+                  'label'	        => esc_html__( 'Preloader logo', 'digiqole' ),
+                  'desc'	           => esc_html__( 'When you enable preloader then you can set preloader image otherwise default color preloader you will see', 'digiqole' ),
+                  'type'	           => 'upload',
+                  'image_only'      => true,
+               ],
+              
+
                'general_text_logo' => [
                   'type'			   => 'switch',
                   'label'			   => esc_html__( 'Logo text', 'digiqole' ),
@@ -142,7 +164,12 @@ $options =[
                   ],
               ],
 
-            
+              'blog_reading_progressbar_color' => [
+               'label' => esc_html__( 'Progressbar color', 'digiqole'),
+               'type' => 'color-picker',
+               'value' => '#000',
+               'desc' => esc_html__( 'You can change the progressbar color with rgba color or solid color', 'digiqole'),
+               ],
 
                'blog_reading_pregressbar_settings' => [
                   'type' => 'multi-picker',

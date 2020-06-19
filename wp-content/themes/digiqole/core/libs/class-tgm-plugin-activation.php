@@ -207,7 +207,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 		 *
 		 * @since 2.2.0
 		 *
-		 * @var string Message filtered by wp_kses_post(). Default is empty string.
+		 * @var string Message filtered by digiqole_kses(). Default is empty string.
 		 */
 		public $message = '';
 
@@ -665,7 +665,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 
 				<?php
 				if ( ! empty( $this->message ) && is_string( $this->message ) ) {
-					echo wp_kses_post( $this->message );
+					echo digiqole_kses( $this->message );
 				}
 				?>
 				<?php $plugin_table->views(); ?>
@@ -953,7 +953,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 				$activate = activate_plugin( $file_path );
 
 				if ( is_wp_error( $activate ) ) {
-					echo '<div id="message" class="error"><p>', wp_kses_post( $activate->get_error_message() ), '</p></div>',
+					echo '<div id="message" class="error"><p>', digiqole_kses( $activate->get_error_message() ), '</p></div>',
 						'<p><a href="', esc_url( $this->get_tgmpa_url() ), '" target="_parent">', esc_html( $this->strings['return'] ), '</a></p>';
 
 					return false; // End it here if there is an error with activation.
@@ -1098,7 +1098,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 
 					// If dismissable is false and a message is set, output it now.
 					if ( ! $this->dismissable && ! empty( $this->dismiss_msg ) ) {
-						$rendered .= sprintf( $line_template, wp_kses_post( $this->dismiss_msg ) );
+						$rendered .= sprintf( $line_template, digiqole_kses( $this->dismiss_msg ) );
 					}
 
 					// Render the individual message lines for the notice.
@@ -2936,7 +2936,7 @@ if ( ! class_exists( 'TGMPA_List_Table' ) ) {
 				$activate = activate_plugins( $plugins_to_activate );
 
 				if ( is_wp_error( $activate ) ) {
-					echo '<div id="message" class="error"><p>', wp_kses_post( $activate->get_error_message() ), '</p></div>';
+					echo '<div id="message" class="error"><p>', digiqole_kses( $activate->get_error_message() ), '</p></div>';
 				} else {
 					$count        = count( $plugin_names ); // Count so we can use _n function.
 					$plugin_names = array_map( array( 'TGMPA_Utils', 'wrap_in_strong' ), $plugin_names );
@@ -3666,7 +3666,7 @@ if ( ! class_exists( 'TGMPA_Utils' ) ) {
 		 * @return string
 		 */
 		public static function wrap_in_em( $string ) {
-			return '<em>' . wp_kses_post( $string ) . '</em>';
+			return '<em>' . digiqole_kses( $string ) . '</em>';
 		}
 
 		/**
@@ -3680,7 +3680,7 @@ if ( ! class_exists( 'TGMPA_Utils' ) ) {
 		 * @return string
 		 */
 		public static function wrap_in_strong( $string ) {
-			return '<strong>' . wp_kses_post( $string ) . '</strong>';
+			return '<strong>' . digiqole_kses( $string ) . '</strong>';
 		}
 
 		/**

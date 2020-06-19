@@ -3,6 +3,8 @@
 $show_author_avator = isset($settings['show_author_avator'])?
                      $settings['show_author_avator'] 
                      :'no'; 
+$show_rating      =   (isset($settings['show_rating'])) ? $settings['show_rating'] :'no'; 
+$post_id = get_the_ID();
 
 ?>
 
@@ -65,11 +67,17 @@ $show_author_avator = isset($settings['show_author_avator'])?
                         <?php } ?>
                         
                       </div>
+                       <?php if($show_rating=='yes'): ?>
+                           <div class="post-review">
+                              <?php echo do_shortcode("[wp-reviews-rating post-id='$post_id' ratting-show='yes' count-show='no' vote-show='yes' vote-text='Votes' class='']"); ?>
+                           </div>
+                        <?php endif; ?>
+                        
                       <?php if($show_desc == 'yes'): ?>
                          <p><?php echo esc_html( wp_trim_words(get_the_excerpt(),$post_content_crop,'') );?></p>
                       <?php endif; ?>
                       <?php if($readmore != '') { ?>
-                         <a class="post-readmore" href="<?php echo esc_url( get_permalink()); ?>" > <?php echo esc_html($readmore); ?> <i class="fa fa-arrow-right"></i> </a>
+                         <a class="post-readmore" href="<?php echo esc_url( get_permalink()); ?>" > <?php echo esc_html($readmore); ?> <i class="icon icon-arrow-right"></i> </a>
                       <?php } ?>
                   
                    </div><!-- Post content end -->

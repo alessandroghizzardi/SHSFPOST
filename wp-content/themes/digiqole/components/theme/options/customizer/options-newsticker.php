@@ -64,7 +64,7 @@ $options =[
                            'latest'   => esc_html__('latest Post', 'digiqole'),
                            'trending' => esc_html__('Trending post', 'digiqole'),
                            'category' => esc_html__('Category', 'digiqole'),
-                           
+                           'tag' => esc_html__('Tag', 'digiqole'),
                         ],
                       
                ],
@@ -84,6 +84,23 @@ $options =[
                     
                   )
               ),
+              'newsticker_tag_by_choice' => array(
+               'type' => 'multi-picker',
+               'picker' => 'newsticker_post_order_by',
+               'choices' => array(
+                   'tag' => array(
+                        'newsticker_post_tag' => [
+                           'type'  => 'multi-select',
+                           'label' => esc_html__('Newsticker post tag', 'digiqole'),
+                           'population' => 'taxonomy',
+                           'source' => 'tag',
+                           'limit' => 300,
+                        ],
+                   ),
+                 
+               )
+           ),
+           
               
                'newsticker_post_number' => [
                   'type'  => 'text',

@@ -50,7 +50,7 @@ $show_author_avator = isset($settings['show_author_avator'])?
 
          <div class="post-thumb ts-resize">
             <?php if(get_post_format()=='video'): ?>
-            <?php $video = digiqole_meta_option($query->posts[0]->ID,'featured_video','#');  
+            <?php $video = digiqole_meta_option(get_the_ID(),'featured_video','#');  
             
             ?>
                   <div class="post-video-content">

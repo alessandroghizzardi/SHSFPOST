@@ -8,9 +8,24 @@ function digiqole_fw_ext_backups_demos( $demos ) {
 			'screenshot'	 => esc_url( $demo_content_installer ) . '/default/screenshot.png',
 			'preview_link'	 => esc_url( 'http://themeforest.net/user/tripples/portfolio' ),
 		),
+		'personal_blog'			 => array(
+			'title'			 => esc_html__( 'Personal Blog', 'digiqole' ),
+			'screenshot'	 => esc_url( $demo_content_installer ) . '/personal_blog/screenshot.png',
+			'preview_link'	 => esc_url( 'http://themeforest.net/user/tripples/portfolio' ),
+		),
 		'dark'			 => array(
 			'title'			 => esc_html__( 'Dark', 'digiqole' ),
 			'screenshot'	 => esc_url( $demo_content_installer ) . '/dark/screenshot.png',
+			'preview_link'	 => esc_url( 'http://themeforest.net/user/tripples/portfolio' ),
+		),
+		'covid19'			 => array(
+			'title'			 => esc_html__( 'Covid-19', 'digiqole' ),
+			'screenshot'	 => esc_url( $demo_content_installer ) . '/covid19/screenshot.png',
+			'preview_link'	 => esc_url( 'http://themeforest.net/user/tripples/portfolio' ),
+		),
+		'food_recipe'			 => array(
+			'title'			 => esc_html__( 'Food Recipe', 'digiqole' ),
+			'screenshot'	 => esc_url( $demo_content_installer ) . '/food_recipe/screenshot.png',
 			'preview_link'	 => esc_url( 'http://themeforest.net/user/tripples/portfolio' ),
 		),
 		

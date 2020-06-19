@@ -65,7 +65,7 @@ if ( !function_exists('digiqole_get_breadcrumbs') ) {
             echo '">';
          
             echo esc_html__( 'Home', 'digiqole' );
-            echo "</a>". wp_kses_post( $seperator )."</li> " ;
+            echo "</a>". digiqole_kses( $seperator )."</li> " ;
             if ( is_category() || is_single() ) {
             
             
@@ -85,7 +85,7 @@ if ( !function_exists('digiqole_get_breadcrumbs') ) {
                }
                
                if ( is_single() ) {
-                  echo '<li>'.wp_kses_post( $seperator );
+                  echo '<li>'.digiqole_kses( $seperator );
                   echo esc_html( $word ) != '' ? wp_trim_words( get_the_title(), $word ) : get_the_title();
                   echo '</li>';
                   

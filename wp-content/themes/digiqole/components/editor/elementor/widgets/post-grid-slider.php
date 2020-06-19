@@ -86,6 +86,18 @@ class Digiqole_Post_Grid_Slider_Widget extends Widget_Base {
               'default' => 'yes'
               ]
       );
+
+      $this->add_control(
+          'digiqole_slider_nav_show',
+              [
+              'label' => esc_html__( 'Nav Show', 'digiqole' ),
+              'type' => \Elementor\Controls_Manager::SWITCHER,
+              'label_on' => esc_html__( 'Yes', 'digiqole' ),
+              'label_off' => esc_html__( 'No', 'digiqole' ),
+              'return_value' => 'yes',
+              'default' => 'no'
+              ]
+      );
       $this->add_control(
          'post_count_slider',
          [
@@ -142,7 +154,30 @@ class Digiqole_Post_Grid_Slider_Widget extends Widget_Base {
         'default' => '35',
        
       ]
-    );  
+    );
+    
+    $this->add_control(
+    'show_desc',
+        [
+            'label' => esc_html__('Show post description', 'digiqole'),
+            'type' => Controls_Manager::SWITCHER,
+            'label_on' => esc_html__('Yes', 'digiqole'),
+            'label_off' => esc_html__('No', 'digiqole'),
+            'default' => 'no',
+            
+        ]
+    );
+    
+    $this->add_control(
+    'post_content_crop',
+    [
+        'label'         => esc_html__( 'Description limit', 'digiqole' ),
+        'type'          => Controls_Manager::NUMBER,
+        'default' => '35',
+        'condition' => [ 'show_desc' => ['yes'] ],
+    
+    ]
+    );
   
     $this->add_control(
         'show_rating',
@@ -326,6 +361,10 @@ class Digiqole_Post_Grid_Slider_Widget extends Widget_Base {
                         'latestpost'      =>esc_html__( 'Latest posts', 'digiqole' ),
                         'popularposts'    =>esc_html__( 'Popular posts', 'digiqole' ),
                         'mostdiscussed'    =>esc_html__( 'Most discussed', 'digiqole' ),
+                        'title'       =>esc_html__( 'Title', 'digiqole' ),
+                        'name'       =>esc_html__( 'Name', 'digiqole' ),
+                        'rand'       =>esc_html__( 'Random', 'digiqole' ),
+                        'ID'       =>esc_html__( 'ID', 'digiqole' ),
                     ],
             ]
         );
@@ -410,6 +449,18 @@ class Digiqole_Post_Grid_Slider_Widget extends Widget_Base {
               ],
            ]
         );
+
+        $this->add_control(
+            'desc_color',
+            [
+               'label' => esc_html__('Description color', 'digiqole'),
+               'type' => Controls_Manager::COLOR,
+               'default' => '',
+               'selectors' => [
+                  '{{WRAPPER}} .weekend-top .post-content p' => 'color: {{VALUE}};',                
+               ],
+            ]
+         );
   
         $this->add_group_control(
            Group_Control_Typography::get_type(),
@@ -601,6 +652,7 @@ class Digiqole_Post_Grid_Slider_Widget extends Widget_Base {
         $slide_controls    = [
         
          'dot_nav_show'=>$settings['digiqole_slider_dot_nav_show'], 
+         'nav_show'=>$settings['digiqole_slider_nav_show'], 
          'auto_nav_slide'=>$settings['digiqole_slider_autoplay'], 
          'item_count'=>$settings['post_count_slider'], 
 
@@ -637,16 +689,28 @@ class Digiqole_Post_Grid_Slider_Widget extends Widget_Base {
 
         switch($settings['post_sortby']){
             case 'popularposts':
-                $arg['meta_key'] = 'newszone_post_views_count';
-                $arg['orderby'] = 'meta_value_num';
+                 $arg['meta_key'] = 'newszone_post_views_count';
+                 $arg['orderby'] = 'meta_value_num';
             break;
             case 'mostdiscussed':
-                $arg['orderby'] = 'comment_count';
+                 $arg['orderby'] = 'comment_count';
+            break;
+            case 'title':
+                $arg['orderby'] = 'title';
+            break;
+            case 'ID':
+                $arg['orderby'] = 'ID';
+            break;
+            case 'rand':
+                $arg['orderby'] = 'rand';
+            break;
+            case 'name':
+                $arg['orderby'] = 'name';
             break;
             default:
-                $arg['orderby'] = 'date';
+                 $arg['orderby'] = 'date';
             break;
-        }
+         }
 
         if($settings['last_week_top']=='yes'):
 
@@ -676,8 +740,6 @@ class Digiqole_Post_Grid_Slider_Widget extends Widget_Base {
                </div>
 
         <?php endif; ?>
-
-
 
       <?php  
     }

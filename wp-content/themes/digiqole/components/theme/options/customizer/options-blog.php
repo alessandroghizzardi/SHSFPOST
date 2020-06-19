@@ -57,6 +57,10 @@ $options =[
                     'small'     => DIGIQOLE_IMG . '/admin/post-header-layout/min-style4.png',
                     'large'     => DIGIQOLE_IMG . '/admin/post-header-layout/style4.png',
                  ],
+                 'style8'    => [
+                    'small'     => DIGIQOLE_IMG . '/admin/post-header-layout/min-style1.png',
+                    'large'     => DIGIQOLE_IMG . '/admin/post-header-layout/style1.png',
+                 ],
                ],
                'value'         => 'style1',
             ],

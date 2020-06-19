@@ -336,6 +336,16 @@
 		padding-bottom: 15px;
    }
    
+   .trending-slide{  
+      .carousel-inner {
+         height: 25px;
+         overflow: hidden;
+         .post-title{
+            line-height: 28px !important;
+         }
+      }
+   }
+   
 	.header-gradient-area .nav-search-area{
 		display: none;
    }
@@ -458,6 +468,15 @@
       width: 100%;
       background: #1b1b1b;
       padding: 15px;
+   }
+}
+
+.weekend-top {
+   .owl-nav{
+      .owl-prev,
+      .owl-next{
+         display: none;
+      }
    }
 }
  

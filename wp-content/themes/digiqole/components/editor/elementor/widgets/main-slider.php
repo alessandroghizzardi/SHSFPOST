@@ -51,8 +51,19 @@ class Digiqole_Main_Slider_Widget extends Widget_Base {
                         'imagesmall' => DIGIQOLE_IMG . '/elementor/slider/style3.png',
                         'width' => '50%',
                ],
-               
-         
+
+               'style3' => [
+                  'title' =>esc_html__( 'Style 3', 'digiqole' ),
+                        'imagelarge' => DIGIQOLE_IMG . '/elementor/slider/slider-style4.png',
+                        'imagesmall' => DIGIQOLE_IMG . '/elementor/slider/slider-style4.png',
+                        'width' => '50%',
+               ],
+               'style4' => [
+                  'title' =>esc_html__( 'Style 4', 'digiqole' ),
+                  'imagelarge' => DIGIQOLE_IMG . '/elementor/slider/slider-style5.png',
+                  'imagesmall' => DIGIQOLE_IMG . '/elementor/slider/slider-style5.png',
+                  'width' => '50%',
+               ],
            ],
 
          ]
@@ -297,6 +308,11 @@ class Digiqole_Main_Slider_Widget extends Widget_Base {
                         'latestpost'      =>esc_html__( 'Latest posts', 'digiqole' ),
                         'popularposts'    =>esc_html__( 'Popular posts', 'digiqole' ),
                         'mostdiscussed'    =>esc_html__( 'Most discussed', 'digiqole' ),
+                        'featuredposts'    =>esc_html__( 'Featured posts', 'digiqole' ),
+                        'title'       =>esc_html__( 'Title', 'digiqole' ),
+                        'name'       =>esc_html__( 'Name', 'digiqole' ),
+                        'rand'       =>esc_html__( 'Random', 'digiqole' ),
+                        'ID'       =>esc_html__( 'ID', 'digiqole' ),
                     ],
             ]
         );
@@ -434,7 +450,7 @@ class Digiqole_Main_Slider_Widget extends Widget_Base {
               'name' => 'post_title_typography',
               'label' => esc_html__( 'Typography', 'digiqole' ),
               'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-              'selector' => '{{WRAPPER}} .main-slider .post-content .post-title',
+              'selector' => '{{WRAPPER}} .main-slider .post-content .post-title,{{WRAPPER}} .main-slide.style4 .digiqole-main-slider .post-content .post-title',
            ]
         );
 
@@ -443,9 +459,10 @@ class Digiqole_Main_Slider_Widget extends Widget_Base {
 			[
 				'label' => esc_html__( 'Title margin', 'digiqole' ),
 				'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => [ 'px','%'],
+            'size_units' => [ 'px','%'],
 				'selectors' => [
 					'{{WRAPPER}} .main-slider .post-content .post-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .main-slide.style4 .post-content .post-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
         );
@@ -460,6 +477,7 @@ class Digiqole_Main_Slider_Widget extends Widget_Base {
               'condition' => [ 'show_desc' => ['yes'] ],
               'selectors' => [
                  '{{WRAPPER}} .main-slider .post-content p' => 'color: {{VALUE}};',
+                 '{{WRAPPER}} .main-slide .post-content p' => 'color: {{VALUE}};',
                
               ],
            ]
@@ -470,7 +488,8 @@ class Digiqole_Main_Slider_Widget extends Widget_Base {
                'name' => 'post_meta_typography',
                'label' => esc_html__( 'Meta Typography', 'digiqole' ),
                'scheme' => Scheme_Typography::TYPOGRAPHY_1,
-               'selector' => '{{WRAPPER}} .main-slider .post-meta-info li',
+               'selector' => '{{WRAPPER}} .main-slider .post-meta-info li,{{WRAPPER}} .main-slide .post-meta-info li',
+               
             ]
          );
 
@@ -619,6 +638,19 @@ class Digiqole_Main_Slider_Widget extends Widget_Base {
                 'size_units' => [ 'px','%'],
 				'selectors' => [
 					'{{WRAPPER}} .main-slider .post-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .main-slide .post-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+        );
+
+        $this->add_responsive_control(
+			'desc_padding',
+			[
+				'label' => esc_html__( 'Description padding', 'digiqole' ),
+				'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => [ 'px','%'],
+				'selectors' => [
+					'{{WRAPPER}} .digiqole-main-slider .post-content p' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
         );
@@ -669,7 +701,8 @@ class Digiqole_Main_Slider_Widget extends Widget_Base {
         $show_date          = $settings['show_date'];
         $post_format        = $settings['post_format'];
         $post_title_crop    = $settings['post_title_crop'];
-        $show_author        =  $settings['show_author']; 
+        $show_author        =  $settings['show_author'];
+        $show_desc        =  $settings['show_desc'];
         $post_content_crop  = $settings['post_content_crop'];
         $post_number        = $settings['post_count'];
         $readmore           = $settings['post_readmore'];      
@@ -713,21 +746,55 @@ class Digiqole_Main_Slider_Widget extends Widget_Base {
                ) 
            );
 
-       } 
+       }
 
-        switch($settings['post_sortby']){
+       switch($settings['post_sortby']){
          case 'popularposts':
-             $arg['meta_key'] = 'newszone_post_views_count';
-             $arg['orderby'] = 'meta_value_num';
+              $arg['meta_key'] = 'newszone_post_views_count';
+              $arg['orderby'] = 'meta_value_num';
          break;
          case 'mostdiscussed':
-             $arg['orderby'] = 'comment_count';
+              $arg['orderby'] = 'comment_count';
+         break;
+         case 'featuredposts':
+            $category          = get_category( get_query_var( 'cat' ) );
+            $feature_post_show = digiqole_term_option($category->cat_ID,'block_featured_post', []); 
+            if($feature_post_show == 'yes'){
+               $arg = array(
+                  'cat' => $category->term_id,
+                  'posts_per_page' => $settings['post_count'],
+                  'orderby'     =>  'date',
+                  'order' => 'DESC', 
+                  'suppress_filters' => true,
+                  'meta_query' => array(
+                     array(
+                        'key' => 'digiqole_featured_post',
+                        'value' => 'yes', 
+                        
+                     ),
+                  ) ,
+               );
+
+            }else {
+               break;
+            }
+         break;
+         case 'title':
+             $arg['orderby'] = 'title';
+         break;
+         case 'ID':
+             $arg['orderby'] = 'ID';
+         break;
+         case 'rand':
+             $arg['orderby'] = 'rand';
+         break;
+         case 'name':
+             $arg['orderby'] = 'name';
          break;
          default:
-             $arg['orderby'] = 'date';
+              $arg['orderby'] = 'date';
          break;
-     }
-
+      }
 
         //$settings['show_author'] = 'no';
         $query = new \WP_Query( $arg ); ?>
@@ -744,14 +811,33 @@ class Digiqole_Main_Slider_Widget extends Widget_Base {
                <?php if($settings['block_style']=="style2"): ?>  
                   <div data-controls="<?php echo esc_attr($slide_controls); ?>" class="main-slider owl-carousel">
                      <?php while ($query->have_posts()) : $query->the_post();?>
-
                         <?php  require 'style/post-grid/slider-style3.php'; ?>
+                     <?php endwhile; ?>
+                  </div><!-- block-item6 -->
+                  <?php wp_reset_postdata(); ?>
+               <?php endif; ?>  
+               <?php if($settings['block_style']=="style3"): ?>  
+                  <div data-controls="<?php echo esc_attr($slide_controls); ?>" class="main-slider style3 owl-carousel">
+                     <?php while ($query->have_posts()) : $query->the_post();?>
+
+                        <?php  require 'style/post-grid/slider-style4.php'; ?>
                    
                      <?php endwhile; ?>
                   </div><!-- block-item6 -->
                   <?php wp_reset_postdata(); ?>
                <?php endif; ?>  
-             
+
+               <?php if($settings['block_style']=="style4"): ?>  
+                  <div data-controls="<?php echo esc_attr($slide_controls); ?>" class="main-slide style4 owl-carousel">
+                     <?php while ($query->have_posts()) : $query->the_post();?>
+
+                        <?php  require 'style/post-grid/slider-style4.php'; ?>
+                   
+                     <?php endwhile; ?>
+                  </div><!-- block-item6 -->
+                  <?php wp_reset_postdata(); ?>
+               <?php endif; ?>  
+
          <?php endif; ?>
 
       <?php  

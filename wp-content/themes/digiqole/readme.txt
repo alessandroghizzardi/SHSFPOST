@@ -4,7 +4,7 @@ Theme URI: https://themeforest.net/user/tripples/portfolio
 Author: Tripples
 Author URI: http://themewinter.com
 Description: Digiqole is newspaper & magazine WordPress Theme.
-Version: 1.2.1
+Version: 1.2.8
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: digiqole

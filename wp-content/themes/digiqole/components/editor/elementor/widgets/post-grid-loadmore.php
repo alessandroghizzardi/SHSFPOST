@@ -319,6 +319,10 @@ class Digiqole_Post_Grid_Loadmore_Widget extends Widget_Base {
                     'latestpost'      =>esc_html__( 'Latest posts', 'digiqole' ),
                     'popularposts'    =>esc_html__( 'Popular posts', 'digiqole' ),
                     'mostdiscussed'    =>esc_html__( 'Most discussed', 'digiqole' ),
+                    'title'       =>esc_html__( 'Title', 'digiqole' ),
+                    'name'       =>esc_html__( 'Name', 'digiqole' ),
+                    'rand'       =>esc_html__( 'Random', 'digiqole' ),
+                    'ID'       =>esc_html__( 'ID', 'digiqole' ),
                 ],
         ]
     );
@@ -372,6 +376,19 @@ class Digiqole_Post_Grid_Loadmore_Widget extends Widget_Base {
               ],
            ]
         );
+
+        $this->add_control(
+            'block_des_color',
+            [
+               'label' => esc_html__('Desription color', 'digiqole'),
+               'type' => Controls_Manager::COLOR,
+               'default' => '',
+               'condition' => [ 'show_desc' => ['yes'] ],
+               'selectors' => [
+                  '{{WRAPPER}} .post-grid-loadmore .post-content p' => 'color: {{VALUE}};',
+               ],
+            ]
+         );
   
         $this->add_group_control(
            Group_Control_Typography::get_type(),
@@ -470,17 +487,29 @@ class Digiqole_Post_Grid_Loadmore_Widget extends Widget_Base {
         }
 
         switch($settings['post_sortby']){
-            case 'popularposts':
-                $arg['meta_key'] = 'newszone_post_views_count';
-                $arg['orderby'] = 'meta_value_num';
-            break;
-            case 'mostdiscussed':
-                $arg['orderby'] = 'comment_count';
-            break;
-            default:
-                $arg['orderby'] = 'date';
-            break;
-        }
+         case 'popularposts':
+              $arg['meta_key'] = 'newszone_post_views_count';
+              $arg['orderby'] = 'meta_value_num';
+         break;
+         case 'mostdiscussed':
+              $arg['orderby'] = 'comment_count';
+         break;
+         case 'title':
+             $arg['orderby'] = 'title';
+         break;
+         case 'ID':
+             $arg['orderby'] = 'ID';
+         break;
+         case 'rand':
+             $arg['orderby'] = 'rand';
+         break;
+         case 'name':
+             $arg['orderby'] = 'name';
+         break;
+         default:
+              $arg['orderby'] = 'date';
+         break;
+      }
         
        
         $query = new \WP_Query( $arg );
@@ -537,6 +566,7 @@ class Digiqole_Post_Grid_Loadmore_Widget extends Widget_Base {
                                 </div>
                                 <?php
                             break;
+
                              ?>
                      
                     <?php } ?>

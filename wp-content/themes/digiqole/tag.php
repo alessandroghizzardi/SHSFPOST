@@ -17,9 +17,9 @@ $column = ($blog_sidebar == 1 || !is_active_sidebar('sidebar-1')) ? 'col-lg-8 mx
 <section id="main-content" class="blog main-container" role="main">
 	<div class="container">
 		<div class="category-main-title heading-style3 tag-title mb-30">
-			<h2 class="block-title">
+			<h1 class="block-title">
 				<span class="title-angle-shap"> <?php echo esc_html__('Tags','digiqole').' :'; ?>  <?php single_tag_title( ) ?> </span>
-			</h2>
+			</h1>
 		</div>
 	</div>
 	<div class="container">

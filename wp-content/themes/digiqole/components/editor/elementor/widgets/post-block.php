@@ -85,7 +85,30 @@ class Digiqole_Post_block_Widget extends Widget_Base {
                         'imagelarge' => DIGIQOLE_IMG . '/elementor/post-block/style7.png',
                         'width' => '50%',
                ],
-          
+               'style8' => [
+                    'title' =>esc_html__( 'Style 8', 'digiqole' ),
+                    'imagesmall' => DIGIQOLE_IMG . '/elementor/post-block/style_min8.png',
+                    'imagelarge' => DIGIQOLE_IMG . '/elementor/post-block/style8.png',
+                    'width' => '50%',
+               ],
+               'style9' => [
+                    'title' =>esc_html__( 'Style 9', 'digiqole' ),
+                    'imagesmall' => DIGIQOLE_IMG . '/elementor/post-block/style_min9.png',
+                    'imagelarge' => DIGIQOLE_IMG . '/elementor/post-block/style9.png',
+                    'width' => '50%',
+               ],
+               'style10' => [
+                    'title' =>esc_html__( 'Style 10', 'digiqole' ),
+                    'imagesmall' => DIGIQOLE_IMG . '/elementor/post-block/style_min10.png',
+                    'imagelarge' => DIGIQOLE_IMG . '/elementor/post-block/style10.png',
+                    'width' => '50%',
+               ],
+               'style11' => [
+                'title' =>esc_html__( 'Style 11', 'digiqole' ),
+                'imagesmall' => DIGIQOLE_IMG . '/elementor/post-block/style11.png',
+                'imagelarge' => DIGIQOLE_IMG . '/elementor/post-block/style11.png',
+                'width' => '50%',
+           ],
          
            ],
 
@@ -100,6 +123,21 @@ class Digiqole_Post_block_Widget extends Widget_Base {
             'default'       => '5',
           ]
         );
+
+        $this->add_control(
+			'grid_column',
+			[
+				'label'   => esc_html__( 'Number of Column', 'digiqole' ),
+				'type'    => Controls_Manager::SELECT,
+				'options' => [
+					'6'     => esc_html__( '2', 'digiqole' ),
+					'4'       => esc_html__( '3', 'digiqole' ),
+					'3' => esc_html__( '4', 'digiqole' ),
+				],
+                'default' => '6',
+				'condition' => ['block_style' => ['style8','style11']],
+			]
+		);
 
         $this->add_responsive_control(
 			'thumbnail_height',
@@ -169,7 +207,7 @@ class Digiqole_Post_block_Widget extends Widget_Base {
                   'label_on' => esc_html__('Yes', 'digiqole'),
                   'label_off' => esc_html__('No', 'digiqole'),
                   'default' => 'yes',
-                  'condition' => [ 'block_style' => ['style3', 'style6', 'style5'] ]
+                  'condition' => [ 'block_style' => ['style3', 'style6', 'style5','style8','style9','style10'] ]
                ]
         );
 
@@ -179,7 +217,7 @@ class Digiqole_Post_block_Widget extends Widget_Base {
            'label'         => esc_html__( 'Post content crop', 'digiqole' ),
            'type'          => Controls_Manager::NUMBER,
            'default'       => '10',
-           'condition' => [ 'block_style' => ['style1', 'style3','style6', 'style5'] ]
+           'condition' => [ 'block_style' => ['style1', 'style3','style6', 'style5','style8','style9','style10','style11'] ]
          ]
         );
 
@@ -341,7 +379,7 @@ class Digiqole_Post_block_Widget extends Widget_Base {
             'label' => esc_html__('Read more', 'digiqole'),
             'type' => Controls_Manager::TEXT,
             'default' => esc_html__( 'read more', 'digiqole' ),
-            'condition' => [ 'block_style' => ['style1','style3'] ]
+            'condition' => [ 'block_style' => ['style1','style3','style8','style10','style11'] ]
          ]
         );
 
@@ -355,6 +393,10 @@ class Digiqole_Post_block_Widget extends Widget_Base {
                         'latestpost'      =>esc_html__( 'Latest posts', 'digiqole' ),
                         'popularposts'    =>esc_html__( 'Popular posts', 'digiqole' ),
                         'mostdiscussed'    =>esc_html__( 'Most discussed', 'digiqole' ),
+                        'title'       =>esc_html__( 'Title', 'digiqole' ),
+                        'name'       =>esc_html__( 'Name', 'digiqole' ),
+                        'rand'       =>esc_html__( 'Random', 'digiqole' ),
+                        'ID'       =>esc_html__( 'ID', 'digiqole' ),
                     ],
             ]
         );
@@ -446,7 +488,7 @@ class Digiqole_Post_block_Widget extends Widget_Base {
                'label' => esc_html__('Descrition Color', 'digiqole'),
                'type' => Controls_Manager::COLOR,
                'default' => '',
-                'condition' => ['block_style' => 'style3'],
+                'condition' => ['block_style' => 'style3','style11'],
                'selectors' => [
                   '{{WRAPPER}} .post-content p' => 'color: {{VALUE}};',
                ],
@@ -474,6 +516,8 @@ class Digiqole_Post_block_Widget extends Widget_Base {
                 {{WRAPPER}} .post-block-item.block-item-post.style4 .ts-overlay-style .post-content .post-title,
                 {{WRAPPER}} .post-block-item.block-item-post.style6 .post-feature .post-block-style .post-content .post-title,
                 {{WRAPPER}} .post-block-item.style3 .feature-grid-content .post-content .post-title,
+                {{WRAPPER}} .post-block-item.style3 .feature-grid-content .post-content .post-title,
+                {{WRAPPER}} .block-item-post .post-content .post-title,
                 {{WRAPPER}} .block-item-post.style1 .post-content .post-title.md',
            ]
         );
@@ -486,6 +530,8 @@ class Digiqole_Post_block_Widget extends Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .post-float .post-content .post-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 					'{{WRAPPER}} .post-block-item.style3 .feature-grid-content .post-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .post-block-style .post-content .post-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+					'{{WRAPPER}} .block-item-post .post-block-style .post-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
 				],
 			]
 		);
@@ -569,10 +615,26 @@ class Digiqole_Post_block_Widget extends Widget_Base {
                 'label' => esc_html__( 'Feature Content Padding', 'digiqole' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
-                'condition' => [ 'block_style' => ['style2','style4','style5','style7'] ],
+                'condition' => [ 'block_style' => ['style2','style4','style5','style7','style9','style11'] ],
 
                 'selectors' => [
                     '{{WRAPPER}} .ts-overlay-style .post-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+       $this->add_responsive_control(
+        'block_post_margin',
+        [
+                'label' => esc_html__( 'Post Margin', 'digiqole' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em' ],
+                'condition' => [ 'block_style' => ['style8','style9','style11'] ],
+                'selectors' => [
+                    '{{WRAPPER}} .post-block-item.style8 .post-block-style' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .block-item-post.style9 .post-block-style' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .block-item-post .post-block-style' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .block-item-post .ts-overlay-review-style ' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -612,7 +674,9 @@ class Digiqole_Post_block_Widget extends Widget_Base {
         $show_author_avator = isset($settings['show_author_avator'])?
                                 $settings['show_author_avator'] 
                                 :'no';   
-        
+
+        $grid_column = $settings['grid_column'];   
+
         $arg = [
             'post_type'   =>  'post',
             'post_status' => 'publish',
@@ -642,17 +706,29 @@ class Digiqole_Post_block_Widget extends Widget_Base {
 
        } 
 
-        switch($settings['post_sortby']){
-         case 'popularposts':
+       switch($settings['post_sortby']){
+        case 'popularposts':
              $arg['meta_key'] = 'newszone_post_views_count';
              $arg['orderby'] = 'meta_value_num';
-         break;
-         case 'mostdiscussed':
+        break;
+        case 'mostdiscussed':
              $arg['orderby'] = 'comment_count';
-         break;
-         default:
+        break;
+        case 'title':
+            $arg['orderby'] = 'title';
+        break;
+        case 'ID':
+            $arg['orderby'] = 'ID';
+        break;
+        case 'rand':
+            $arg['orderby'] = 'rand';
+        break;
+        case 'name':
+            $arg['orderby'] = 'name';
+        break;
+        default:
              $arg['orderby'] = 'date';
-         break;
+        break;
      }
 
         $settings['ts_image_size'] = 'post-thumbnail';
@@ -660,34 +736,43 @@ class Digiqole_Post_block_Widget extends Widget_Base {
         $query = new \WP_Query( $arg ); ?>
         
          <?php if ( $query->have_posts() ) : ?>
-              <?php if($settings['block_style']=="style1"): ?>  
-               
+            <?php if($settings['block_style']=="style1"): ?>  
               <?php  require 'style/post-grid/content-style1-a.php'; ?>
-             
-              <?php endif; ?>
-              <?php if($settings['block_style']=="style2"): ?>  
-                 <?php  require 'style/post-grid/content-style1-b.php'; ?>
-              <?php endif; ?>
-              <?php if($settings['block_style']=="style3"): ?>  
-                 <?php  require 'style/post-grid/content-style1-c.php'; ?>
-              <?php endif; ?>
-              <?php if($settings['block_style']=="style4"): ?>  
-                 <?php  require 'style/post-grid/content-style1-d.php'; ?>
-              <?php endif; ?>
-              <?php if($settings['block_style']=="style5"): ?>  
-                <?php  require 'style/post-grid/content-style4.php'; ?>
-              <?php endif; ?>
-              <?php if($settings['block_style']=="style6"): ?>  
-                <?php  require 'style/post-grid/content-style1-f.php'; ?>
-              <?php endif; ?>
+            <?php endif; ?>
+            <?php if($settings['block_style']=="style2"): ?>  
+                <?php  require 'style/post-grid/content-style1-b.php'; ?>
+            <?php endif; ?>
+            <?php if($settings['block_style']=="style3"): ?>  
+                <?php  require 'style/post-grid/content-style1-c.php'; ?>
+            <?php endif; ?>
+            <?php if($settings['block_style']=="style4"): ?>  
+                <?php  require 'style/post-grid/content-style1-d.php'; ?>
+            <?php endif; ?>
+            <?php if($settings['block_style']=="style5"): ?>  
+            <?php  require 'style/post-grid/content-style4.php'; ?>
+            <?php endif; ?>
+            <?php if($settings['block_style']=="style6"): ?>  
+            <?php  require 'style/post-grid/content-style1-f.php'; ?>
+            <?php endif; ?>
 
-              <?php if($settings['block_style']=="style7"): ?>  
-                <?php  require 'style/post-grid/content-style1-g.php'; ?>
+            <?php if($settings['block_style']=="style7"): ?>  
+            <?php  require 'style/post-grid/content-style1-g.php'; ?>
+            <?php endif; ?>
+
+              <?php if($settings['block_style']=="style8"): ?>  
+                <?php  require 'style/post-grid/content-style1-i.php'; ?>
+              <?php endif; ?>
+              <?php if($settings['block_style']=="style9"): ?>  
+                <?php  require 'style/post-grid/content-style1-j.php'; ?>
+              <?php endif; ?>
+              <?php if($settings['block_style']=="style10"): ?>  
+                <?php  require 'style/post-grid/content-style1-k.php'; ?>
+              <?php endif; ?>
+              <?php if($settings['block_style']=="style11"): ?>  
+                <?php  require 'style/post-grid/content-style1-l.php'; ?>
               <?php endif; ?>
              <?php wp_reset_postdata(); ?>
          <?php endif; ?>
-
-
 
       <?php  
     }
@@ -699,7 +784,7 @@ class Digiqole_Post_block_Widget extends Widget_Base {
                 'taxonomy'    => 'category',
                 'hide_empty'  => false,
                 'posts_per_page' => -1, 
-        ) 
+            ) 
         );
 
       $cat_list = [];

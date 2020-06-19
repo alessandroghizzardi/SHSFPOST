@@ -41,6 +41,7 @@ if ( defined( 'FW' ) ) {
     $menu_hover_color = digiqole_option('menu_hover_color');
     $submenu_color = digiqole_option('submenu_color');
     $submenu_hover_color = digiqole_option('submenu_hover_color');
+    $humberger_color = digiqole_option('humberger_color');
 
     $menu_font = digiqole_option( 'menu_font' );
     digiqole_Unyson_Google_Fonts::add_typography_v2( $menu_font );
@@ -102,14 +103,15 @@ if ( defined( 'FW' ) ) {
     digiqole_Unyson_Google_Fonts::add_typography_v2( $heading_font_three );
     $heading_font_three = digiqole_advanced_font_styles( $heading_font_three );
 
-
-
-
-
     // init custom css
     $custom_css	 = digiqole_option( 'custom_css' );
     $output = $custom_css;
-
+    // progress bar color
+    $blog_reading_pregressbar = digiqole_option( 'blog_reading_pregressbar' );
+    if( isset($blog_reading_pregressbar) && $blog_reading_pregressbar == 'yes'){
+        $blog_reading_progressbar_color = digiqole_option( 'blog_reading_progressbar_color' );
+        $output .=".progress-bar{ background-color : $blog_reading_progressbar_color}";
+    }
     // global style
     $output	.= "
         body{ $body_font }
@@ -174,9 +176,7 @@ if ( defined( 'FW' ) ) {
             transition: all ease 500ms;
         }
       
-        .btn-primary:hover,
-        .header .navbar-light .elementskit-menu-hamburger,
-        .header .navbar-light .navbar-toggler-icon{
+        .btn-primary:hover{
          background: $secondary_color;
          border-color: $secondary_color;;
         }
@@ -223,7 +223,9 @@ if ( defined( 'FW' ) ) {
         .footer-social ul li a,
         .digiqole-video-post .video-item .post-video .ts-play-btn,
         .blog-single .post-meta .social-share i.fa-share,
-        .woocommerce input.button.alt:hover,.woocommerce .widget_price_filter .ui-slider .ui-slider-handle{
+        .woocommerce input.button.alt:hover,
+        .woocommerce .widget_price_filter .ui-slider .ui-slider-handle,
+        #preloader{
             background: $style_primary;
         }
         .owl-carousel.owl-loaded .owl-nav .owl-next.disabled, 
@@ -410,6 +412,16 @@ if ( defined( 'FW' ) ) {
             .header .navbar-light .navbar-nav li ul.dropdown-menu li.active a{
                    color: $submenu_hover_color;
                    
+                }
+            ";
+        }
+        if($humberger_color !=''){
+            $output .= "
+     
+            .header .navbar-light .elementskit-menu-hamburger,
+            .header .navbar-light .navbar-toggler-icon {
+                    background: $humberger_color;
+                    border-color: $humberger_color;
                 }
             ";
         }

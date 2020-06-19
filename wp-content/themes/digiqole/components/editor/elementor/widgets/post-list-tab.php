@@ -104,6 +104,10 @@ class Digiqole_post_list_tab_widget extends Widget_Base {
                      'latestpost'      =>esc_html__( 'Latest posts', 'digiqole' ),
                      'viewcount'    =>esc_html__( 'View count', 'digiqole' ),
                      'mostdiscussed'    =>esc_html__( 'Most discussed', 'digiqole' ),
+                     'title'       =>esc_html__( 'Title', 'digiqole' ),
+                    'name'       =>esc_html__( 'Name', 'digiqole' ),
+                    'rand'       =>esc_html__( 'Random', 'digiqole' ),
+                    'ID'       =>esc_html__( 'ID', 'digiqole' ),
                  ],
          ]
      );
@@ -114,9 +118,13 @@ class Digiqole_post_list_tab_widget extends Widget_Base {
              'type'      => Controls_Manager::SELECT,
              'default'   => 'latestpost',
              'options'   => [
-                     'latestpost'      =>esc_html__( 'Latest posts', 'digiqole' ),
-                     'viewcount'    =>esc_html__( 'View count', 'digiqole' ),
-                     'mostdiscussed'    =>esc_html__( 'Most discussed', 'digiqole' ),
+                'latestpost'      =>esc_html__( 'Latest posts', 'digiqole' ),
+                'viewcount'    =>esc_html__( 'View count', 'digiqole' ),
+                'mostdiscussed'    =>esc_html__( 'Most discussed', 'digiqole' ),
+                'title'       =>esc_html__( 'Title', 'digiqole' ),
+                'name'       =>esc_html__( 'Name', 'digiqole' ),
+                'rand'       =>esc_html__( 'Random', 'digiqole' ),
+                'ID'       =>esc_html__( 'ID', 'digiqole' ),
                  ],
          ]
      );
@@ -130,6 +138,10 @@ class Digiqole_post_list_tab_widget extends Widget_Base {
                     'latestpost'      =>esc_html__( 'Latest posts', 'digiqole' ),
                     'viewcount'    =>esc_html__( 'View count', 'digiqole' ),
                     'mostdiscussed'    =>esc_html__( 'Most discussed', 'digiqole' ),
+                    'title'       =>esc_html__( 'Title', 'digiqole' ),
+                    'name'       =>esc_html__( 'Name', 'digiqole' ),
+                    'rand'       =>esc_html__( 'Random', 'digiqole' ),
+                    'ID'       =>esc_html__( 'ID', 'digiqole' ),
                 ],
         ]
     );
@@ -250,17 +262,29 @@ class Digiqole_post_list_tab_widget extends Widget_Base {
       ];
 
       switch($settings['post_sortby']){
-       case 'viewcount':
-           $arg_fav['meta_key'] = 'newszone_post_views_count';
-           $arg_fav['orderby'] = 'meta_value_num';
-       break;
-       case 'mostdiscussed':
-           $arg_fav['orderby'] = 'comment_count';
-       break;
-       default:
-           $arg_fav['orderby'] = 'date';
-       break;
-   }
+        case 'viewcount':
+            $arg_fav['meta_key'] = 'newszone_post_views_count';
+            $arg_fav['orderby'] = 'meta_value_num';
+        break;
+        case 'mostdiscussed':
+            $arg_fav['orderby'] = 'comment_count';
+        break;
+        case 'title':
+            $arg_fav['orderby'] = 'title';
+        break;
+        case 'ID':
+            $arg_fav['orderby'] = 'ID';
+        break;
+        case 'rand':
+            $arg_fav['orderby'] = 'rand';
+        break;
+        case 'name':
+            $arg_fav['orderby'] = 'name';
+        break;
+        default:
+            $arg_fav['orderby'] = 'date';
+        break;
+     }
       switch($settings['recent_post_sortby']){
         case 'viewcount':
             $arg_recent['meta_key'] = 'newszone_post_views_count';
@@ -268,6 +292,18 @@ class Digiqole_post_list_tab_widget extends Widget_Base {
         break;
         case 'mostdiscussed':
             $arg_recent['orderby'] = 'comment_count';
+        break;
+        case 'title':
+            $arg_recent['orderby'] = 'title';
+        break;
+        case 'ID':
+            $arg_recent['orderby'] = 'ID';
+        break;
+        case 'rand':
+            $arg_recent['orderby'] = 'rand';
+        break;
+        case 'name':
+            $arg_recent['orderby'] = 'name';
         break;
         default:
             $arg_recent['orderby'] = 'date';
@@ -280,6 +316,18 @@ class Digiqole_post_list_tab_widget extends Widget_Base {
         break;
         case 'mostdiscussed':
             $arg_commnets['orderby'] = 'comment_count';
+        break;
+        case 'title':
+            $arg_commnets['orderby'] = 'title';
+        break;
+        case 'ID':
+            $arg_commnets['orderby'] = 'ID';
+        break;
+        case 'rand':
+            $arg_commnets['orderby'] = 'rand';
+        break;
+        case 'name':
+            $arg_commnets['orderby'] = 'name';
         break;
         default:
             $arg_commnets['orderby'] = 'date';

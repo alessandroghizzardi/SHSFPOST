@@ -213,6 +213,40 @@ function digiqole_post_ajax_loading_cb()
 add_action( 'wp_ajax_nopriv_digiqole_post_ajax_loading', 'digiqole_post_ajax_loading_cb' );
 add_action( 'wp_ajax_digiqole_post_ajax_loading', 'digiqole_post_ajax_loading_cb' );
 
+
+
+
+// preloader function
+// ----------------------------------------------------------------------------------------
+            
+
+function preloader_function(){
+    $preloader_show = digiqole_option('preloader_show');
+        if($preloader_show == 'yes'){
+            $digiqole_preloader_logo_url= esc_url(digiqole_src('preloader_logo'));
+        ?>
+        <div id="preloader">
+            <?php if($digiqole_preloader_logo_url !=''): ?>
+            
+            <div class="preloader-logo">
+                <img  class="img-fluid" src="<?php echo esc_url($digiqole_preloader_logo_url); ?>" alt="<?php echo get_bloginfo('name') ?>">
+            </div>
+            <?php else: ?>
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+            <?php endif; ?>
+            <div class="preloader-cancel-btn-wraper"> 
+                <span class="btn btn-primary preloader-cancel-btn">
+                  <?php echo esc_html_e('Cancel Preloader', 'digiqole'); ?></span>
+            </div>
+        </div>
+    <?php
+    }
+}
+add_action('wp_head', 'preloader_function');
+
 /**
  * SHSF POST CUSTOM AREA
  * 
@@ -228,8 +262,4 @@ add_action( 'wp_ajax_digiqole_post_ajax_loading', 'digiqole_post_ajax_loading_cb
 function yst_wpseo_change_og_locale( $locale ) {
     return 'it_IT';
 }
-
 add_filter( 'wpseo_locale', 'yst_wpseo_change_og_locale' );
-
-
-

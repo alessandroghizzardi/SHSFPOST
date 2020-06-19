@@ -6,7 +6,7 @@
  */
       $show_desc = (isset($settings['show_desc'])) 
                         ? $settings['show_desc'] 
-                        : '';
+                        : 'yes';
       $show_author = (isset($settings['show_author'])) 
                         ? $settings['show_author'] 
                         : digiqole_option( 'blog_author_show', 'yes' );

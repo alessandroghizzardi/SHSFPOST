@@ -227,6 +227,10 @@ class Digiqole_post_tab_widget extends Widget_Base {
                      'latestpost'      =>esc_html__( 'Latest posts', 'digiqole' ),
                      'popularposts'    =>esc_html__( 'Popular posts', 'digiqole' ),
                      'mostdiscussed'    =>esc_html__( 'Most discussed', 'digiqole' ),
+                     'title'       =>esc_html__( 'Title', 'digiqole' ),
+                     'name'       =>esc_html__( 'Name', 'digiqole' ),
+                     'rand'       =>esc_html__( 'Random', 'digiqole' ),
+                     'ID'       =>esc_html__( 'ID', 'digiqole' ),
                  ],
          ]
    );
@@ -669,20 +673,34 @@ class Digiqole_post_tab_widget extends Widget_Base {
                            'post_status' => 'publish',
                            'posts_per_page' => $post_number,
                            'order' => $post_order,
-                           'orderby' => 'publish_date',
                            'category__in' => $value['post_cats'],
                            'tag__in' => $value['post_tags'],
                            'suppress_filters' => false,
                         );
 
-                        if($post_sortby=='popularposts'){
-                         
-                           $arg['meta_key'] = 'newszone_post_views_count';
-                           $arg['orderby'] = 'meta_value_num';
-                        }
-
-                        if($post_sortby=='mostdiscussed'){
-                           $arg['orderby'] = 'comment_count';
+                        switch($settings['post_sortby']){
+                           case 'popularposts':
+                                $arg['meta_key'] = 'newszone_post_views_count';
+                                $arg['orderby'] = 'meta_value_num';
+                           break;
+                           case 'mostdiscussed':
+                                $arg['orderby'] = 'comment_count';
+                           break;
+                           case 'title':
+                               $arg['orderby'] = 'title';
+                           break;
+                           case 'ID':
+                               $arg['orderby'] = 'ID';
+                           break;
+                           case 'rand':
+                               $arg['orderby'] = 'rand';
+                           break;
+                           case 'name':
+                               $arg['orderby'] = 'name';
+                           break;
+                           default:
+                                $arg['orderby'] = 'date';
+                           break;
                         }
                         
                        if(in_array('video',$post_format) && !in_array('standard',$post_format)) {

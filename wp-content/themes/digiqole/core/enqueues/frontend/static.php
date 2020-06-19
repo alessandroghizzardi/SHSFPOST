@@ -27,6 +27,7 @@ if ( !is_admin() ) {
 
    // theme css
 	wp_enqueue_style( 'digiqole-blog',  DIGIQOLE_CSS . '/blog.css', null,  DIGIQOLE_VERSION );
+	wp_enqueue_style( 'digiqole-print',  DIGIQOLE_CSS . '/print.css', null,  DIGIQOLE_VERSION, 'print');
 	wp_enqueue_style( 'digiqole-gutenberg-custom',  DIGIQOLE_CSS . '/gutenberg-custom.css', null,  DIGIQOLE_VERSION );
 	 wp_enqueue_style( 'digiqole-master',  DIGIQOLE_CSS . '/master.css', null,  DIGIQOLE_VERSION );
 	

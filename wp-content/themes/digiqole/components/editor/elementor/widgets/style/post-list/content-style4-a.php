@@ -69,7 +69,7 @@ $show_author_avator = isset($settings['show_author_avator'])?
          
                </div>
                <?php if($show_desc=='yes'): ?>
-                  <p> <?php echo esc_html(wp_trim_words(get_the_content(),$post_content_crop,'')); ?> </p>
+                  <p> <?php echo esc_html(wp_trim_words(get_the_excerpt(),$post_content_crop,'')); ?> </p>
                <?php endif; ?>
 
                <?php if($readmore != '') { ?>

@@ -190,60 +190,6 @@ jQuery( document ).ready( function($){
          });
          
      }
-
-    
-
-      /*==========================================================
-                     Post grid ajax load
-        ======================================================================*/
-  
-   $('.digiqole-post-grid-loadmore').on('click',function(event){
-      event.preventDefault();
-      
-      var $that = $(this);
-      var ajaxjsondata = $that.data('json_grid_meta');
-      var digiqole_json_data = Object (ajaxjsondata);
-     
-      var contentwrap = $('.grid-loadmore-content'), // item contentwrap
-          postperpage = parseInt(digiqole_json_data.posts_per_page), // post per page number
-          showallposts = parseInt(digiqole_json_data.total_post); // total posts count
-
-          var items = contentwrap.find('.grid-item'),
-          totalpostnumber = parseInt(items.length),
-          paged =  parseInt( totalpostnumber / postperpage ) + 1; // paged number
-         
-         $.ajax({
-            url: digiqole_ajax.ajax_url,
-            type: 'POST',
-            data: {action: 'digiqole_post_ajax_loading',ajax_json_data: ajaxjsondata,paged:paged},
-            beforeSend: function(){
-               
-                $('<i class="fa fa-spinner fa-spin" style="margin-left:10px"></i>').appendTo( "#digiqole-post-grid-loadmore" ).fadeIn(100);
-            },
-            complete:function(){
-                $('.digiqole-post-grid-loadmore .fa-spinner ').remove();
-            }
-         })
-        
-         .done(function(data) {
-           
-               var $pstitems = $(data);
-               $('.grid-loadmore-content').append( $pstitems );
-               var newLenght  = contentwrap.find('.grid-item').length;
-            
-               if(showallposts <= newLenght){
-                  $('.digiqole-post-grid-loadmore').fadeOut(300,function(){
-                     $('.digiqole-post-grid-loadmore').remove();
-                  });
-               }
-         
-         })
-
-         .fail(function() {
-            $('.digiqole-post-grid-loadmore').remove(); 
-         });
-	
-    });
     
           /*==========================================================
                     review rating circle
@@ -472,6 +418,26 @@ jQuery( document ).ready( function($){
                 });
            
             }
+
+
+      /*==========================================================
+                        Preloader
+      ======================================================================*/
+      $(window).on('load', function () {
+         
+        setTimeout(() => {
+           $('#preloader').addClass('loaded');
+        }, 1000);
+        
+        });
+        
+     // preloader close
+     $('.preloader-cancel-btn').on('click', function (e) {
+        e.preventDefault();
+        if (!($('#preloader').hasClass('loaded'))) {
+           $('#preloader').addClass('loaded');
+        }
+     });
 
 
 } );

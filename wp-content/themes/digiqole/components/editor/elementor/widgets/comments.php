@@ -273,14 +273,12 @@ class Digiqole_Comment_Widget extends Widget_Base {
             <?php foreach ( $comments as $comment ) : ?>
                <div class="row ts-comments-row align-items-center mb-50">
                   <div class="col-lg-4 col-md-2"> 
-
                      <div class="ts-author-media">
                         <div class="ts-author-thumb"> 
-                            <?php echo get_avatar(get_the_author_meta('ID')); ?>
+                            <?php  echo get_avatar( $comment->comment_author_email, 'ID' ); ?>
                         </div> 
                         <div class="ts-author-meta"> 
-                       
-                          <?php echo get_the_date(get_option($comment->comment_date)); ?>
+                           <?php 	echo date( 'd M y', strtotime( $comment->comment_date ) );?>
                         </div>
                      </div>
 

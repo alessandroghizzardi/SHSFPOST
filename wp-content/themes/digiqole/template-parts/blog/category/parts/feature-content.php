@@ -18,7 +18,7 @@
    <?php endif; ?>
    <div class="post-content">
       <div class="entry-blog-summery">
-         <?php echo the_excerpt(); ?>
+         <?php the_excerpt(); ?>
       </div>
      
    </div>

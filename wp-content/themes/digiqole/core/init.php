@@ -128,6 +128,7 @@ class Digiqole_Theme_Includes {
          'blocks',
 		 'blog',
          'ads',
+		 'instgram',
 		 'footer',
 		];
 

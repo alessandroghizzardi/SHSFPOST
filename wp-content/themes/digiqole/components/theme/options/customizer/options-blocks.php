@@ -15,7 +15,6 @@ $options =[
                   'label'	 => esc_html__( 'Global header background image', 'digiqole' ),
                   'type'	 => 'upload',
                ],
-               
                 'block_category_template' => [
                     'label'	        => esc_html__( 'Category template', 'digiqole' ),
                     'desc'	        => esc_html__( 'Post block style in category pages.', 'digiqole' ),
@@ -51,6 +50,15 @@ $options =[
                            'small'     => DIGIQOLE_IMG . '/admin/category-main-layout/category_min6.png',
                            'large'     => DIGIQOLE_IMG . '/admin/category-main-layout/screen/style6.png',
                        ],
+                       'style7'    => [
+                        'small'     => DIGIQOLE_IMG . '/admin/category-main-layout/category_min5.png',
+                        'large'     => DIGIQOLE_IMG . '/admin/category-main-layout/screen/style5.png',
+                       ],
+
+                       'style8'    => [
+                        'small'     => DIGIQOLE_IMG . '/admin/category-main-layout/category_min4.png',
+                        'large'     => DIGIQOLE_IMG . '/admin/category-main-layout/screen/style4.png',
+                    ],
                       
                        ],
                     'value'         => 'style2',

@@ -29,7 +29,7 @@ function digiqole_register_required_plugins() {
 			'name'		 => esc_html__( 'Digiqole Essentials', 'digiqole' ),
 			'slug'		 => 'digiqole-essential',
 			'required'	 => true,
-			'version'	 => '1.5',
+			'version'	 => '1.6',
 			'source'     => get_template_directory() . '/core/installation-fragments/plugins/digiqole-essential.zip', // The plugin source.
       ),	
       

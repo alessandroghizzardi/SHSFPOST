@@ -14,6 +14,7 @@
                'newszone-post-slider.default': DIGIQOLE.Newszone_post_slider,
                'newszone-editor-pick-post-slider.default': DIGIQOLE.Newszone_editor_pick_post_slider,
                'newszone-video-post-slider2.default': DIGIQOLE.Newszone_video_slider2,
+               'newszone-post-grid-loadmore.default': DIGIQOLE.Newszone_post_grid_loadmore,
 		          
             };
             $.each(widgets, function (widget, callback) {
@@ -30,11 +31,13 @@
                var conrol_data = $container.attr('data-controls');
                var autoslide = true;
                var dot_nav = true;
+               var nav_show = false;
                var item_count = true;
                if(conrol_data){
                   var controls = JSON.parse($container.attr('data-controls'));
                   autoslide = Boolean(controls.auto_nav_slide?true:false);
                   dot_nav = Boolean(controls.dot_nav_show?true:false);
+                  nav_show = Boolean(controls.nav_show?true:false);
                   item_count = parseInt( controls.item_count );
                }
             
@@ -43,7 +46,7 @@
                         items: item_count,
                         loop: true,
                         autoplay: autoslide,
-                        nav: false,
+                        nav: nav_show,
                         dots: dot_nav,
                         autoplayTimeout: 8000,
                         autoplayHoverPause: false,
@@ -74,12 +77,14 @@
             Newszone_post_block_slider:function($scope){
             
                var $container = $scope.find('.block-slider');
-                var controls= JSON.parse($container.attr('data-controls'));
-                var autoslide = Boolean(controls.auto_nav_slide?true:false);
-                var dot_nav = Boolean(controls.dot_nav_show?true:false);
-                var item_count = parseInt( controls.item_count );
+               
                
                if ($container.length > 0) {
+                  var controls= JSON.parse($container.attr('data-controls'));
+                  var autoslide = Boolean(controls.auto_nav_slide?true:false);
+                  var dot_nav = Boolean(controls.dot_nav_show?true:false);
+                  var item_count = parseInt( controls.item_count );
+                  
                      $container.owlCarousel({
                         items: item_count,
                         loop: true,
@@ -118,20 +123,73 @@
             Newszone_main_slider:function($scope){
             
                var $container = $scope.find('.main-slider');
-                var controls= JSON.parse($container.attr('data-controls'));
-                    
-                var autoslide = Boolean(controls.auto_nav_slide?true:false);
-                var nav = Boolean(controls.dot_nav_show?true:false);
-                var dot = Boolean(controls.slider_dot_show?true:false);
-               
+               var control_data = $container.attr('data-controls');
+               var autoslide = true;
+               var nav = true;
+               var dot = false;
+               if(control_data){
+                  var controls= JSON.parse($container.attr('data-controls'));
+                  var autoslide = Boolean(controls.auto_nav_slide?true:false);
+                  var nav = Boolean(controls.dot_nav_show?true:false);
+                  var dot = Boolean(controls.slider_dot_show?true:false);
+               }
                
                if ($container.length > 0) {
                      $container.owlCarousel({
-                        items: 1,
+                        items: 3,
                         loop: true,
                         autoplay: autoslide,
                         nav: nav,
                         dots: dot,
+                        autoplayTimeout: 5000,
+                        autoplayHoverPause: true,
+                        mouseDrag: true,
+                        smartSpeed: 1100,
+                        margin:30,
+                       
+                        navText: ["<i class='fa fa-angle-left'></i>", "<i class='fa fa-angle-right'></i>"],
+                        responsive: {
+                           0: {
+                              items: 1,
+                           },
+                           600: {
+                              items: 1,
+                           },
+                           1000: {
+                              items:1,
+                           },
+                           1300: {
+                              items:1,
+                           }
+                        }
+                  
+                     });
+                     $('.main-slider').on('mouseleave',function(){
+                        $container.trigger('play.owl.autoplay',[1000])
+                    })
+                    $('.main-slider').on('mouseover',function(){
+                     $container.trigger('stop.owl.autoplay')
+                    });
+               };
+
+               var $container2 = $scope.find('.main-slide.style4');
+               var conrol_data = $container2.attr('data-controls');
+               var autoslide1 = true;
+               var nav1 = true;
+               var dot1 = false;
+               if(conrol_data){
+                  var controls1= JSON.parse($container2.attr('data-controls'));
+                  var autoslide1 = Boolean(controls1.auto_nav_slide?true:false);
+                  var nav1 = Boolean(controls1.dot_nav_show?true:false);
+                  var dot1 = Boolean(controls1.slider_dot_show?true:false);
+               }
+               if ($container2.length > 0) {
+                     $container2.owlCarousel({
+                        items: 1,
+                        loop: true,
+                        autoplay: autoslide1,
+                        nav: nav1,
+                        dots: dot1,
                         autoplayTimeout: 5000,
                         autoplayHoverPause: true,
                         mouseDrag: true,
@@ -144,39 +202,34 @@
                            },
                            600: {
                               items: 1,
+                              stagePadding: 30,
                            },
-                           1000: {
+                           1300: {
                               items:1,
+                              stagePadding: 200,
                            }
                         }
                   
                      });
-                     $('.main-slider').on('mouseleave',function(){
-                        $container.trigger('play.owl.autoplay',[1000])
-                    })
-                    $('.main-slider').on('mouseover',function(){
-                     $container.trigger('stop.owl.autoplay')
-                    });
+                  
                }
-          
          },
-         
+           
             /* ----------------------------------------------------------- */
             /*  post slider
             /* ----------------------------------------------------------- */
             Newszone_post_slider:function($scope){
             
                var $container = $scope.find('.post-slider');
-                var controls= JSON.parse($container.attr('data-controls'));
-                    
-                var autoslide = Boolean(controls.auto_nav_slide?true:false);
-                var dot_nav = Boolean(controls.dot_nav_show?true:false);
-                var nav = Boolean(controls.nav_show?true:false);
-                var item_count = parseInt(controls.item_count);
-                var margin = parseInt(controls.margin);
-               
-               
+                
                if ($container.length > 0) {
+                  var controls= JSON.parse($container.attr('data-controls'));
+                  var autoslide = Boolean(controls.auto_nav_slide?true:false);
+                  var dot_nav = Boolean(controls.dot_nav_show?true:false);
+                  var nav = Boolean(controls.nav_show?true:false);
+                  var item_count = parseInt(controls.item_count);
+                  var margin = parseInt(controls.margin);
+                  
                      $container.owlCarousel({
                         items: item_count,
                         loop: true,
@@ -309,20 +362,83 @@
                });
           
          },
+
+         
+         
+         /* ----------------------------------------------------------- */
+         /*   Post grid ajax load
+         /* ----------------------------------------------------------- */
+         
+         Newszone_post_grid_loadmore:function($scope){
+            var $container = $scope.find('.digiqole-post-grid-loadmore');
+            if ($container.length > 0) {
+               $container.on('click',function(event){
+                  event.preventDefault();
+
+                  var $that = $(this);
+                  var ajaxjsondata = $that.data('json_grid_meta');
+                  var digiqole_json_data = Object (ajaxjsondata);
+
+                  var contentwrap = $scope.find('.grid-loadmore-content'), // item contentwrap
+                     postperpage = parseInt(digiqole_json_data.posts_per_page), // post per page number
+                     showallposts = parseInt(digiqole_json_data.total_post); // total posts count
+
+                     var items = contentwrap.find('.grid-item'),
+                     totalpostnumber = parseInt(items.length),
+                     paged =  parseInt( totalpostnumber / postperpage ) + 1; // paged number
+
+                     $.ajax({
+                        url: digiqole_ajax.ajax_url,
+                        type: 'POST',
+                        data: {action: 'digiqole_post_ajax_loading',ajax_json_data: ajaxjsondata,paged:paged},
+                        beforeSend: function(){
+
+                           $('<i class="fa fa-spinner fa-spin" style="margin-left:10px"></i>').appendTo( "#digiqole-post-grid-loadmore" ).fadeIn(100);
+                        },
+                        complete:function(){
+                           $scope.find('.digiqole-post-grid-loadmore .fa-spinner ').remove();
+                        }
+                     })
+
+                     .done(function(data) {
+
+                           var $pstitems = $(data);
+                           $scope.find('.grid-loadmore-content').append( $pstitems );
+                           var newLenght  = contentwrap.find('.grid-item').length;
+
+                           if(showallposts <= newLenght){
+                              $scope.find('.digiqole-post-grid-loadmore').fadeOut(300,function(){
+                                 $scope.find('.digiqole-post-grid-loadmore').remove();
+                              });
+                           }
+
+                     })
+
+                     .fail(function() {
+                        $scope.find('.digiqole-post-grid-loadmore').remove();
+                     });
+
+               });
+         }
+
+
+         },
+         
            /* ----------------------------------------------------------- */
             /*  Editor pick post slider
             /* ----------------------------------------------------------- */
             Newszone_editor_pick_post_slider:function($scope){
             
                var $container = $scope.find('.editor-pick-post-slider');
-                var controls= JSON.parse($container.attr('data-controls'));
-                    
-                var autoslide = Boolean(controls.auto_nav_slide?true:false);
-                var nav = Boolean(controls.dot_nav_show?true:false);
-                var item_count = parseInt(controls.item_count);
+                
                
                
                if ($container.length > 0) {
+                  var controls= JSON.parse($container.attr('data-controls'));
+                  var autoslide = Boolean(controls.auto_nav_slide?true:false);
+                  var nav = Boolean(controls.dot_nav_show?true:false);
+                  var item_count = parseInt(controls.item_count);
+                  
                      $container.owlCarousel({
                         items: item_count,
                         loop: true,

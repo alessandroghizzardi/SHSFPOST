@@ -143,6 +143,9 @@ class DIGIQOLE_Shortcode{
       require_once DIGIQOLE_EDITOR_ELEMENTOR.'/widgets/category-list.php';
       $widgets_manager->register_widget_type(new Elementor\Digiqole_Category_List_Widget());
 
+      require_once DIGIQOLE_EDITOR_ELEMENTOR.'/widgets/category-classic.php';
+      $widgets_manager->register_widget_type(new Elementor\Digiqole_Category_List_classic_Widget());
+
       require_once DIGIQOLE_EDITOR_ELEMENTOR.'/widgets/post-grid.php';
       $widgets_manager->register_widget_type(new Elementor\Digiqole_Post_Grid_Widget());
 
@@ -160,8 +163,10 @@ class DIGIQOLE_Shortcode{
 
       require_once DIGIQOLE_EDITOR_ELEMENTOR.'/widgets/post-block-slider.php';
       $widgets_manager->register_widget_type(new Elementor\Digiqole_Post_block_Slider_Widget());
+
       require_once DIGIQOLE_EDITOR_ELEMENTOR.'/widgets/title.php';
       $widgets_manager->register_widget_type(new Elementor\Digiqole_Title_Widget());
+      
       require_once DIGIQOLE_EDITOR_ELEMENTOR.'/widgets/comments.php';
       $widgets_manager->register_widget_type(new Elementor\Digiqole_Comment_Widget());
     
@@ -184,6 +189,16 @@ class DIGIQOLE_Shortcode{
       
       require_once DIGIQOLE_EDITOR_ELEMENTOR.'/widgets/feature-post-tab.php';
       $widgets_manager->register_widget_type(new Elementor\Digiqole_Feature_Post_Tab_Widget());
+
+      require_once DIGIQOLE_EDITOR_ELEMENTOR.'/widgets/post-horizontal-block.php';
+      $widgets_manager->register_widget_type(new Elementor\Digiqole_Horizonal_Post_Block_Widget());
+
+      require_once DIGIQOLE_EDITOR_ELEMENTOR.'/widgets/site-logo.php';
+      $widgets_manager->register_widget_type(new Elementor\Digiqole_Site_Logo_Widget());
+
+      if(class_exists('\Elementor\Digiqole_Widget_Instagram_Feed')){
+        $widgets_manager->register_widget_type(new Elementor\Digiqole_Widget_Instagram_Feed());
+    }
     }
     
 	public static function digiqole_get_instance() {

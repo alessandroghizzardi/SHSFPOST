@@ -60,6 +60,12 @@ class Digiqole_Title_Widget extends Widget_Base {
                            'imagesmall' => DIGIQOLE_IMG . '/admin/title/style-3.png',
                            'width' => '50%',
                   ],
+                  'style4' => [
+                     'title' =>esc_html__( 'Style 2', 'digiqole' ),
+                           'imagelarge' => DIGIQOLE_IMG . '/admin/title/style-4.png',
+                           'imagesmall' => DIGIQOLE_IMG . '/admin/title/style-4.png',
+                           'width' => '50%',
+                  ],
 				
 				  ],
 
@@ -109,7 +115,7 @@ class Digiqole_Title_Widget extends Widget_Base {
 
                'left'		 => [
                   
-                  'title'	 => esc_html__( 'Left', 'digiqole' ),
+                  'title'	 => esc_html__( 'left', 'digiqole' ),
 						'icon'	 => 'fa fa-align-left',
                
                ],
@@ -171,7 +177,7 @@ class Digiqole_Title_Widget extends Widget_Base {
  
              'label'		 => esc_html__( 'Title Background', 'digiqole' ),
              'type'		 => Controls_Manager::COLOR,
-             'condition' => ['title_style' => ['style1', 'style2']],
+             'condition' => ['title_style' => ['style1', 'style2', 'style4']],
 
              'selectors'	 => [
             '{{WRAPPER}} .block-title > span.title-bg,
@@ -189,11 +195,12 @@ class Digiqole_Title_Widget extends Widget_Base {
 
             'label'		 => esc_html__( 'Title border style color', 'digiqole' ),
             'type'		 => Controls_Manager::COLOR,
-            'condition' => ['title_style' => ['style1', 'style2']],
+            'condition' => ['title_style' => ['style1', 'style2', 'style4']],
 
             'selectors'	 => [
                '{{WRAPPER}} .block-title.title-border' => 'border-bottom: 2px solid {{VALUE}};',
                '{{WRAPPER}} .heading-style2 .block-title.title-border:before' => 'background-color: {{VALUE}};',
+               '{{WRAPPER}} .heading-style4 .block-title.title-border:before' => 'background-color: {{VALUE}};',
             ],
         ]
 
@@ -204,7 +211,7 @@ class Digiqole_Title_Widget extends Widget_Base {
             [
                 'label' =>esc_html__( 'Border Height', 'digiqole' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
-                'condition' => ['title_style' => ['style1', 'style2']],
+                'condition' => ['title_style' => ['style1', 'style2', 'style4']],
                 'range' => [
                     'px' => [
                         'min' => 0,
@@ -226,6 +233,7 @@ class Digiqole_Title_Widget extends Widget_Base {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .heading-style2 .block-title.title-border:before' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .heading-style4 .block-title.title-border:before' => 'height: {{SIZE}}{{UNIT}};',
                     '{{WRAPPER}} .block-title.title-border' => 'border-width: {{SIZE}}{{UNIT}};',
                 ],
             
@@ -382,6 +390,16 @@ class Digiqole_Title_Widget extends Widget_Base {
             <div class="section-heading heading-style3">
             <<?php echo esc_attr($heading_type); ?> class="block-title">
                 <span class="title-angle-shap">
+                     <?php echo esc_html($title); ?>
+                </span>
+            </<?php echo esc_attr($heading_type); ?>>
+         </div>
+
+
+        <?php elseif ($title_style  == 'style4'): ?>
+            <div class="section-heading heading-style4">
+            <<?php echo esc_attr($heading_type); ?> class="block-title title-border">
+                <span class="title-bg">
                      <?php echo esc_html($title); ?>
                 </span>
             </<?php echo esc_attr($heading_type); ?>>

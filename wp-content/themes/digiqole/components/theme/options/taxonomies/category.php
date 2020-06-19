@@ -77,6 +77,7 @@ $options = [
             'small'     => DIGIQOLE_IMG . '/admin/category-main-layout/category_min6.png',
             'large'     => DIGIQOLE_IMG . '/admin/category-main-layout/screen/style6.png',
         ],
+   
        
         ],
         'value'         => 'style2',
