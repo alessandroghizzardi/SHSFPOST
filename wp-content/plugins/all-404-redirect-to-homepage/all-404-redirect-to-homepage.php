@@ -4,7 +4,7 @@ Plugin Name: All 404 Redirect  to Homepage
 Plugin URI: http://www.clogica.com
 Description: a plugin to redirect 404 pages to home page or any custom page
 Author: Fakhri Alsadi
-Version: 1.19
+Version: 1.20
 Author URI: http://www.clogica.com
 */
 
@@ -128,7 +128,7 @@ function p404_install(){
 //---------------------------------------------------------------
 
 function p404_uninstall(){
-	delete_option(OPTIONS404);
+	//delete_option(OPTIONS404);
 }
 
 //---------------------------------------------------------------

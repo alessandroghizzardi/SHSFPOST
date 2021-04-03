@@ -39,7 +39,7 @@ See [Admin UI](documentation/admin-ui.md)
 # Roadmap
 
 Following plugins have native (built-in) support for Cookiebot:
-* [MonsterInsights](https://www.monsterinsights.com/addon/eu-compliance/)
+* [MonsterInsights](https://www.monsterinsights.com/addon/eu-compliance/) (only in the Plus / Pro version)
 * [PixelYourSite](https://wordpress.org/plugins/pixelyoursite/)
 
 Released and tested addons:
@@ -95,6 +95,6 @@ Way to go!
 # Need to get in touch?
 
 There are several ways you can get in touch with us. <br>
-We are available on the Making Wordress Slack workspace. <br>
+We are available on the Making Wordpress Slack workspace. <br>
 Username: Kenan <br>
 You can also reach us through our helpdesk at www.cookiebot.com/goto/helpdesk/

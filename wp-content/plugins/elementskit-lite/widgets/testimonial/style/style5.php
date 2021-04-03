@@ -1,4 +1,4 @@
-<div  class="elementskit-testimonial-slider ekit_testimonial_style_5" <?php echo \ElementsKit\Utils::render($wrapper_data); ?>>
+<div  class="elementskit-testimonial-slider ekit_testimonial_style_5" <?php echo $this->get_render_attribute_string('wrapper'); ?>>
 	<?php foreach ($testimonials as $testimonial): ?>
 	<div class="elementskit-single-testimonial-slider elementskit-testimonial-slider-block-style elementskit-testimonial-slider-block-style-two elementor-repeater-item-<?php echo esc_attr( $testimonial[ '_id' ] ); ?>">
         <div class="elementskit-commentor-header">
@@ -12,7 +12,7 @@
 						$iconStart = 'fas fa-star active';
 					}
 				?>
-				<li><a href="#"><i class="<?php esc_attr_e( $iconStart );?>"></i></a></li>
+				<li><a href="#"><i class="<?php esc_attr_e( $iconStart, 'elementskit-lite' );?>"></i></a></li>
 
 				<?php }?>
 			</ul>
@@ -39,21 +39,26 @@
 			</div>
 			<?php endif;?>
 		</div>
+		
+        <?php if ( isset($testimonial['review']) && !empty($testimonial['review'])) : ?>
+			<div class="elementskit-commentor-content"><p><?php echo isset($testimonial['review']) ? \ElementsKit_Lite\Utils::kses($testimonial['review']) : ''; ?></p></div>
+		<?php endif;  ?>
+
 		<div class="elementskit-commentor-bio">
 			<div class="elementkit-commentor-details <?php echo esc_attr($ekit_testimonial_client_area_alignment); ?>">
 				<?php
-					if (isset($testimonial['client_photo']) && sizeof($testimonial['client_photo']) > 0) {
+					if (isset($testimonial['client_photo']) && !empty($testimonial['client_photo']['url']) && sizeof($testimonial['client_photo']) > 0) {
 					$clientLogo = isset($testimonial['client_photo']['url']) ? $testimonial['client_photo']['url'] : '';
 				?>
 					<div class="elementskit-commentor-image">
-						<img src="<?php echo esc_url($clientLogo); ?>"  height="<?php echo esc_attr($ekit_testimonial_client_image_size['size']); ?>" width="<?php echo esc_attr($ekit_testimonial_client_image_size['size']); ?>" alt="<?php esc_attr_e("Client Logo", "agmycoo");?>">
+						<img src="<?php echo esc_url($clientLogo); ?>"  height="<?php echo esc_attr($ekit_testimonial_client_image_size['size']); ?>" width="<?php echo esc_attr($ekit_testimonial_client_image_size['size']); ?>" alt="<?php esc_attr_e("Client Logo", "elementskit-lite");?>">
 					</div>
 				<?php
 					}
 				?>
 				<div class="elementskit-profile-info">
 					<strong class="elementskit-author-name"><?php echo isset($testimonial['client_name']) ? esc_html($testimonial['client_name']) : ''; ?></strong>
-					<span class="elementskit-author-des"><?php echo isset($testimonial['designation']) ? \ElementsKit\Utils::kspan($testimonial['designation']) : ''; ?></span>
+					<span class="elementskit-author-des"><?php echo isset($testimonial['designation']) ? \ElementsKit_Lite\Utils::kspan($testimonial['designation']) : ''; ?></span>
 				</div>
 			</div>
 			<?php if(isset($ekit_testimonial_wartermark_enable) && ($ekit_testimonial_wartermark_enable == 'yes') && ($ekit_testimonial_wartermark_position == 'bottom')):?>
@@ -75,9 +80,7 @@
 			</div>
 			<?php endif;?>
 		</div>
-        <?php if ( isset($testimonial['review']) && !empty($testimonial['review'])) : ?>
-			<div class="elementskit-commentor-content"><p><?php echo isset($testimonial['review']) ? \ElementsKit\Utils::kses($testimonial['review']) : ''; ?></p></div>
-		<?php endif;  ?>
+		
 	</div>
 	<?php endforeach; ?>
 </div><!-- .testimonial-block-slider2 END -->

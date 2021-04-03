@@ -1,5 +1,5 @@
 <?php
-namespace ElementsKit\Modules\Controls;
+namespace ElementsKit_Lite\Modules\Controls;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -12,14 +12,13 @@ class Icons{
 	public function __add_font( $font){
         $font_new['ekiticons'] = [
 			'name' => 'ekiticons',
-			'label' => __( 'ElementsKit - Icons', 'elementskit' ),
+			'label' => __( 'ElementsKit_Lite - Icons', 'elementskit-lite' ),
 			'url' => Init::get_url() . 'assets/css/ekiticons.css',
-			'enqueue' => [Init::get_url() . 'assets/css/ekiticons.css'],
 			'prefix' => 'icon-',
 			'displayPrefix' => 'icon',
 			'labelIcon' => 'icon icon-ekit',
 			'ver' => '5.9.0',
-			'fetchJson' => Init::get_url() . 'assets/js/ekiticons.js',
+			'fetchJson' => Init::get_url() . 'assets/js/ekiticons.json',
 			'native' => true,
 		];
         return  array_merge($font, $font_new);
@@ -30,8 +29,8 @@ class Icons{
 		global $wp_filesystem;
 		require_once ( ABSPATH . '/wp-admin/includes/file.php' );
 		WP_Filesystem();
-		//$css_file =  \ElementsKit::widget_dir() . 'init/assets/css/admin-ekiticon.css';
-		$css_file =  Init::get_dir() . 'assets/css/ekiticons.css';
+		$css_file =  Init::get_url() . 'assets/css/ekiticons.css';
+		// $css_file =  Init::get_dir() . 'assets/css/ekiticons.css';
 		if ( $wp_filesystem->exists( $css_file ) ) {
 			$css_source = $wp_filesystem->get_contents( $css_file );
 		} 
@@ -45,7 +44,7 @@ class Icons{
 		$icons = new \stdClass();
 		$icons->icons = $iconList;
 		$icon_data = json_encode($icons);
-		$file = Init::get_dir() . 'assets/js/ekiticons.js';
+		$file = Init::get_dir() . 'assets/js/ekiticons.json';
 		global $wp_filesystem;
 		require_once ( ABSPATH . '/wp-admin/includes/file.php' );
 		WP_Filesystem();

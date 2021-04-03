@@ -1,13 +1,13 @@
 <?php
 namespace Elementor;
 
-use \ElementsKit\Elementskit_Widget_Caldera_Forms_Handler as Handler;
-use \ElementsKit\Modules\Controls\Controls_Manager as ElementsKit_Controls_Manager;
+use \Elementor\ElementsKit_Widget_Caldera_Forms_Handler as Handler;
+use \ElementsKit_Lite\Modules\Controls\Controls_Manager as ElementsKit_Controls_Manager;
 
 if (! defined( 'ABSPATH' ) ) exit;
 
-class Elementskit_Widget_Caldera_Forms extends Widget_Base {
-	use \ElementsKit\Widgets\Widget_Notice;
+class ElementsKit_Widget_Caldera_Forms extends Widget_Base {
+	use \ElementsKit_Lite\Widgets\Widget_Notice;
 
     public $base;
 
@@ -26,10 +26,15 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
     public function get_categories() {
         return Handler::get_categories();
     }
+
+    public function get_help_url() {
+        return '';
+	}
+	
 	function elementskit_caldera_forms_options() {
 		if ( class_exists( 'Caldera_Forms' ) ) {
 			$caldera_forms = \Caldera_Forms_Forms::get_forms( true, true );
-			$form_options  = ['0' => esc_html__( 'Select Form', 'elementskit-addons' )];
+			$form_options  = ['0' => esc_html__( 'Select Form', 'elementskit-lite' )];
 			$form          = array();
 			if ( ! empty( $caldera_forms ) && ! is_wp_error( $caldera_forms ) ) {
 				foreach ( $caldera_forms as $form ) {
@@ -39,7 +44,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 				}
 			}
 		} else {
-			$form_options = ['0' => esc_html__( 'Form Not Found!', 'elementskit-addons' ) ];
+			$form_options = ['0' => esc_html__( 'Form Not Found!', 'elementskit-lite' ) ];
 		}
 		return $form_options;
 	}
@@ -47,14 +52,14 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
     protected function _register_controls() {
         $this->start_controls_section(
             'ekit_caldera_form_section_tab', [
-                'label' =>esc_html__( 'Caldera Forms', 'elementskit' ),
+                'label' =>esc_html__( 'Caldera Forms', 'elementskit-lite' ),
             ]
         );
 
 		$this->add_control(
 			'ekit_caldera_form_list',
 			[
-				'label'   => esc_html__( 'Select Form', 'elementskit-addons' ),
+				'label'   => esc_html__( 'Select Form', 'elementskit-lite' ),
 				'type'    => Controls_Manager::SELECT,
 				'default' => '0',
 				'options' => $this->elementskit_caldera_forms_options(),
@@ -67,7 +72,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->start_controls_section(
 			'ekit_contact_form_input_label_style',
 			[
-				'label' => esc_html__( 'Label', 'elementskit' ),
+				'label' => esc_html__( 'Label', 'elementskit-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -76,7 +81,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'ekit_contact_form_input_label_typography',
-				'label' => esc_html__( 'Typography', 'elementskit' ),
+				'label' => esc_html__( 'Typography', 'elementskit-lite' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .ekit-form form label',
 			]
@@ -85,7 +90,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_input_label_color',
 			[
-				'label' => esc_html__( 'Color', 'elementskit' ),
+				'label' => esc_html__( 'Color', 'elementskit-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#000000',
 				'selectors' => [
@@ -97,7 +102,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_input_label_margin',
 			[
-				'label' => esc_html__( 'Margin', 'elementskit' ),
+				'label' => esc_html__( 'Margin', 'elementskit-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -109,7 +114,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
         $this->add_control(
 			'ekit_contact_form_input_label_hint_heading',
 			[
-				'label' => esc_html__( 'Hint', 'elementskit' ),
+				'label' => esc_html__( 'Hint', 'elementskit-lite' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -119,7 +124,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'ekit_contact_form_input_label_hint_typography',
-				'label' => esc_html__( 'Typography', 'elementskit' ),
+				'label' => esc_html__( 'Typography', 'elementskit-lite' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .ekit-form form label span',
 			]
@@ -128,7 +133,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
         $this->add_responsive_control(
 			'ekit_contact_form_input_label_hint_color',
 			[
-				'label' => esc_html__( 'Color', 'elementskit' ),
+				'label' => esc_html__( 'Color', 'elementskit-lite' ),
 				'type' => Controls_Manager::COLOR,
                 'default' => '#777777',
 				'selectors' => [
@@ -143,7 +148,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->start_controls_section(
 			'ekit_contact_form_input_style',
 			[
-				'label' => esc_html__( 'Input', 'elementskit' ),
+				'label' => esc_html__( 'Input', 'elementskit-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -151,7 +156,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_input_style_padding',
 			[
-				'label' => esc_html__( 'Padding', 'elementskit' ),
+				'label' => esc_html__( 'Padding', 'elementskit-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -163,7 +168,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_input_style_width',
 			[
-				'label' => esc_html__( 'Width', 'elementskit' ),
+				'label' => esc_html__( 'Width', 'elementskit-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [
@@ -191,7 +196,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_input_style_height',
 			[
-				'label' => esc_html__( 'Height', 'elementskit' ),
+				'label' => esc_html__( 'Height', 'elementskit-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -215,7 +220,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_input_style_margin_bottom',
 			[
-				'label' => esc_html__( 'Margin Bottom', 'elementskit' ),
+				'label' => esc_html__( 'Margin Bottom', 'elementskit-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -238,7 +243,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
         $this->add_control(
 			'ekit_contact_form_input_style_textarea_heading',
 			[
-				'label' => esc_html__( 'Textarea', 'elementskit' ),
+				'label' => esc_html__( 'Textarea', 'elementskit-lite' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -247,7 +252,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
         $this->add_responsive_control(
 			'ekit_contact_form_input_style_textarea_height',
 			[
-				'label' => esc_html__( 'Height', 'elementskit' ),
+				'label' => esc_html__( 'Height', 'elementskit-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [
@@ -274,7 +279,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_input_style_padding_textarea',
 			[
-				'label' => esc_html__( 'Padding', 'elementskit' ),
+				'label' => esc_html__( 'Padding', 'elementskit-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -296,7 +301,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
         $this->start_controls_tab(
             'ekit_contact_form_input_normal_tab',
             [
-                'label' => esc_html__( 'Normal', 'elementskit' ),
+                'label' => esc_html__( 'Normal', 'elementskit-lite' ),
             ]
 		);
 
@@ -304,7 +309,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'ekit_contact_form_input_style_background',
-				'label' => esc_html__( 'Background', 'elementskit' ),
+				'label' => esc_html__( 'Background', 'elementskit-lite' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .ekit-form form input:not([type="submit"]) ,{{WRAPPER}} .ekit-form form textarea',
 				'exclude' => [
@@ -316,7 +321,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_input_style_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'elementskit' ),
+				'label' => esc_html__( 'Border Radius', 'elementskit-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors' => [
@@ -330,7 +335,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'ekit_contact_form_input_style_border',
-				'label' => esc_html__( 'Border', 'elementskit' ),
+				'label' => esc_html__( 'Border', 'elementskit-lite' ),
 				'selector' => '{{WRAPPER}} .ekit-form form input:not([type="submit"]), {{WRAPPER}} .ekit-form form textarea',
 			]
 		);
@@ -339,7 +344,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'ekit_contact_form_input_style_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'elementskit' ),
+				'label' => esc_html__( 'Box Shadow', 'elementskit-lite' ),
                 'selector' => '
                             {{WRAPPER}} .ekit-form form input:not([type="submit"]),
                             {{WRAPPER}} .ekit-form form textarea'
@@ -351,7 +356,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
         $this->start_controls_tab(
             'ekit_contact_form_input_hover_tab',
             [
-                'label' => esc_html__( 'Hover', 'elementskit' ),
+                'label' => esc_html__( 'Hover', 'elementskit-lite' ),
             ]
 		);
 
@@ -359,7 +364,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'ekit_contact_form_input_hover_style_background',
-				'label' => esc_html__( 'Background', 'elementskit' ),
+				'label' => esc_html__( 'Background', 'elementskit-lite' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .ekit-form form input:not([type="submit"]):hover ,{{WRAPPER}} .ekit-form form textarea:hover',
 				'exclude' => [
@@ -371,7 +376,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_input_hover_style_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'elementskit' ),
+				'label' => esc_html__( 'Border Radius', 'elementskit-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors' => [
@@ -385,7 +390,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'ekit_contact_form_input_hover_style_border',
-				'label' => esc_html__( 'Border', 'elementskit' ),
+				'label' => esc_html__( 'Border', 'elementskit-lite' ),
 				'selector' => '{{WRAPPER}} .ekit-form form input:not([type="submit"]):hover, {{WRAPPER}} .ekit-form form textarea:hover',
 			]
 		);
@@ -394,7 +399,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'ekit_contact_form_input_hover_style_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'elementskit' ),
+				'label' => esc_html__( 'Box Shadow', 'elementskit-lite' ),
                 'selector' => '
                             {{WRAPPER}} .ekit-form form input:not([type="submit"]):hover,
                             {{WRAPPER}} .ekit-form form textarea:hover'
@@ -406,7 +411,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
         $this->start_controls_tab(
             'ekit_contact_form_input_focus_tab',
             [
-                'label' => esc_html__( 'Focus', 'elementskit' ),
+                'label' => esc_html__( 'Focus', 'elementskit-lite' ),
             ]
 		);
 
@@ -414,7 +419,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'ekit_contact_form_input_focus_style_background',
-				'label' => esc_html__( 'Background', 'elementskit' ),
+				'label' => esc_html__( 'Background', 'elementskit-lite' ),
 				'types' => [ 'classic', 'gradient' ],
 				'selector' => '{{WRAPPER}} .ekit-form form input:not([type="submit"]):focus ,{{WRAPPER}} .ekit-form form textarea:focus',
 				'exclude' => [
@@ -426,7 +431,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_input_focus_style_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'elementskit' ),
+				'label' => esc_html__( 'Border Radius', 'elementskit-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%' ],
 				'selectors' => [
@@ -440,7 +445,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'ekit_contact_form_input_focus_style_border',
-				'label' => esc_html__( 'Border', 'elementskit' ),
+				'label' => esc_html__( 'Border', 'elementskit-lite' ),
 				'selector' => '{{WRAPPER}} .ekit-form form input:not([type="submit"]):focus, {{WRAPPER}} .ekit-form form textarea:focus',
 			]
 		);
@@ -449,7 +454,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'ekit_contact_form_input_focus_style_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'elementskit' ),
+				'label' => esc_html__( 'Box Shadow', 'elementskit-lite' ),
                 'selector' => '
                             {{WRAPPER}} .ekit-form form input:not([type="submit"]):focus,
                             {{WRAPPER}} .ekit-form form textarea:focus'
@@ -464,7 +469,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
         $this->add_control(
             'ekit_contact_form_input_style_typography_heading',
             [
-                'label' => esc_html__( 'Typography', 'elementskit' ),
+                'label' => esc_html__( 'Typography', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -474,7 +479,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'ekit_contact_form_input_typography',
-                'label' => esc_html__( 'Typography', 'elementskit' ),
+                'label' => esc_html__( 'Typography', 'elementskit-lite' ),
                 'scheme' => Scheme_Typography::TYPOGRAPHY_1,
                 'selector' => '{{WRAPPER}} .ekit-form form input:not([type="submit"]), .wpcf7-form input:not([type="submit"]), .wpcf7-form textarea, .ekit-wid-con .ekit-form form textarea',
             ]
@@ -483,7 +488,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
         $this->add_responsive_control(
             'ekit_contact_form_input_style_font_color',
             [
-                'label' => esc_html__( 'Color', 'elementskit' ),
+                'label' => esc_html__( 'Color', 'elementskit-lite' ),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#000000',
                 'selectors' => [
@@ -497,7 +502,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_control(
 			'ekit_contact_form_input_style_placeholder_heading',
 			[
-				'label' => esc_html__( 'Placeholder', 'elementskit' ),
+				'label' => esc_html__( 'Placeholder', 'elementskit-lite' ),
 				'type' => Controls_Manager::HEADING,
 				'separator' => 'before',
 			]
@@ -506,7 +511,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_input_style_placeholder_font_size',
 			[
-				'label' => esc_html__( 'Font Size', 'elementskit' ),
+				'label' => esc_html__( 'Font Size', 'elementskit-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -536,7 +541,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
         $this->add_responsive_control(
             'ekit_contact_form_input_placeholder_font_color',
             [
-                'label' => esc_html__( 'Placeholder Color', 'elementskit' ),
+                'label' => esc_html__( 'Placeholder Color', 'elementskit-lite' ),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#000000',
                 'selectors' => [
@@ -561,7 +566,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->start_controls_section(
 			'ekit_contact_form_button_style_holder',
 			[
-				'label' => esc_html__( 'Button', 'elementskit' ),
+				'label' => esc_html__( 'Button', 'elementskit-lite' ),
 				'tab' => Controls_Manager::TAB_STYLE,
 			]
 		);
@@ -569,19 +574,19 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_button_alignment',
 			[
-				'label'    => esc_html__( 'Alignment', 'elementskit' ),
+				'label'    => esc_html__( 'Alignment', 'elementskit-lite' ),
 				'type'     => Controls_Manager::CHOOSE,
 				'options'  => [
 					'left'   => [
-						'title' => esc_html__( 'Left', 'elementskit' ),
+						'title' => esc_html__( 'Left', 'elementskit-lite' ),
 						'icon'  => 'fa fa-align-left',
 					],
 					'center' => [
-						'title' => esc_html__( 'Center', 'elementskit' ),
+						'title' => esc_html__( 'Center', 'elementskit-lite' ),
 						'icon'  => 'fa fa-align-center',
 					],
 					'right'  => [
-						'title' => esc_html__( 'Right', 'elementskit' ),
+						'title' => esc_html__( 'Right', 'elementskit-lite' ),
 						'icon'  => 'fa fa-align-right',
 					],
 				],
@@ -596,7 +601,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Typography::get_type(),
 			[
 				'name' => 'ekit_contact_form_button_typography',
-				'label' => esc_html__( 'Typography', 'elementskit' ),
+				'label' => esc_html__( 'Typography', 'elementskit-lite' ),
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .ekit-form form input[type="submit"]',
 			]
@@ -605,7 +610,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_button_border_radius',
 			[
-				'label' => esc_html__( 'Border Radius', 'elementskit' ),
+				'label' => esc_html__( 'Border Radius', 'elementskit-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -617,7 +622,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_button_border_padding',
 			[
-				'label' => esc_html__( 'Padding', 'elementskit' ),
+				'label' => esc_html__( 'Padding', 'elementskit-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -629,7 +634,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_button_style_margin',
 			[
-				'label' => esc_html__( 'Margin', 'elementskit' ),
+				'label' => esc_html__( 'Margin', 'elementskit-lite' ),
 				'type' => Controls_Manager::DIMENSIONS,
 				'size_units' => [ 'px', '%', 'em' ],
 				'selectors' => [
@@ -642,10 +647,10 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_control(
 			'ekit_contact_form_button_style_use_width_height',
 			[
-				'label' => esc_html__( 'Use Height Width', 'elementskit' ),
+				'label' => esc_html__( 'Use Height Width', 'elementskit-lite' ),
 				'type' => Controls_Manager::SWITCHER,
-				'label_on' => esc_html__( 'Show', 'elementskit' ),
-				'label_off' => esc_html__( 'Hide', 'elementskit' ),
+				'label_on' => esc_html__( 'Show', 'elementskit-lite' ),
+				'label_off' => esc_html__( 'Hide', 'elementskit-lite' ),
 				'return_value' => 'yes',
 				'default' => 'no',
 			]
@@ -654,7 +659,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_button_width',
 			[
-				'label' => esc_html__( 'Width', 'elementskit' ),
+				'label' => esc_html__( 'Width', 'elementskit-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%' ],
 				'range' => [
@@ -684,7 +689,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_button_style_height',
 			[
-				'label' => esc_html__( 'Height', 'elementskit' ),
+				'label' => esc_html__( 'Height', 'elementskit-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -714,7 +719,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_contact_form_button_style_line_height',
 			[
-				'label' => esc_html__( 'Line Height', 'elementskit' ),
+				'label' => esc_html__( 'Line Height', 'elementskit-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
@@ -747,14 +752,14 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
         $this->start_controls_tab(
             'ekit_contact_form_button_normal_tab',
             [
-                'label' => esc_html__( 'Normal', 'elementskit' ),
+                'label' => esc_html__( 'Normal', 'elementskit-lite' ),
             ]
 		);
 
 		$this->add_responsive_control(
 			'ekit_contact_form_button_color',
 			[
-				'label' => esc_html__( 'Color', 'elementskit' ),
+				'label' => esc_html__( 'Color', 'elementskit-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ffffff',
 				'selectors' => [
@@ -767,7 +772,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'ekit_contact_form_button_background',
-				'label' => esc_html__( 'Background', 'elementskit' ),
+				'label' => esc_html__( 'Background', 'elementskit-lite' ),
 				'types' => [ 'classic', 'gradient', ],
 				'selector' => '{{WRAPPER}} .ekit-form form input[type="submit"]',
 				'exclude' => [
@@ -780,7 +785,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'ekit_contact_form_button_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'elementskit' ),
+				'label' => esc_html__( 'Box Shadow', 'elementskit-lite' ),
 				'selector' => '{{WRAPPER}} .ekit-form form input[type="submit"]',
 			]
 		);
@@ -789,7 +794,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'ekit_contact_form_button_border',
-				'label' => esc_html__( 'Border', 'elementskit' ),
+				'label' => esc_html__( 'Border', 'elementskit-lite' ),
 				'selector' => '{{WRAPPER}} .ekit-form form input[type="submit"]',
 			]
 		);
@@ -806,14 +811,14 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
         $this->start_controls_tab(
             'ekit_contact_form_button_hover_tab',
             [
-                'label' => esc_html__( 'Hover', 'elementskit' ),
+                'label' => esc_html__( 'Hover', 'elementskit-lite' ),
             ]
 		);
 
 		$this->add_responsive_control(
 			'ekit_contact_form_button_color_hover',
 			[
-				'label' => esc_html__( 'Color', 'elementskit' ),
+				'label' => esc_html__( 'Color', 'elementskit-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'default' => '#ffffff',
 				'selectors' => [
@@ -826,7 +831,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Background::get_type(),
 			[
 				'name' => 'ekit_contact_form_button_hover_background',
-				'label' => esc_html__( 'Background', 'elementskit' ),
+				'label' => esc_html__( 'Background', 'elementskit-lite' ),
 				'types' => [ 'classic', 'gradient', ],
 				'selector' => '{{WRAPPER}} .ekit-form form input[type="submit"]:hover',
 				'exclude' => [
@@ -839,7 +844,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Box_Shadow::get_type(),
 			[
 				'name' => 'ekit_contact_form_button_box_shadow_hover',
-				'label' => esc_html__( 'Box Shadow', 'elementskit' ),
+				'label' => esc_html__( 'Box Shadow', 'elementskit-lite' ),
 				'selector' => '{{WRAPPER}} .ekit-form form input[type="submit"]:hover',
 			]
 		);
@@ -848,7 +853,7 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 			Group_Control_Border::get_type(),
 			[
 				'name' => 'ekit_contact_form_button_border_hover',
-				'label' => esc_html__( 'Border', 'elementskit' ),
+				'label' => esc_html__( 'Border', 'elementskit-lite' ),
 				'selector' => '{{WRAPPER}} .ekit-form form input[type="submit"]:hover',
 			]
 		);
@@ -888,13 +893,12 @@ class Elementskit_Widget_Caldera_Forms extends Widget_Base {
 		<div class="ekit-form">
 		<?php
 			if ( !$settings['ekit_caldera_form_list'] ) {
-				echo '<div class="elementskit-notices"><p>'.esc_html__('Please select a Contact Form From Setting!', 'elementskit-addons').'</p></div>';
+				echo '<div class="elementskit-notices"><p>'.esc_html__('Please select a Contact Form From Setting!', 'elementskit-lite').'</p></div>';
 			}else{
 				echo do_shortcode( sprintf( '[caldera_form %s]', $this->get_render_attribute_string( 'shortcode' ) ) );
 			}
 		?>
 		</div>
 		<?php
-}
-    protected function _content_template() { }
+	}
 }

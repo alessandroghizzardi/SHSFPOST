@@ -28,8 +28,8 @@ class Term extends Base implements Filter_Interface
         echo $this->get_service('twig')->render(
             'workflow_filter_multiple_select.twig',
             [
-                'name'    => "publishpress_notif[{$this->step_name}_filters][term]",
-                'id'      => "publishpress_notif_{$this->step_name}_filters_term",
+                'name'    => esc_attr("publishpress_notif[{$this->step_name}_filters][term]"),
+                'id'      => esc_attr("publishpress_notif_{$this->step_name}_filters_term"),
                 'options' => $this->get_options(),
                 'labels'  => [
                     'label' => esc_html__('Terms', 'publishpress'),
@@ -99,20 +99,20 @@ class Term extends Base implements Filter_Interface
      * workflows that should be executed.
      *
      * @param array $query_args
-     * @param array $action_args
+     * @param array $event_args
      *
      * @return array
      */
-    public function get_run_workflow_query_args($query_args, $action_args)
+    public function get_run_workflow_query_args($query_args, $event_args)
     {
         // If post is not set, we ignore.
-        if (!isset($action_args['post']) || !is_object($action_args['post'])) {
-            return parent::get_run_workflow_query_args($query_args, $action_args);
+        if (!isset($event_args['params']['post_id']) || !is_numeric($event_args['params']['post_id'])) {
+            return parent::get_run_workflow_query_args($query_args, $event_args);
         }
 
         $taxonomies = array_values(get_taxonomies());
 
-        $terms    = wp_get_post_terms($action_args['post']->ID, $taxonomies);
+        $terms    = wp_get_post_terms($event_args['params']['post_id'], $taxonomies);
         $term_ids = [];
 
         if (!empty($terms)) {
@@ -156,7 +156,7 @@ class Term extends Base implements Filter_Interface
             ],
         ];
 
-        return parent::get_run_workflow_query_args($query_args, $action_args);
+        return parent::get_run_workflow_query_args($query_args, $event_args);
     }
 
     /**

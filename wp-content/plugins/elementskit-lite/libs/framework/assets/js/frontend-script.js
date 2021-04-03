@@ -1,3 +1,1 @@
-jQuery(document).ready(function ($) {
-    "use strict";
-}); // end ready function
+jQuery(document).ready(function(e){"use strict"});

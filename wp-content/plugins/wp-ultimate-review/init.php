@@ -4,7 +4,7 @@ namespace WurReview;
 
 use WurReview\Utilities\Helper;
 
-if(!defined('ABSPATH')) die('Forbidden');
+defined('ABSPATH') || exit;
 
 /**
  * Class Name : Init - This main class for review plugin
@@ -168,7 +168,7 @@ Class Init {
 			'parent_item_colon'  => '',
 			'menu_name'          => _x('WP Reviews', 'WP Ultimate Reviews', 'wp-ultimate-review'),
 		];
-		
+
 		register_post_type($this->post_type,
 			[
 				'labels'              => $labels,

@@ -21,8 +21,13 @@ class Migration
         // remove old cache files
         $this->empty_dir(EAEL_ASSET_PATH);
 
+        //check setup wizard condition
+        $this->enable_setup_wizard();
+
         // save default values
         $this->set_default_values();
+
+
 
         // Redirect to options page - disabled temporarily
         // set_transient('eael_do_activation_redirect', true, 60);
@@ -58,12 +63,12 @@ class Migration
      *
      * @since 3.0.0
      */
-    public function migrator() {
+    public function migrator()
+    {
         // set current version to db
-        if(get_option('eael_version') != EAEL_PLUGIN_VERSION) {
+        if (get_option('eael_version') != EAEL_PLUGIN_VERSION) {
+            // update plugin version
             update_option('eael_version', EAEL_PLUGIN_VERSION);
-
-            // tricky updates here...
         }
 
     }

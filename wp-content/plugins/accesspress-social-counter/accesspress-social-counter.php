@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) or die( "No script kiddies please!" );
  * Plugin Name: AccessPress Social Counter
  * Plugin URI: https://accesspressthemes.com/wordpress-plugins/accesspress-social-counter/
  * Description: A plugin to display your social accounts fans, subscribers and followers number on your website with handful of backend settings and interface.
- * Version: 1.8.8
+ * Version: 1.9.0
  * Author: AccessPress Themes
  * Author URI: http://accesspressthemes.com
  * Text Domain: aps-counter
@@ -29,7 +29,7 @@ if ( ! defined( 'SC_CSS_DIR' ) ) {
 }
 
 if ( ! defined( 'SC_VERSION' ) ) {
-    define( 'SC_VERSION', '1.8.8' );
+    define( 'SC_VERSION', '1.9.0' );
 }
 
 if ( ! defined( 'SC_PATH' ) ) {
@@ -43,8 +43,7 @@ defined('APSC_LITE_DETAIL') or define('APSC_LITE_DETAIL', 'https://accesspressth
 defined('APSC_LITE_RATING') or define('APSC_LITE_RATING', 'https://wordpress.org/support/plugin/accesspress-social-counter/reviews/#new-post');
 
 defined('APSC_PRO_PLUGIN_NAME') or define('APSC_PRO_PLUGIN_NAME', 'AccessPress Social Pro');
-defined('APSC_PRO_LINK') or define('APSC_PRO_LINK','https://1.envato.market/c/1302794/275988/4415?u=https%3A%2F%2Fcodecanyon.net%2Fitem%2Faccesspress-social-pro%2F10429645
-  ');
+defined('APSC_PRO_LINK') or define('APSC_PRO_LINK','https://accesspressthemes.com/wordpress-plugins/accesspress-social-pro/');
 defined('APSC_PRO_DEMO') or define('APSC_PRO_DEMO', 'http://demo.accesspressthemes.com/wordpress-plugins/accesspress-social-pro');
 defined('APSC_PRO_DETAIL') or define('APSC_PRO_DETAIL', 'https://accesspressthemes.com/wordpress-plugins/accesspress-social-pro/');
 
@@ -192,14 +191,19 @@ if ( ! class_exists( 'SC_Class' ) ) {
                     'consumer_secret' => '', 
                     'access_token' => '', 
                     'access_token_secret' => '' ),
-                'instagram' => array('username' => '', 
+                'instagram' => array('app_id' => '',
+                    'app_secret' => '',
+                    'username' => '', 
                     'access_token' => '', 
                     'user_id' => '' ),
                 'youtube' => array( 'username' => '', 
                     'channel_url' => '' ),
                 'soundcloud' => array( 'username' => '', 
                     'client_id' => '' ),
-                'dribbble' => array( 'username' => '' ),
+                'dribbble' => array( 'client_id' => '',
+                    'client_secret' => '',
+                    'username' => '',
+                    'access_token' => ''),
             ),
                 'profile_order' => array( 'facebook', 'twitter', 'instagram', 'youtube', 'soundcloud', 'dribbble', 'posts', 'comments' ),
                 'social_profile_theme' => 'theme-1',

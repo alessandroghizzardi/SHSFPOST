@@ -2,9 +2,9 @@
 Contributors: optinmonster, griffinjt, smub
 Tags: marketing, popups, popup builder, newsletter, conversion, optin forms, forms, subscribers, exit intent popup, email marketing, crm, popup maker, popup plugin, cart abandonment, spin a wheel popup, conversion optimization, a/b testing, email opt-in, retargeting, ecommerce, cro, lightbox, promotion, shipping bar, announcement bar, advertising, mailing list, popup slide-in
 Requires at least: 4.7.0
-Tested up to: 5.4.1
+Tested up to: 5.7
 Requires PHP: 5.3
-Stable tag: 1.9.8
+Stable tag: 2.3.1
 License: GNU General Public License v2.0 or later
 
 Create popups, opt-in forms, & floating bars to get more email newsletter subscribers, leads, and increase sales conversion - #1 marketing popup plugin.
@@ -26,7 +26,7 @@ OptinMonster popups and newsletter opt-in forms are 100% mobile responsive, so y
 We understand the importance of speed when it comes SEO, marketing, and conversion optimization. This is why we made sure that OptinMonster popups and marketing tools are optimized for both web and server performance.
 
 > <strong>OptinMonster App</strong><br />
-> OptinMonster popups and marketing tools are part of the standalone OptinMonster app. You will need to create an OptinMonster account to access our popup builder, opt-in form builder, newsletter subscribers, and other powerful conversion tools. <a href="https://optinmonster.com/wp/?utm_source=orgplugin&utm_medium=link&utm_campaign=wpreadme" rel="friend" title="OptinMonster">Click here to purchase OptinMonster Pro now!</a>
+> OptinMonster is a SaaS service. OptinMonster popups and marketing tools are part of the standalone OptinMonster app. You will need to create an OptinMonster account to access our popup builder, opt-in form builder, newsletter subscribers, and other powerful conversion tools. <a href="https://optinmonster.com/wp/?utm_source=orgplugin&utm_medium=link&utm_campaign=wpreadme" rel="friend" title="OptinMonster">Click here to purchase OptinMonster Pro now!</a>
 
 We took the pain out of creating highly personalized popup forms and made it easy. Here's why smart business owners, designers, and developers love OptinMonster marketing toolkit, and you will too!
 
@@ -218,7 +218,7 @@ Other Powerful Popup Features:
 
 After reading this feature list, you can probably imagine why OptinMonster is the best WordPress popup form plugin in the market.
 
-<a href="https://optinmonster.com/wp/utm_source=orgplugin&utm_medium=link&utm_campaign=wpreadme" rel="friend">Give OptinMonster a try</a>.
+<a href="https://optinmonster.com/wp/?utm_source=orgplugin&utm_medium=link&utm_campaign=wpreadme" rel="friend">Give OptinMonster a try</a>.
 
 = Credits =
 
@@ -471,27 +471,71 @@ Syed Balkhi
 
 **Most Recent Changes:**
 
-= 1.9.8 =
-* Fix compatibility with AMP.
-* Update compatibility with popular caching plugins.
-* Update to make all strings translatable.
-* Fix bug where phone numbers wouldn't save when using MailPoet.
-* Remove old jQuery dependencies.
-* Update internal notices to be more friendly with other plugins.
+= 2.3.1 =
+* Fixed issues when multiple tinymce instances existed on a page (specifically, the double OptinMonster link button).
+* Fix console/blocking errors JS errors because specific data was missing on the page related to the OptinMonster Monster Link buttons.
+* Fix height of link search results when other fields added.
+* Fix errors that can occur with WooCommerce data-store failures.
 
-= 1.9.7 =
-* Update the OptinMonster API JS URL.
-* Update trustpulse menu title.
+= 2.3.0 =
+* Introduce the Personalization page, for documenting available rules/triggers.
+* Introduce functionality for Classic Editor (and classic editor instances) for inserting inline campaign shortcodes, or adding Monster Links to text.
+* Improvements to the Gutenberg Block.
+* New setting for globally disabling campaigns for a given post/page/etc (Gutenberg sidebar setting, and a fallback settings metabox for the Classic Editor). Also adds error boundaries around all campaigns in the Gutenberg editor if this option is selected (since they will not work on the frontend).
+* New Gutenberg text formatting option for adding Monster Links to text.
+* Improved UX for select elements where campaigns were displayed by adding the campaign slug to the label.
+* Better error handling and output when certain API requests fail.
+* Better error handling and UX when user's site domain has changed (e.g. from a temp domain to the permanent one).
+* Introduced caching for various requests to improve plugin page performance.
+* Added helpful title attribute tooltips for the various options in the Output Settings (displaying the term slug and the associated taxonomy slug, etc).
+* Improved various other tooltips on the Output Settings to be more helpful
+* Improved UX for select elements where taxonomy terms were displayed by adding the term slug to the label.
+* Add singular post-type options "Show on Post Types and Archives" output settings.
+* Improved messaging in various errors.
+* Fixed bug where exiting and then re-entering output settings, the advanced settings would disappear.
+* Fixed conflict when BigCommerce plugin installed, triggered by their admin scripts.
+* Fixed php warning, "strpos(): Empty needle in optin-monster-wp-api/OMAPI/Inserter.php..."
+* Fixed bug where the "Product Archive Page (shop)" output setting option was only visible for inline campaigns.
+* Fixed bug where output settings would conflict if a post and category had the same ID.
+* Fixed `WP_Scripts::localize` deprecation warning by switching to `wp_add_inline_script()` where applicable.
 
-= 1.9.6 =
-* You can now use Gravity Forms AJAX submissions and form validation with your OptinMonster campaigns.
-* Update admin notices to use the recommended classes
+= 2.2.0 =
+* Added Elementor Block and other integration.
+* Added WooCommerce Integrations.
+* Added features to onboarding flow.
+* Fixed issue with search "X" button.
+* Fixed issue with selecting posts in the campaign output settings.
+* Additional fixes to the University page responsive styling.
+* Fixed issue with campaign shortcode storage
+* Improved live preview/rule preview for campaigns with shortcodes.
+* Fix to put campaigns in preview mode when in the WordPress customizer preview or post preview.
+* Fix PHP notices for using `$_SERVER['HTTP_REFERER']` when it doesn't exist.
+* Fix some performance issues by only peforming `wp_update_post` if the synced campaign contains changes.
+* Fix help link in Gutenberg Block's sidebar settings.
+* Fix help link in Gutenberg Block when no campaigns have yet been created.
+* Added additional filter for filtering campaigns to embed on the frontend.
 
-= 1.9.5 =
-* Add support for www domains in Api.js embed code.
-* Improve MailPoet error outputs.
+= 2.1.1 =
+* Notifications improvements.
+* Better handling to prevent Gutenberg block from using same inline slug multiple times (which does not work).
+* Fix output settings link in Gutenberg sidebar not working.
+* Fixes University responsive styling.
+* Code cleanup
 
-= 1.9.4 =
-* Fix issue where site settings were not being retrieved properly.
+= 2.1.0 =
+* Introduce Subscribers page to manage Monster Leads for your WordPress site, with helpful analytics data, graphs, management, and export capabilities.
+* Introduce the OptinMonster University page.
+* Various help-text improvements, and fixed typos.
+* Bug fixes, and error output for campaign-status changes.
+* Better alert output.
+* Better notification output, improving visibility/functionality.
+* Improved communication around connection process.
+* Include javascript source map files in build to prevent console notices.
+* Improved account-upgrade workflow.
+* Improved request performance on campaigns page.
+
+= 2.0.3 =
+* Updates the "get started" interface to be more intuitive for existing users.
+* Remove incorrect concept of "pending" for split tests.
 
 **[View entire changelog](https://plugins.svn.wordpress.org/optinmonster/trunk/CHANGELOG.md)**

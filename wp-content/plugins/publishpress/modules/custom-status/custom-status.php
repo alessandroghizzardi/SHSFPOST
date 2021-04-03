@@ -308,12 +308,6 @@ if (!class_exists('PP_Custom_Status')) {
             }
 
             if (function_exists('register_post_status')) {
-                // Users can delete draft and pending statuses if they want, so let's get rid of them
-                // They'll get re-added if the user hasn't "deleted" them
-                // TODO: Disabled this code for now - PPRESS-316 - unsetting the pending status, sending to pend will make the post disappear.
-                // unset($wp_post_statuses['draft']);
-                // unset($wp_post_statuses['pending']);
-
                 $custom_statuses = $this->get_custom_statuses($args, !is_admin());
 
                 // Unfortunately, register_post_status() doesn't accept a
@@ -327,18 +321,19 @@ if (!class_exists('PP_Custom_Status')) {
                         continue;
                     }
 
-                    register_post_status(
-                        $status->slug,
-                        [
-                            'label'       => $status->name,
-                            'protected'   => true,
-                            '_builtin'    => false,
-                            'label_count' => _n_noop(
-                                "{$status->name} <span class='count'>(%s)</span>",
-                                "{$status->name} <span class='count'>(%s)</span>"
-                            ),
-                        ]
-                    );
+                    $postStatusArgs = [
+                        'label'       => $status->name,
+                        'protected'   => true,
+                        '_builtin'    => false,
+                        'label_count' => _n_noop(
+                            "{$status->name} <span class='count'>(%s)</span>",
+                            "{$status->name} <span class='count'>(%s)</span>"
+                        ),
+                    ];
+
+                    $postStatusArgs = apply_filters('publishpress_new_custom_status_args', $postStatusArgs, $status);
+
+                    register_post_status($status->slug, $postStatusArgs);
                 }
             }
         }
@@ -388,6 +383,7 @@ if (!class_exists('PP_Custom_Status')) {
         {
             global $publishpress;
 
+
             if ($this->disable_custom_statuses_for_post_type()) {
                 return;
             }
@@ -434,7 +430,7 @@ if (!class_exists('PP_Custom_Status')) {
                 wp_enqueue_script(
                     'publishpress-custom_status',
                     $this->module_url . 'lib/custom-status.js',
-                    ['jquery', 'post'],
+                    ['jquery'],
                     PUBLISHPRESS_VERSION,
                     true
                 );
@@ -840,6 +836,11 @@ if (!class_exists('PP_Custom_Status')) {
             $post_type_obj = get_post_type_object($this->get_current_post_type());
 
             if (!current_user_can($post_type_obj->cap->edit_posts)) {
+                return false;
+            }
+
+            // Disable the scripts for the post page if the plugin Visual Composer is enabled.
+            if (isset($_GET['vcv-action']) && $_GET['vcv-action'] === 'frontend') {
                 return false;
             }
 
@@ -1253,11 +1254,11 @@ if (!class_exists('PP_Custom_Status')) {
             $orderedStatusList = [];
             $hold_to_end       = [];
             foreach ($statuses as $key => $status) {
-                // Unencode and set all of our psuedo term meta because we need the position if it exists
+                // Unencode and set all of our pseudo term meta because we need the position if it exists
                 $unencoded_description = $this->get_unencoded_description($status->description);
                 if (is_array($unencoded_description)) {
-                    foreach ($unencoded_description as $key => $value) {
-                        $status->$key = $value;
+                    foreach ($unencoded_description as $descriptionKey => $value) {
+                        $status->$descriptionKey = $value;
                     }
                 }
                 // We require the position key later on (e.g. management table)
@@ -1500,12 +1501,23 @@ if (!class_exists('PP_Custom_Status')) {
                 );
             }
             // Check that the status name doesn't exceed 20 chars
-            if (strlen($status_name) > 20) {
+            $name_is_valid = true;
+            if (function_exists('mb_strlen')) {
+                if (mb_strlen($status_name) > 20) {
+                    $name_is_valid = false;
+                }
+            } else {
+                if (strlen($status_name) > 20) {
+                    $name_is_valid = false;
+                }
+            }
+            if (!$name_is_valid) {
                 $_REQUEST['form-errors']['name'] = __(
                     'Status name cannot exceed 20 characters. Please try a shorter name.',
                     'publishpress'
                 );
             }
+
             // Check to make sure the status doesn't already exist as another term because otherwise we'd get a weird slug
             if (term_exists($status_slug, self::taxonomy_key)) {
                 $_REQUEST['form-errors']['name'] = __(
@@ -1601,7 +1613,17 @@ if (!class_exists('PP_Custom_Status')) {
                     );
                 }
                 // Check that the status name doesn't exceed 20 chars
-                if (strlen($name) > 20) {
+                $name_is_valid = true;
+                if (function_exists('mb_strlen')) {
+                    if (mb_strlen($name) > 20) {
+                        $name_is_valid = false;
+                    }
+                } else {
+                    if (strlen($name) > 20) {
+                        $name_is_valid = false;
+                    }
+                }
+                if (!$name_is_valid) {
                     $_REQUEST['form-errors']['name'] = __(
                         'Status name cannot exceed 20 characters. Please try a shorter name.',
                         'publishpress'

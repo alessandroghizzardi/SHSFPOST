@@ -125,14 +125,16 @@ if(count($links)==0){
 
     </tbody>
     </table>
-    <br/><br/>
-    <b style="color:red">Have many broken links?</b> keep track of 404 errors using our powerfull <a target="_blank" href="http://www.clogica.com/product/seo-redirection-premium-wordpress-plugin#404-options-page">SEO Redirection Plugin</a> with an advanced <b>404 Manager</b> and set many rules to handle 404 links
-</div>
+    <br/></div>
 
 <?php
 }
 // ----   End of Tabs ----------------
 ?>
+    
+    <br/>
+    <b style="color:red">Have many broken links?</b> keep track of 404 errors using our powerfull <a target="_blank" href="http://www.clogica.com/product/seo-redirection-premium-wordpress-plugin#404-options-page">SEO Redirection Plugin</a> with an advanced <b>404 Manager</b> and set many rules to handle 404 links
+
 </div></div></div>
 
 

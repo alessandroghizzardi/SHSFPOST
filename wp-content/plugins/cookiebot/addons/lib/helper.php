@@ -84,24 +84,37 @@ function cookiebot_addons_remove_class_action( $action, $class, $method, $priori
  * @since   1.2.0
  */
 function cookiebot_addons_manipulate_script( $buffer, $keywords ) {
+    /**
+     * normalize potential self-closing script tags
+     */
+
+    $normalized_buffer = preg_replace('/(<script(.*?)\/>)/is', '<script$2></script>', $buffer);
+
+    if($normalized_buffer !== null) {
+        $buffer = $normalized_buffer;
+    }
+
+
+
 	/**
 	 * Pattern to get all scripts
 	 *
 	 * @version 2.0.4
 	 * @since   1.2.0
 	 */
-	$pattern = "/<script[\s\S]*?>[\s\S]*?<\/script>/i";
+	$pattern = '/(<script(?:.*?)>)(.*?)(<\/script>)/is';
 
 	/**
 	 * Get all scripts and add cookieconsent if it does match with the criterion
 	 */
 	$updated_scripts = preg_replace_callback( $pattern, function ( $matches ) use ( $keywords ) {
-		/**
-		 * Matched script data
-		 */
-		$data = ( isset( $matches[0] ) ) ? $matches[0] : '';
 
-		/**
+		$script = $matches[0]; // the full script html
+        $script_tag_open = $matches[1]; // only the script open tag with all attributes
+        $script_tag_inner = $matches[2]; // only the script's innerText
+        $script_tag_close = $matches[3]; // only the script closing tag
+
+        /**
 		 * Check if the script contains the keywords, checks keywords one by one
 		 *
 		 * If one match, then the rest of the keywords will be skipped.
@@ -110,21 +123,36 @@ function cookiebot_addons_manipulate_script( $buffer, $keywords ) {
 			/**
 			 * The script contains the needle
 			 **/
-			if ( strpos( $data, $needle ) !== false ) {
-				$data = preg_replace( '/\<script/', '<script type="text/plain" data-cookieconsent="' . cookiebot_addons_output_cookie_types( $cookie_type ) . '"', $data );
-				$data = preg_replace( '/type\=\"text\/javascript\"/', '', $data );
+			if ( strpos( $script, $needle ) !== false ) {
+                /**
+                 * replace all single quotes with double quotes in the open tag
+                 * remove previously set data-cookieconsent attribute
+                 * remove type attribute
+                 */
+			    $script_tag_open = preg_replace('/\'/', '"', $script_tag_open);
+			    $script_tag_open = preg_replace('/\sdata-cookieconsent=\"(?:.*?)\"/', '', $script_tag_open);
+				$script_tag_open = preg_replace( '/\stype=\"(?:.*?)\"/', '', $script_tag_open );
 
-				/**
-				 * matched already so we can skip other keywords
-				 **/
+                /**
+                 * set the type attribute to text/plain to prevent javascript execution
+                 * add data-cookieconsent attribute
+                 */
+				$cookie_types = cookiebot_addons_output_cookie_types( $cookie_type );
+				$replacement = '<script type="text/plain" data-cookieconsent="' . $cookie_types . '"';
+				$script_tag_open = preg_replace( '/<script/', $replacement, $script_tag_open );
+
+                /**
+                 * reconstruct the script and break the foreach loop
+                 */
+				$script = $script_tag_open . $script_tag_inner . $script_tag_close;
 				continue;
 			}
 		}
 
-		/**
-		 * Return updated script data
-		 */
-		return $data;
+        /**
+         * return the reconstructed script
+         */
+		return $script;
 	}, $buffer );
 
 	/**
@@ -182,15 +210,42 @@ function cookiebot_addons_checked_selected_helper( $helper, $current, $echo = tr
  * @return string
  *
  * @since 1.3.0
+ * @version 3.9.1
  */
 function cookiebot_addons_output_cookie_types( $cookie_types ) {
 	if ( is_array( $cookie_types ) && count( $cookie_types ) > 0 ) {
-		return implode( ', ', $cookie_types );
+		return implode( ', ', array_map( function ( $value ) {
+			return cookiebot_translate_type_name( $value );
+		}, $cookie_types ) );
 	} elseif ( is_string( $cookie_types ) && $cookie_types != '' ) {
-		return $cookie_types;
+		return cookiebot_translate_type_name( $cookie_types );
 	}
 
-	return 'statistics';
+	return cookiebot_translate_type_name( 'statistics' );
+}
+
+/**
+ * Translates the cookie type to different language
+ *
+ * @param $type string
+ *
+ * @return string
+ *
+ * @since 3.9.1
+ */
+function cookiebot_translate_type_name( $type ) {
+	switch ( $type ) {
+		case 'marketing':
+			return esc_html__( 'marketing', 'cookiebot' );
+		case 'statistics':
+			return esc_html__( 'statistics', 'cookiebot' );
+		case 'preferences':
+			return esc_html__( 'preferences', 'cookiebot' );
+		case 'necessary':
+			return esc_html__( 'necessary', 'cookiebot' );
+		default:
+			return $type;
+	}
 }
 
 /**
@@ -214,6 +269,23 @@ function cookiebot_addons_get_one_cookie_type( $cookie_types ) {
 	}
 
 	return '';
+}
+
+/**
+ * @param $cookie_types
+ *
+ * @return string
+ *
+ * @version 3.9.0
+ */
+function cookiebot_addons_cookieconsent_optout( $cookie_types ) {
+	$output = '';
+
+	foreach ( $cookie_types as $cookie_type ) {
+		$output .= 'cookieconsent-optout-' . $cookie_type . ' ';
+	}
+
+	return trim( $output );
 }
 
 /**

@@ -7,18 +7,18 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Scheme_Typography as Scheme_Typography;
-use \Elementor\Widget_Base as Widget_Base;
-use \Elementor\Group_Control_Background as Group_Control_Background;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Scheme_Typography;
+use \Elementor\Widget_Base;
+use \Elementor\Group_Control_Background;
 use \Elementor\Scheme_Color;
 
 class Formstack extends Widget_Base {
 
-    // use \Essential_Addons_Elementor\Traits\Helper;
+    // 
 
     public function get_name () {
         return 'eael-formstack';
@@ -60,7 +60,7 @@ class Formstack extends Widget_Base {
         return get_option('formstack_oauth2_code', '');
     }
 
-    private function formstackAuth (string $key) {
+    private function formstackAuth ($key) {
         return get_option('formstack_settings')[$key];
     }
 
@@ -148,7 +148,7 @@ class Formstack extends Widget_Base {
 
     protected function _register_controls () {
 
-        if (!apply_filters('eael/active_plugins', 'formstack/plugin.php')) {
+        if (!apply_filters('eael/is_plugin_active', 'formstack/plugin.php')) {
             $this->formstack_not_activated();
             return;
         }
@@ -200,6 +200,9 @@ class Formstack extends Widget_Base {
             [
                 'label'       => esc_html__('Title', 'essential-addons-for-elementor-lite'),
                 'type'        => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'label_block' => true,
                 'default'     => '',
                 'condition'   => [
@@ -213,6 +216,9 @@ class Formstack extends Widget_Base {
             [
                 'label'     => esc_html__('Description', 'essential-addons-for-elementor-lite'),
                 'type'      => Controls_Manager::TEXTAREA,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default'   => '',
                 'condition' => [
                     'eael_formstack_custom_title_description' => 'yes',
@@ -2039,7 +2045,7 @@ class Formstack extends Widget_Base {
 
     protected function render () {
 
-        if (!apply_filters('eael/active_plugins', 'formstack/plugin.php') || empty($this->get_forms())) {
+        if (!apply_filters('eael/is_plugin_active', 'formstack/plugin.php') || empty($this->get_forms())) {
             return;
         }
 

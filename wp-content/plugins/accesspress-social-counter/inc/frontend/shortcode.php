@@ -18,7 +18,7 @@ if ($enable_font_css) {
 }
 include(SC_PATH . 'inc/frontend/font-awesome-icon.php');
 ?>
-<div class="apsc-icons-wrapper clearfix apsc-<?php echo $apsc_settings['social_profile_theme']; ?> <?php echo $font_awesome_version; ?>" >
+<div class="apsc-icons-wrapper clearfix apsc-<?php echo esc_attr($apsc_settings['social_profile_theme']); ?> <?php echo esc_attr($font_awesome_version); ?>" >
     <?php
     if (isset($apsc_settings['profile_order']) && !empty($apsc_settings['profile_order'])) {
         foreach ($apsc_settings['profile_order'] as $social_profile) {

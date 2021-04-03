@@ -3,7 +3,7 @@
 * Plugin Name: Digiqole Essentials
 * License - GNU/GPL V2 or Later
 * Description: This is a required plugin for digiqole theme.
-* Version: 1.5
+* Version: 1.6
 * text domain: digiqole-essential
 */
 if ( ! defined( 'ABSPATH' ) ) {
@@ -86,3 +86,5 @@ class Digiqole_Essentials_Includes {
 }
 
 Digiqole_Essentials_Includes::init();
+
+include 'modules/init.php';

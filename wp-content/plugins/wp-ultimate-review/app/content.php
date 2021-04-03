@@ -2,7 +2,7 @@
 
 namespace WurReview\App;
 
-if(!defined('ABSPATH')) die('Forbidden');
+defined('ABSPATH') || exit;
 
 use \WurReview\App\Settings as Settings;
 
@@ -16,7 +16,7 @@ use \WurReview\App\Settings as Settings;
  * @since 1.0.0
  * @access Public
  */
-Class Content {
+class Content {
 
 	private static $instance;
 
@@ -44,7 +44,8 @@ Class Content {
 
 		// add review form and list in the content
 		$return_data_display_setting = get_option('xs_review_display', '');
-		$content_Position            = isset($return_data_display_setting['review_location']) ? $return_data_display_setting['review_location'] : 'after_content';
+
+		$content_Position = isset($return_data_display_setting['review_location']) ? $return_data_display_setting['review_location'] : 'after_content';
 
 		if($content_Position != 'custom_code') {
 			add_filter('the_content', [$this, 'wur_meta_box_content_view']);
@@ -62,9 +63,13 @@ Class Content {
 
 
 	/**
+	 * Return the content for front-end
+	 *
 	 * Review wur_meta_box_content_view.
 	 * Method Description: Review form show in content
+	 *
 	 * @since 1.0.0
+	 *
 	 * @access public
 	 */
 	public function wur_meta_box_content_view($content) {
@@ -83,108 +88,76 @@ Class Content {
 			return $content;
 		}
 
-
 		// output for display settings. Get from options
 		$this->getPostType = $post->post_type;
 		$this->getPostId   = $post->ID;
-		// get display settings data
-		$return_data_display_setting = get_option('xs_review_display', '');
 
-		// get global settings data
-		$return_data_global_setting = get_option('xs_review_global');
 
-		// get overview data
-		$metaDataOverviewJson = get_post_meta($this->getPostId, 'xs_review_overview_settings', false);
+		/**
+		 * Loading the saved settings from database
+		 *
+		 */
+		$wur_settings = new Wur_Settings();
+		$wur_settings->load();
 
-		if(is_array($metaDataOverviewJson) AND sizeof($metaDataOverviewJson) > 0) {
-			$return_data_overview = json_decode(end($metaDataOverviewJson));
-		} else {
-			$return_data_overview = [];
-		}
 
-		// enable review
-		$enable_review = isset($return_data_display_setting['page']['enable']) ? 'Yes' : 'No';
+		$display_setting  = $wur_settings->getDisplaySettings();
+		$global_setting   = $wur_settings->getGlobalSettings();
+		$post_review_meta = Wur_Settings::get_xs_post_meta($this->getPostId, 'xs_review_overview_settings');
 
-		if(!is_array($return_data_display_setting)) {
-			$enable_review = 'Yes';
-		}
 
-		// enable page
-		$page_enable = isset($return_data_display_setting['page']['data']) ? $return_data_display_setting['page']['data'] : ['post'];
+		if($wur_settings->is_review_enable_for_post_type($post->post_type)) {
 
-		if(!is_array($return_data_display_setting)) {
-			$page_enable = ['post', $this->post_type];
-		}
+			$review_content = '';
 
-		if($enable_review == 'Yes'):
-			if(in_array($this->getPostType, $page_enable)):
-				// show per page
-				$showPostNo = isset($return_data_display_setting['review_show_per']) ? $return_data_display_setting['review_show_per'] : 10;
-				// Like query data
-				$likeData = '"xs_post_id":"' . $this->getPostId . '"';
-				// code for view review list
+			if($wur_settings->is_author_review_enabled()) {
 
-				$paged = isset($_GET['review_page']) ? $_GET['review_page'] : 1;
-				$args  = array(
-					'post_type'      => $this->post_type,
-					'meta_query'     => array(
-						array(
-							'key'     => 'xs_public_review_data',
-							'value'   => '' . $likeData . '',
-							'compare' => 'LIKE',
-						),
-					),
-					'orderby'        => array(
-						'post_date' => 'DESC',
-					),
-					'posts_per_page' => $showPostNo,
-					'paged'          => $paged,
-				);
-				// query review list data
-				$the_query = new \WP_Query($args);
+				$post_review_meta = Wur_Settings::get_xs_post_meta($this->getPostId);
 
-				// total review count
+				if(!empty($post_review_meta->overview->enable)) {
 
-				$argsTotal      = array(
-					'post_type'  => $this->post_type,
-					'meta_query' => array(
-						array(
-							'key'     => 'xs_public_review_data',
-							'value'   => '' . $likeData . '',
-							'compare' => 'LIKE',
-						),
-					),
-					'orderby'    => array(
-						'post_date' => 'DESC',
-					),
+					ob_start();
 
-				);
-				$the_queryTotal = new \WP_Query($argsTotal);
+					require(WUR_REVIEW_PLUGIN_PATH . 'views/public/meta-box-author-review.php');
 
-				// content key for submit array index
-				$content_meta_key = 'xs_submit_review_data';
+					$author_content = ob_get_contents();
+					ob_end_clean();
 
-				// start object
-				ob_start();
-				//require page for submit review form and review list
-				require_once(WUR_REVIEW_PLUGIN_PATH . 'views/public/meta-box-view.php');
-				$getContent = ob_get_contents();
-				ob_end_clean();
-				// end object content
-				$content_Position = isset($return_data_display_setting['review_location']) ? $return_data_display_setting['review_location'] : 'after_content';
-
-				if($content_Position == 'after_content') {
-					return $content . $getContent;
-				} elseif($content_Position == 'before_content') {
-					return $getContent . $content;
-				} elseif($content_Position == 'custom_code') {
-					return $getContent;
-				} else {
-					return $content;
+					$review_content .= $author_content;
 				}
 
-			endif;
-		endif;
+			}
+
+
+			if($wur_settings->is_user_review_enabled()) {
+
+				ob_start();
+
+				require(WUR_REVIEW_PLUGIN_PATH . 'views/public/meta-box-user-review.php');
+
+				$author_content = ob_get_contents();
+				ob_end_clean();
+
+				$review_content .= $author_content;
+			}
+
+
+			$content_Position = isset($display_setting['review_location']) ? $display_setting['review_location'] : 'after_content';
+
+
+			if($content_Position == 'after_content') {
+				return $content . $review_content;
+			}
+
+			if($content_Position == 'before_content') {
+				return $review_content . $content;
+			}
+
+			if($content_Position == 'custom_code') {
+				return $review_content;
+			}
+		}
+
 
 		return $content;
 	}
@@ -358,17 +331,55 @@ Class Content {
 			}
 		}
 
-		// get overview data
-		$metaDataOverviewJson = get_post_meta($this->getPostId, 'xs_review_overview_settings', false);
-		if(is_array($metaDataOverviewJson) AND sizeof($metaDataOverviewJson) > 0) {
-			$return_data_overview = json_decode(end($metaDataOverviewJson));
+		$postId    = (int)isset($atts['post-id']) ? $atts['post-id'] : 0;
+		$className = isset($atts['class']) ? $atts['class'] : '';
+		$reviewBox = isset($atts['overview']) ? $atts['overview'] : 'no';
+
+		if ($postId != 0) {
+			$post = get_post($postId);
+			$this->getPostType = $post->post_type;
+			$this->getPostId = $post->ID;
 		} else {
-			$return_data_overview = [];
+			global $post;
+			$this->getPostType = $post->post_type;
+			$this->getPostId = $post->ID;
 		}
 
-		if((isset($return_data_display_setting['page']['enable']) ? $return_data_display_setting['page']['enable'] : 'No') == 'Yes'):
+		// get display settings data
+		$return_data_display_setting = get_option('xs_review_display', '');
+		// get global settings data
+		$return_data_global_setting = get_option('xs_review_global');
 
-			//if(  isset($return_data_display_setting['page']['data']) && in_array($this->getPostType, $return_data_display_setting['page']['data']) ):
+
+		if ($return_data_display_setting['review_location'] != 'custom_code') {
+			if ($postId == 0) {
+				return '';
+			}
+		}
+
+
+		/**
+		 * Settings from each page/post
+		 */
+		$metaDataOverviewJson = get_post_meta($this->getPostId, 'xs_review_overview_settings', true);
+
+		if (empty($metaDataOverviewJson)) {
+			$return_data_overview = [];
+
+		} else {
+			$return_data_overview = json_decode($metaDataOverviewJson);
+		}
+
+		/**
+		 * AR:20201109
+		 * After 1.2.2 enable review is removed and only cpt's are listed,
+		 * so now we have to check only if tht list is empty or not -
+		 * todo - one catch need to be checked if user can uncheck all cpt's, if not we need to move back again
+		 */
+		//if((isset($return_data_display_setting['page']['enable']) ? $return_data_display_setting['page']['enable'] : 'No') == 'Yes'):
+
+
+		if(isset($return_data_display_setting['page']['data']) && in_array($this->getPostType, $return_data_display_setting['page']['data'])):
 
 			// show per page
 			$showPostNo = isset($return_data_display_setting['review_show_per']) ? $return_data_display_setting['review_show_per'] : 10;
@@ -611,6 +622,7 @@ Class Content {
 	/**
 	 * Review wur_ratting_view_star_point . for star style of content view
 	 * Method Description: this method use for ratting view in admin page
+	 *
 	 * @params $rat, get ratting value
 	 * @params $max, limit score data
 	 * @return ratting html data

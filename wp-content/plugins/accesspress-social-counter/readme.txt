@@ -3,15 +3,15 @@ Contributors: Access Keys
 Tags: social count, social counter, social counters, social media counters, social media, social network, social profiles counter, social profile count, social profile, social icons, social icon counter
 Donate link: http://accesspressthemes.com/donation/
 Requires at least: 4.5
-Tested up to: 5.3.2
-Stable tag: 1.8.8
+Tested up to: 5.7
+Stable tag: 1.9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 A plugin to display your social accounts fans, subscribers and followers number on your website with handful of backend settings.
 
 == Description ==
-[Homepage](https://accesspressthemes.com/) | [Documentation](https://accesspressthemes.com/documentation/accesspress-social-counter/) | [Support](https://accesspressthemes.com/support) | [Demo](http://demo.accesspressthemes.com/wordpress-plugins/accesspress-social-counter/) | [Premium Version](https://accesspressthemes.com/wordpress-plugins/accesspress-social-pro/)
+[Documentation](https://accesspressthemes.com/documentation/accesspress-social-counter/) | [Support](https://accesspressthemes.com/support) | [Demo](http://demo.accesspressthemes.com/wordpress-plugins/accesspress-social-counter/) | [Premium Version](https://accesspressthemes.com/wordpress-plugins/accesspress-social-pro/)
 
 <strong>AccessPress Social Counter</strong> is a <strong>Free WordPress plugin</strong> to display your social accounts fans, subscribers and followers number on your website!
 A perfect plugin to show your social media stats and encourage more to join your network.
@@ -85,7 +85,6 @@ Note: If Instagram followers count is returning 0, it is due to change in the in
 = Some Useful Links =
 * <strong>Support Email</strong>: support@accesspressthemes.com
 * <strong>Support Forum Link</strong>: http://accesspressthemes.com/support/
-* <strong>Website Link</strong>: http://accesspressthemes.com/
 * <strong>Youtube channel link</strong>: https://www.youtube.com/watch?v=TjZNcVG3fDE
 * <strong>Facebook link</strong>: https://www.facebook.com/AccessPressThemes
 
@@ -100,22 +99,6 @@ For complete information and documentation regarding plugin,please visit below l
 
 [Demo](http://demo.accesspressthemes.com/wordpress-plugins/accesspress-social-counter/)
 
-== More Resources ==
-Themes Compatible With Our Plugin :
-
-AccessPress Social Counter works best with every WordPress theme. Its even more remarkable when used with popular themes of ours or any other being compatible to almost all of the themes.
-
-AND IF THIS PLUGIN HAS IMPRESSED YOU, THEN YOU WOULD ENJOY OUR OTHER PROJECTS TOO. DO CHECK THESE OUT :
-
-[WPAll Club](https://wpall.club/) - A complete WordPress resources club. WordPress tutorials, blogs, curated free and premium themes and plugins, WordPress deals, offers, hosting info and more.
-
-[Premium WordPress Themes](https://themeforest.net/user/accesskeys/portfolio) - 6 premium WordPress themes well suited for all sort of websites. Professional, well coded and highly configurable themes for you.
-
-[Premium WordPress Plugins](https://codecanyon.net/user/accesskeys/portfolio) - 45+ premium WordPress plugins of many different types. High user ratings, great quality and best sellers in CodeCanyon marketplace.
-
-[AccessPress Themes](https://accesspressthemes.com/) - AccessPress Themes has 50+ beautiful and elegant, fully responsive, multipurpose themes to meet your need for free and commercial basis.
-
-[8Degree Themes](https://8degreethemes.com/) - 8Degree Themes offers 15+ free WordPress themes and 16+ premium WordPress themes  carefully crafted with creativity.
 
 == Installation ==
 1. Unzip accesspress-social-counter.zip
@@ -146,6 +129,14 @@ Once you install the plugin , you can check some general documentation about how
 5. Backend Cache Settings Section
 
 == Changelog ==
+
+= 1.9.0 =
+* Few backend code refinement
+
+= 1.8.9 =
+* Solved facebook page follower count issue.
+* Added new settings for instagram and dribbble to fetch follower count.
+* WordPress latest version compatibility checked.
 
 = 1.8.8 =
 * Added font awesome 4 and 5 compatibility settings in backend and frontend.

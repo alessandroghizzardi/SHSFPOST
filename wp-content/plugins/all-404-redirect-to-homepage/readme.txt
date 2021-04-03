@@ -2,8 +2,8 @@
 Contributors: fakhris 
 Tags: 404 error, redirection, homepage, redirection, https, automatic redirection, 404 link,redirect, soft 404, redirected, 301 seo redirect, post redirect plugin, broken links, fix 404
 Requires at least: 3.0.1
-Tested up to: 5.4
-Stable tag: 1.16
+Tested up to: 5.6
+Stable tag: 1.20
 
 By using this smart plugin, you can fix all 404 error links by redirecting them to homepage using the SEO 301 redirection. Improve your visibility in search engines now..
 

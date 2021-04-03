@@ -859,7 +859,8 @@
 .xs-review-box .xs-review-media {
   flex: 0 0 75%;
   max-width: 75%;
-  margin-right: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
 }
 .xs-review-box .xs-review-media.review-full{
   flex: 0 0 100%;
@@ -879,4 +880,103 @@
 }
 .xs-review-box .xs-reviewer-details .review-reviwer-info-section {
   padding-left: 10px;
+}
+.wur-pie-data {
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+}
+.wur-pie-data p{
+  margin: 0;
+  color: #3a3a3a;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 20px;
+}
+
+@media screen and (max-width: 767px) {
+  .view-review-list .xs-reviewer-details{
+    padding: 0;
+    flex-direction: column-reverse;
+  }
+  .xs-review-box-item .xs-reviewer-details{
+    text-align: center;
+    align-items: center;
+  }
+  .xs-reviewer-details .review-reviwer-image-section{
+    float: none
+  }
+  .xs-review-box .total_overview_rattings_value {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 30px;
+  }
+  #xs_review_form_public_data .xs-review-box .xs-review {
+      width: 100%;
+      padding: 5px 0;
+  }
+  .xs-review-overview-list,
+  .xs-review-box .xs-review-media{
+    flex: 0 0 100%;
+    max-width: 100%;
+    border: none;
+    padding: 0;
+  }
+  .xs-review-overview-list-right .total_overview_rattings {
+      line-height: 1;
+      margin-top: 0;
+  }
+  #xs-user-review-box{
+    text-align: center;
+  }
+  #xs-user-review-box .xs-review-box-item{
+    flex-direction: column-reverse;
+  }
+  #xs-user-review-box .xs-reviewer-details{
+    flex-direction: column;
+  }
+  #xs_review_form_public_data {
+      text-align: center;
+  }
+  #xs-review-box .write-reivew-headding, 
+  #xs-review-box .total-reivew-headding {
+      padding: 0px;
+      margin: 0;
+  }
+  .total-reivew-headding {
+      text-align: center;
+  }
+  .public-xs-review-box .xs-save-button button {
+      padding: 13px 30px;
+      border-radius: 10px;
+  }
+  .public-xs-review-box, .view-review-list {
+      background: transparent;
+      padding: 30px 30px;
+  }
+  .xs-overview-data.xs-overview-percentage .xs-overview-star .data-rat-label,
+  .xs-overview-data.xs-overview-star .data-rat-label,
+  .xs-overview-data.xs-overview-percentage .xs-overview-data .data-rat-label-range,
+  .xs-overview-data.xs-overview-star .data-rat-label-range,
+  .xs-overview-data.xs-overview-percentage .xs-overview-star .data-rat,
+  .xs-overview-data.xs-overview-star .data-rat{
+    width: 100% !important;
+    text-align: center !important;
+  }
+  .xs-overview-data.xs-overview-star  {
+    display: flex;
+  }
+  .xs-review-overview-list.custom-rat .xs-overview-star {
+      display: block;
+  }
+}
+
+
+/*css for pie chart */
+.xs-overview-pie .data-rat > .wur-rat-cont > div {
+    font-size: 1.1rem;
+    position: relative;
+    top:50px;
 }

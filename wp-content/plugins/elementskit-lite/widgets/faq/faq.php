@@ -2,13 +2,13 @@
 
 namespace Elementor;
 
-use \ElementsKit\Elementskit_Widget_FAQ_Handler as Handler;
-use \ElementsKit\Modules\Controls\Controls_Manager as ElementsKit_Controls_Manager;
+use \Elementor\ElementsKit_Widget_FAQ_Handler as Handler;
+use \ElementsKit_Lite\Modules\Controls\Controls_Manager as ElementsKit_Controls_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Elementskit_Widget_FAQ extends Widget_Base {
-    use \ElementsKit\Widgets\Widget_Notice;
+class ElementsKit_Widget_FAQ extends Widget_Base {
+    use \ElementsKit_Lite\Widgets\Widget_Notice;
 
     public $base;
 
@@ -28,11 +28,14 @@ class Elementskit_Widget_FAQ extends Widget_Base {
         return Handler::get_categories();
     }
 
+    public function get_help_url() {
+        return '';
+    }
 
     protected function _register_controls() {
         $this->start_controls_section(
             'ekit_faq_section_tab', [
-                'label' =>esc_html__( 'FAQ', 'elementskit' ),
+                'label' =>esc_html__( 'FAQ', 'elementskit-lite' ),
             ]
         );
 
@@ -42,28 +45,28 @@ class Elementskit_Widget_FAQ extends Widget_Base {
         $repeater->add_control(
             'ekit_faq_title',
             [
-                'label' =>esc_html__( 'Title', 'elementskit' ),
+                'label' =>esc_html__( 'Title', 'elementskit-lite' ),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
-                'placeholder' =>esc_html__( 'Title type here', 'elementskit' ),
-                'default' =>esc_html__( 'How to Change my Photo from Admin Dashboard?', 'elementskit' ),
+                'placeholder' =>esc_html__( 'Title type here', 'elementskit-lite' ),
+                'default' =>esc_html__( 'How to Change my Photo from Admin Dashboard?', 'elementskit-lite' ),
             ]
         );
         $repeater->add_control(
             'ekit_faq_content',
             [
-                'label' =>esc_html__( 'Content', 'elementskit' ),
+                'label' =>esc_html__( 'Content', 'elementskit-lite' ),
                 'type' => Controls_Manager::TEXTAREA,
                 'label_block' => true,
-                'placeholder' =>esc_html__( 'Description type here', 'elementskit' ),
-                'default' =>esc_html__( 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast', 'elementskit' ),
+                'placeholder' =>esc_html__( 'Description type here', 'elementskit-lite' ),
+                'default' =>esc_html__( 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast', 'elementskit-lite' ),
             ]
         );
 
         $this->add_control(
             'ekit_faq_content_items',
             [
-                'label' => esc_html__('Tab content', 'elementskit'),
+                'label' => esc_html__('Tab content', 'elementskit-lite'),
                 'type' => Controls_Manager::REPEATER,
                 'separator' => 'before',
                 'title_field' => '{{ ekit_faq_title }}',
@@ -91,14 +94,14 @@ class Elementskit_Widget_FAQ extends Widget_Base {
 
         $this->start_controls_section(
             'ekit_faq_section_title_style', [
-                'label'	 =>esc_html__( 'Title', 'elementskit' ),
+                'label'	 =>esc_html__( 'Title', 'elementskit-lite' ),
                 'tab'	 => Controls_Manager::TAB_STYLE,
             ]
         );
 
         $this->add_control(
             'ekit_faq_title_color', [
-                'label'		 =>esc_html__( 'Title Color', 'elementskit' ),
+                'label'		 =>esc_html__( 'Title Color', 'elementskit-lite' ),
                 'type'		 => Controls_Manager::COLOR,
                 'selectors'	 => [
                     '{{WRAPPER}} .elementskit-single-faq .elementskit-faq-title' => 'color: {{VALUE}};'
@@ -118,7 +121,7 @@ class Elementskit_Widget_FAQ extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'ekit_faq_title_background_group',
-                'label' => esc_html__( 'Background', 'elementskit' ),
+                'label' => esc_html__( 'Background', 'elementskit-lite' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .elementskit-single-faq .elementskit-faq-header',
             ]
@@ -128,7 +131,7 @@ class Elementskit_Widget_FAQ extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'ekit_faq_title_border_group',
-                'label' => esc_html__( 'Border', 'elementskit' ),
+                'label' => esc_html__( 'Border', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-single-faq .elementskit-faq-header',
             ]
         );
@@ -136,7 +139,7 @@ class Elementskit_Widget_FAQ extends Widget_Base {
         $this->add_control(
             'ekit_faq_border_radious',
             [
-                'label' => esc_html__( 'Title Border Radius', 'elementskit' ),
+                'label' => esc_html__( 'Title Border Radius', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -148,7 +151,7 @@ class Elementskit_Widget_FAQ extends Widget_Base {
         $this->add_control(
             'ekit_faq_title_padding',
             [
-                'label' => esc_html__( 'Title Padding', 'elementskit' ),
+                'label' => esc_html__( 'Title Padding', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'default' => 	[
@@ -167,7 +170,7 @@ class Elementskit_Widget_FAQ extends Widget_Base {
         $this->add_control(
             'ekit_faq_title_margin',
             [
-                'label' => esc_html__( 'Title Margin', 'elementskit' ),
+                'label' => esc_html__( 'Title Margin', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -182,14 +185,14 @@ class Elementskit_Widget_FAQ extends Widget_Base {
         //Content Style Section
         $this->start_controls_section(
             'ekit_faq_section_content_style', [
-                'label'	 =>esc_html__( 'Content', 'elementskit' ),
+                'label'	 =>esc_html__( 'Content', 'elementskit-lite' ),
                 'tab'	 => Controls_Manager::TAB_STYLE,
             ]
         );
 
         $this->add_control(
             'ekit_faq_content_color', [
-                'label'		 =>esc_html__( 'Color', 'elementskit' ),
+                'label'		 =>esc_html__( 'Color', 'elementskit-lite' ),
                 'type'		 => Controls_Manager::COLOR,
                 'selectors'	 => [
                     '{{WRAPPER}} .elementskit-single-faq .elementskit-faq-body' => 'color: {{VALUE}};'
@@ -209,7 +212,7 @@ class Elementskit_Widget_FAQ extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'ekit_faq_content_background_group',
-                'label' => esc_html__( 'Content Background', 'elementskit' ),
+                'label' => esc_html__( 'Content Background', 'elementskit-lite' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .elementskit-single-faq .elementskit-faq-body',
             ]
@@ -219,7 +222,7 @@ class Elementskit_Widget_FAQ extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'ekit_faq_content_border_group',
-                'label' => esc_html__( 'Content Border', 'elementskit' ),
+                'label' => esc_html__( 'Content Border', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-single-faq .elementskit-faq-body',
             ]
         );
@@ -227,7 +230,7 @@ class Elementskit_Widget_FAQ extends Widget_Base {
         $this->add_control(
             'ekit_faq_content_border_radious',
             [
-                'label' => esc_html__( 'Border Radius', 'elementskit' ),
+                'label' => esc_html__( 'Border Radius', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -239,7 +242,7 @@ class Elementskit_Widget_FAQ extends Widget_Base {
         $this->add_control(
             'ekit_faq_content_padding',
             [
-                'label' => esc_html__( 'Content Padding', 'elementskit' ),
+                'label' => esc_html__( 'Content Padding', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'default' => 	[
@@ -258,7 +261,7 @@ class Elementskit_Widget_FAQ extends Widget_Base {
         $this->add_control(
             'ekit_faq_content_margin',
             [
-                'label' => esc_html__( 'Content Margin', 'elementskit' ),
+                'label' => esc_html__( 'Content Margin', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -270,7 +273,7 @@ class Elementskit_Widget_FAQ extends Widget_Base {
         $this->add_control(
             'ekit_faq_container_margin',
             [
-                'label' => esc_html__( 'Container Margin', 'elementskit' ),
+                'label' => esc_html__( 'Container Margin', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -302,7 +305,7 @@ class Elementskit_Widget_FAQ extends Widget_Base {
             </div>
             <div class="elementskit-faq-body">
                 <?php if(!empty($ekit_faq_content_item['ekit_faq_content'])) {
-                    echo \ElementsKit\Utils::kses($ekit_faq_content_item['ekit_faq_content']);
+                    echo \ElementsKit_Lite\Utils::kses($ekit_faq_content_item['ekit_faq_content']);
                 } ?>
             </div>
         </div>

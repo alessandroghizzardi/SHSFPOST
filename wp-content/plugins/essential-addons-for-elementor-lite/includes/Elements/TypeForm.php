@@ -7,10 +7,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Box_Shadow as Group_Control_Box_Shadow;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Box_Shadow;
+use \Elementor\Widget_Base;
 use \Elementor\Scheme_Color;
 
 class TypeForm extends Widget_Base {
@@ -64,7 +64,7 @@ class TypeForm extends Widget_Base {
         $form_arr = get_transient($key);
         if (empty($form_arr)) {
             $response = wp_remote_get(
-                'https://api.typeform.com/forms',
+                'https://api.typeform.com/forms?page_size=200',
                 [
                     'headers' => [
                         'Authorization' => "Bearer $token",
@@ -104,8 +104,7 @@ class TypeForm extends Widget_Base {
             'eael_global_warning_text',
             [
                 'type'            => Controls_Manager::RAW_HTML,
-                'raw'             => __('Whoops! It\' seems like you didn\'t set TypeForm personal token. You can set from 
-                                    Essential Addons &gt; Elements &gt; TypeForm (Settings)',
+                'raw'             => __('Whoops! It seems like you haven\'t connected your Typeform account. To do this, navigate to <b>WordPress Dashboard -> Essential Addons -> Elements -> Typeform</b> (<a target="_blank" href="'.esc_url(admin_url( 'admin.php?page=eael-settings')).'">Get Access</a>).',
                     'essential-addons-for-elementor-lite'),
                 'content_classes' => 'eael-warning',
             ]
@@ -342,7 +341,7 @@ class TypeForm extends Widget_Base {
     protected function render () {
 
         $settings = $this->get_settings_for_display();
-        if ($settings['eael_typeform_list'] == '') {
+        if ($this->get_settings('eael_typeform_list') == '') {
             return;
         }
         $id = 'eael-type-form-'.$this->get_id();
@@ -363,9 +362,9 @@ class TypeForm extends Widget_Base {
         $this->add_render_attribute('eael_typeform_wrapper', 'class', 'eael-typeform-align-'.$alignment);
         $data = [
             'url'         => esc_url($settings['eael_typeform_list']),
-            'hideFooter'  => ($settings['eael_typeform_hidefooter'] == 'yes'),
-            'hideHeaders' => ($settings['eael_typeform_hideheaders'] == 'yes'),
-            'opacity'     => $settings['eael_typeform_opacity']['size']
+            'hideFooter'  => ($this->get_settings('eael_typeform_hidefooter') == 'yes'),
+            'hideHeaders' => ($this->get_settings('eael_typeform_hideheaders') == 'yes'),
+            'opacity'     => $this->get_settings('eael_typeform_opacity')['size']
         ];
         echo '<div data-typeform="'.htmlspecialchars(json_encode($data), ENT_QUOTES,
                 'UTF-8').'" '.$this->get_render_attribute_string('eael_typeform_wrapper').'></div>';

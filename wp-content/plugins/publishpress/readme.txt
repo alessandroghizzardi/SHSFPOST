@@ -5,8 +5,8 @@ Author URI: https://publishpress.com
 Tags: editorial calendar, notifications, custom statuses, editorial comments, workflow
 Requires at least: 4.6
 Requires PHP: 5.6
-Tested up to: 5.4
-Stable tag: 2.2.0
+Tested up to: 5.7
+Stable tag: 3.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,7 +80,7 @@ PublishPress is based on the EditFlow plugin. It is easy for Edit Flow users to 
 
 [Click here to read about the Edit Flow import](https://publishpress.com/knowledge-base/migrate/).
 
-= Join PublishPress and get the Pro plugins =
+= Join PublishPress and you’ll get access to Pro plugins and support =
 
 The Pro versions of the PublishPress plugins are well worth your investment. The Pro versions have extra features and faster support. [Click here to join PublishPress](https://publishpress.com/pricing/).
 
@@ -92,12 +92,13 @@ Join PublishPress and you’ll get access to these 6 Pro plugins:
 * [PublishPress Permissions Pro](https://publishpress.com/presspermit) is the plugin for advanced WordPress permissions.
 * [PublishPress Pro](https://publishpress.com/publishpress) is the plugin for managing and scheduling WordPress content.
 * [PublishPress Revisions Pro](https://publishpress.com/revisions) allows you to update your published pages with teamwork and precision.
+* [Advanced Gutenberg](https://publishpress.com/advanced-gutenberg) has everything you need to build professional websites with the Gutenberg editor.
 
 Together, these plugins are a suite of powerful publishing tools for WordPress. If you need to create a professional workflow in WordPress, with moderation, revisions, permissions and more … then you should try PublishPress.
 
-=  Bug Reports =
+= Bug Reports =
 
-Bug reports for PublishPress are welcomed in our [repository on GitHub](https://github.com/publishpress/publishpress). Please note that GitHub is not a support forum, and that issues that aren’t properly qualified as bugs will be closed.
+Bug reports for PublishPress are welcomed in our [repository on GitHub](https://github.com/publishpress/publishpress). Please note that GitHub is not a support forum, and that issues that are not properly qualified as bugs will be closed.
 
 = Follow the PublishPress team =
 
@@ -119,10 +120,161 @@ Follow PublishPress on [Facebook](https://www.facebook.com/publishpress), [Twitt
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+= [3.3.0] - 2021-03-18 =
+
+* Added: Add filters to customize the available fields in the notifications "shortcode" help text: publishpress_notifications_shortcode_post_fields, publishpress_notifications_shortcode_actor_fields, publishpress_notifications_shortcode_workflow_fields, publishpress_notifications_shortcode_edcomments_fields, publishpress_notifications_shortcode_receiver_fields;
+* Fixed: Fix the value of the notification channel for authors identified by the email, #793;
+* Fixed: Fixed the admin menu icon restoring the calendar dashicon, #802;
+* Fixed: Fixed PHP Fatal error Uncaught ArgumentCountError: Too few arguments to function MA_Multiple_Authors::filter_workflow_receiver_post_authors, #814;
+* Fixed: Fixed bug on WP 5.7 that breaks the toggle button on accordion of metaboxes, #816;
+* Fixed: Fixed PHP notice: array to string conversion in debug.php:87, #813;
+* Fixed: Fixed The Upgrade to Pro banner and menu item to show only for the users who can install plugins, #599;
+
+= [3.2.0] - 2021-02-10 =
+
+* Added: Add option to rescheduled failed notifications in the notifications log. We only had that option for scheduled notifications, #786;
+* Added: Added option to the notification workflow for avoiding notifying the user who triggered the action, #778;
+* Added: Add the name of blog in the notification log content column, if in a multisite network;
+* Fixed: Fix calendar picking up the wrong day, depending on the time and timezone, #572;
+* Fixed: Fix styling for the error messages in the notifications log. The error lines were moved to the top of the screen due the "error" CSS class, #765;
+* Fixed: Add sanitization and escape variables in some variables, increasing compatibility with WP VIP and more security, #773;
+* Fixed: Fix PHP warning "Creating default object from empty value in publishpress-authors.php:772", correctly assigning the filter "pp_pre_insert_editorial_comment". (Allows PublishPress Revisions integration), #231;
+* Fixed: Fixed timezone information in the calendar subscription and .ics file, #784;
+* Fixed: Fixed role selection when adding a new user in a multisite, #788;
+
+= [3.1.0] - 2021-01-20 =
+
+* Added: Add shortcodes to the email notifications for the post content, excerpt and post type, #288
+* Fixed: Fixed support to PHP 5.6, #772;
+
+= [3.0.3] - 2021-01-11 =
+
+* Fixed: Fix fatal error when "editor" or "author" user roles are missed in the site, #767;
+* Fixed: Update the list of capabilities in the PublishPress Capabilities plugin;
+
+= [3.0.2] - 2021-01-07 =
+
+* Fixed: Fix JS warning: $(html) HTML text after last tag is ignored in the custom-status.js file, #754;
+* Fixed: Fix JS warning: jQuery.fn.attr(‘selected’) might use property instead of attribute on custom-status.js, #753;
+* Fixed: Fix JS warning: jQuery.fn.attr(‘multiple’) might use property instead of attribute on custom-status.js, #753;
+* Fixed: Fix JS warning: jQuery.fn.click() event shorthand is deprecated on "publishpress/modules/calendar/lib/calendar.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.keydown() event shorthand is deprecated on "publishpress/modules/calendar/lib/calendar.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.mouseover() event shorthand is deprecated on "publishpress/modules/calendar/lib/calendar.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.mouseout() event shorthand is deprecated on "publishpress/modules/calendar/lib/calendar.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.change() event shorthand is deprecated on "publishpress/modules/calendar/lib/calendar.js", #761;
+* Fixed: Fix JS warning: jQuery.isArray is deprecated; use Array.isArray on "publishpress/common/libs/select2/js/select2.min.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.click() event shorthand is deprecated on "publishpress/modules/content-overview/lib/content-overview.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.change() event shorthand is deprecated on "publishpress/modules/content-overview/lib/content-overview.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.click() event shorthand is deprecated on "publishpress/modules/notifications-log/assets/js/admin.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.click() event shorthand is deprecated on "publishpress/modules/editorial-metadata/lib/editorial-metadata-configure.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.keyup() event shorthand is deprecated on "publishpress/modules/custom-status/lib/custom-status-configure.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.click() event shorthand is deprecated on "publishpress/modules/custom-status/lib/custom-status-configure.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.keydown() event shorthand is deprecated on "publishpress/modules/custom-status/lib/custom-status-configure.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.mousedown() event shorthand is deprecated on "publishpress/modules/custom-status/lib/custom-status-configure.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.focus() event shorthand is deprecated on "publishpress/common/js/jquery-ui-timepicker-addon.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.bind() is deprecated on "publishpress/common/js/jquery-ui-timepicker-addon.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.bind() is deprecated on "publishpress/modules/custom-status/lib/custom-status.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.click() event shorthand is deprecated on "publishpress/modules/editorial-comments/lib/editorial-comments.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.bind() is deprecated on "publishpress/modules/improved-notifications/libs/opentip/downloads/opentip-jquery.js", #761;
+* Fixed: Fix JS warning: jQuery.fn.click() event shorthand is deprecated on "publishpress/modules/improved-notifications/assets/js/multiple-select.js", #761;
+* Fixed: Fix the post_id passed to the method "get_workflows_related_to_post" that lists the notification workflows related to the post being edited;
+* Changed: Removed the user field in the Roles page to avoid break big sites, #750;
+* Added: Add capability to control who can view ("pp_view_editorial_metadata") or edit ("pp_edit_editorial_metadata") the editorial metadata, deprecating the capability "pp_editorial_metadata_user_can_edit", #758;
+
+= [3.0.1] - 2020-11-24 =
+
+* Fixed: Can't delete users because the plugin redirects to the Notifications Log page, #737;
+* Fixed: Fixed the arguments "old_status" and "new_status" for the shortcode "psppno_post", #713;
+* Fixed: Fixed the argument "author_ip" for the shortcode "psppno_edcomment", #713;
+* Fixed: Fixed the option to always notify users who edited the content, #742;
+* Fixed: Fixed bug in the notification filters that was triggering notifications for unselected post types, #743;
+* Fixed: Updated the Italian language files;
+
+= [3.0.0] - 2020-11-16 =
+
+* Added: Added sortable columns to the Content Overview post list, #709;
+* Added: Added post type filter to the Content Overview page, #727;
+* Added: Added new filter "publishpress_notifications_schedule_delay_in_seconds", #650;
+* Added: Added new filter "publishpress_notifications_scheduled_data", #650
+* Added: Added to each notification log the source of the receiver (why is the user being notified? What group does he belongs to?), #650
+* Added: Added info to the log about the current user when the notification was triggered, #650
+* Added: Show the scheduled time of notifications in the log, #650
+* Added: Added information about the cron task status of each scheduled notification. If not exists, show a failure message, #650
+* Added: Added option to try again failed notifications. Add action "Try again" (Reschedule), and bulk option, #650
+* Added: Display in the log the duplicated notifications that were skipped, #650
+* Added: Added a settings field to configure the duplicated notification time threshold, in minutes, #650
+* Added: Added to the log the icon for the channel used in the notification, #650
+* Fixed: Minor fix to the style of the Content Overview post list, #709;
+* Fixed: Fixed default notifications adding the "new" and "auto-draft" to the previous status field, and "post" to the Post Type field, #721;
+* Fixed: Fixed support for multiple authors in the notifications, #650
+* Fixed: Fixed Strict Standards notice: ..\Dependency_Injector define the same property ($container) in the composition of ..\Role, #726;
+* Fixed: Fixed Strict Standards notice: ..\Dependency_Injector define the same property ($container) in the composition of ..\Follower, #726;
+* Changed: Improved error messages for failed notifications adding more descriptive error messages, #650
+* Changed: Refactored the filter "publishpress_notif_run_workflow_meta_query" to "publishpress_notifications_running_workflow_meta_query", #650
+* Changed: Refactored the filter publishpress_notif_async_timestamp => publishpress_notifications_scheduled_time_for_notification, #650
+* Changed: Refactored the action publishpress_enqueue_notification => publishpress_notifications_scheduled_notification, #650
+* Changed: Refactored the action publishpress_cron_notify => publishpress_notifications_send_notification, #650
+* Changed: Refactored the filter publishpress_notif_workflow_actions => publishpress_notifications_workflow_events, #650
+* Changed: The notification's content is only fixed right before sending the message. Scheduled notifications now have dynamic preview for the content, #650
+* Changed: The notification's list of receivers is only fixed right before sending the message. Scheduled notifications have dynamic receivers list, #650
+* Changed: The popup now displays only the content of the notification, #650
+* Changed: Refactored the Content Overview screen grouping posts by post type instead of by taxonomy, #709;
+* Changed: Deprecated the filter "PP_Content_Overview_term_columns" and added a new one "publishpress_content_overview_columns", #709;
+* Changed: Deprecated the filter "PP_Content_Overview_term_column_value" and added a new one "publishpress_content_overview_column_value", #709;
+* Removed: Removed the action "publishpress_notif_before_run_workflow", #650
+* Removed: Removed the filter "publishpress_notif_workflow_receiver_post_authors", #650
+
+= [2.4.2] - 2020-11-05  =
+
+* Fixed: Invalid assets paths for modules on Windows servers, #712;
+* Fixed: Fixed error in the calendar: Error: selected user doesn't have enough permissions to be set as the post author, #704;
+* Fixed: Fixed conflict with the plugin Visual Composer: pagenow is undefined, #692;
+* Fixed: Method get_inner_information was ignoring the passed information fields to the first argument, #654;
+* Fixed: Updated the .POT file;
+
+= [2.4.1] - 2020-10-22  =
+
+* Fixed: Fix the assets URL when the plugin is not installed in a standard folder;
+
+= [2.4.0] - 2020-10-22 =
+
+* Fixed: Fix PHP notice on Ajax call after clicking a filter without typing anything in the calendar or content overview, #693;
+* Fixed: Fix JS error: No select2/compat/containerCss, #695;
+* Fixed: Fix JS error: Failed to load resource: the server responded with a status of 404 () - select2.min.js, #696;
+* Fixed: Fix JS error: notifications.js:2 Uncaught TypeError: $(...).pp_select2 is not a function, #696;
+* Fixed: Fix PHP error: undefined property $default_pulish_time, #698;
+* Fixed: Fixed assets loading when installed as dependency of the Pro plugin, #697;
+* Added: Added option to sort calendar items by publishing date, #457;
+* Added: Added option to show all posts, or specific number of posts, on a date in the calendar, #675;
+* Changed: Updated the Twig library to 1.42.5;
+
+= [2.3.0] - 2020-10-07 =
+
+* Fixed: Fixed performance and memory issue for the calendar and content overview pages adding filters with asynchronous data search, removing the bloat of rendering all the users/tags in fields for each calendar cell, and content overview filters, #674;
+* Fixed: Fixed language domain loading and updated the POT file, #670;
+* Fixed: Removed a not used JS library: remodal, #517;
+* Fixed: Stop loading the Chosen JS library where it is not used, #330;
+* Fixed: Fixed support to Cyrillic chars on post status, #439;
+* Added: Added support for displaying editorial comments in post status transition notifications, #676;
+* Changed: Updated the Select2 JS library to version 4.0.13. The library instance was refactored to pp_select2;
+* Changed: Converted the select field for notifications in the post edit page from Chosen to Select2;
+
+= [2.2.1] - 2020-08-13 =
+
+* Fixed: Fixed PHP warning about variable $key being used outside and inside the context;
+* Added: Added new filter "publishpress_new_custom_status_args" to customize the post status arguments, #640;
+* Fixed: Fixed a PHP Fatal error: Trait Dependency_Injector not found, #652;
+* Fixed: Fixed PHP warning: Invalid argument supplied for foreach in TopNotice/Module.php;
+* Fixed: Fixed warnings about mixed content when the site uses HTTPS;
+* Fixed: Fixed JS error related to jQuery "live" function being deprecated and not found;
+* Fixed: Fixed DOM errors in the browser related to multiple elements using the same ID, #660;
+* Fixed: Compatibility with WP 5.5;
+
 = [2.2.0] - 2020-06-17 =
 
 * Removed: Fixed conflict with Gutenberg and other plugins keeping draft as the default status, always. Removed the option to set another status as default, #621;
 * Removed: Removed the notice asking for reviews after a few weeks of usage, #637;
+* Removed: Removed the following statuses from the Status dropdown on posts - on Gutenberg: Pending Review, Privately published, Scheduled. To set them, use the respective Gutenberg's UI;
 * Fixed: Protect the WordPress post statuses "Pending" and "Draft", blocking edition of those statuses;
 * Fixed: Fix the post status selection and the "Save as" link for Gutenberg for posts in published statuses. For changing the status you have to unpublish the post first;
 * Fixed: Fix the "Save as" button when the current status doesn't exist;
@@ -172,7 +324,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 * Fixed: Bulk actions in the notifications log page not working;
 * Fixed: Notifications sent to wrong roles on some cases. If the post has any user role set to be notified, and the notification workflow doesn't have that option selected, notifications were being sent to the followers - #571;
-* Fixed: If PublishPress\Notifications\Shortcodes::handle_psppno_edcomment is called with nullstring attrs a fatal error occurs;
+* Fixed: If PublishPress\Notifications\Shortcodes::handle_psppno_edcomment is called with null string attrs a fatal error occurs;
 * Fixed: The Notifications Log text is bigger than the other h3 elements in the post editor metabox;
 
 = [2.0.1] - 2020-02-11 =
@@ -840,7 +992,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 *Fixed:*
 
-* Fixed thge pt-BR translations
+* Fixed the pt-BR translations
 * Fixed datetime format in metadata fields for non-english languages
 * Fixed the metadata editing on the calendar
 * Fixed PHP warning after save options
@@ -959,7 +1111,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 *Changed:*
 
 * Better style for the calendar
-* Click anywhere on the calendar cell to create content, intead show a button
+* Click anywhere on the calendar cell to create content, instead show a button
 * Extends the drag-and-drop feature to custom statuses
 * Minor improvements on the code
 

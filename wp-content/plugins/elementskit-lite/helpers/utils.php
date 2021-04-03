@@ -1,35 +1,15 @@
 <?php
-namespace ElementsKit;
+namespace ElementsKit_Lite;
 
 defined( 'ABSPATH' ) || exit;
+
 /**
  * Global helper class.
  *
  * @since 1.0.0
  */
 
-class Utils{
-
-    /**
-     * Get elementskit older version if has any.
-     *
-     * @since 1.0.0
-     * @access public
-     */
-    public static function old_version(){
-        $version = get_option('elementskit_version');
-        return null == $version ? -1 : $version;
-    }
-
-    /**
-     * Set elementskit installed version as current version.
-     *
-     * @since 1.0.0
-     * @access public
-     */
-    public static function set_version(){
-        //return update_option('elementskit_version', \ElementsKit::plugin_url());
-    }
+class Utils {
 
     /**
      * Auto generate classname from path.
@@ -67,6 +47,7 @@ class Utils{
 				'href'	 => array(),
 				'rel'	 => array(),
 				'title'	 => array(),
+				'target' => array(),
 			),
 			'abbr'							 => array(
 				'title' => array(),
@@ -178,12 +159,12 @@ class Utils{
         $options = array();
 
         if (!empty($wpuf_form_list) && !is_wp_error($wpuf_form_list)) {
-            $options[0] = esc_html__('Select Form', 'elemetskit');
+            $options[0] = esc_html__('Select Form', 'elementskit-lite');
             foreach ($wpuf_form_list as $post) {
                 $options[$post->ID] = $post->post_title;
             }
         } else {
-            $options[0] = esc_html__('Create a form first', 'elemetskit');
+            $options[0] = esc_html__('Create a form first', 'elementskit-lite');
         }
 
         return $options;
@@ -197,14 +178,14 @@ class Utils{
 
             if (!empty($contact_forms) && !is_wp_error($contact_forms)) {
 
-                $options[0] = esc_html__('Select Ninja Form', 'elementskit');
+                $options[0] = esc_html__('Select Ninja Form', 'elementskit-lite');
 
                 foreach ($contact_forms as $form) {
                     $options[$form->get_id()] = $form->get_setting('title');
                 }
             }
         } else {
-            $options[0] = esc_html__('Create a Form First', 'elementskit');
+            $options[0] = esc_html__('Create a Form First', 'elementskit-lite');
         }
 
         return $options;
@@ -215,20 +196,20 @@ class Utils{
 
 		if (class_exists('TablePress')) {
 			$table_ids          = \TablePress::$model_table->load_all( false );
-			$table_options[0] = esc_html__( 'Select Table', 'elemenetskit' );
+			$table_options[0] = esc_html__( 'Select Table', 'elementskit-lite' );
 
 			foreach ( $table_ids as $table_id ) {
 				// Load table, without table data, options, and visibility settings.
 				$table = \TablePress::$model_table->load( $table_id, false, false );
 	
 				if ( '' === trim( $table['name'] ) ) {
-					$table['name'] = __( '(no name)', 'tablepress' );
+					$table['name'] = __( '(no name)', 'elementskit-lite' );
 				}
 				
 				$table_options[$table['id']] = $table['name'];
 			}
 		} else {
-            $table_options[0] = esc_html__('Create a Table First', 'elementskit');
+            $table_options[0] = esc_html__('Create a Table First', 'elementskit-lite');
         }
 
 		return $table_options;
@@ -251,6 +232,27 @@ class Utils{
 		return $array;
 	}
 
+	public static function render_elementor_content_css($content_id){
+		if ( class_exists( '\Elementor\Core\Files\CSS\Post' ) ) {
+			$css_file = new \Elementor\Core\Files\CSS\Post( $content_id );
+			$css_file->enqueue();
+		}
+	}
+
+	public static function render_elementor_content($content_id){
+		$elementor_instance = \Elementor\Plugin::instance();
+		$has_css = false;
+
+		/**
+		 * CSS Print Method Internal and Exteral option support for Header and Footer Builder.
+		 */
+		if (('internal' === get_option( 'elementor_css_print_method' )) || \Elementor\Plugin::$instance->preview->is_preview_mode()) {
+			$has_css = true;
+		}
+		
+		return $elementor_instance->frontend->get_builder_content_for_display( $content_id , $has_css );
+	}
+	
 	public static function render($content){
 		if (stripos($content, "elementskit-has-lisence") !== false) {
 			return null;
@@ -258,16 +260,7 @@ class Utils{
 
 		return $content;
 	}
-	public static function render_elementor_content_css($content_id){
-		if ( class_exists( '\Elementor\Core\Files\CSS\Post' ) ) {
-			$css_file = new \Elementor\Core\Files\CSS\Post( $content_id );
-			$css_file->enqueue();
-		}
-	}
-	public static function render_elementor_content($content_id){
-		$elementor_instance = \Elementor\Plugin::instance();
-		return $elementor_instance->frontend->get_builder_content_for_display( $content_id , true);
-	}
+	
 	public static function render_tab_content($content, $id){
 		return str_replace('.elementor-'.$id.' ', '#elementor .elementor-'.$id.' ', $content);
 	}
@@ -285,5 +278,13 @@ class Utils{
             'src' => $attachment->guid,
             'title' => $attachment->post_title
 		];
+	}
+
+	public static function esc_options($str, $options = [], $default = ''){
+		if(!in_array($str, $options)){
+			return $default;
+		}
+
+		return $str;
 	}
 }

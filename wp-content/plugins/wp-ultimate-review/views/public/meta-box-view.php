@@ -95,7 +95,18 @@ if((isset($return_data_overview->overview->enable) ? $return_data_overview->over
                 <div class="xs-review-overview-list-right custom-rat">
                     <div class="total_overview_rattings">
                         <span class="total_rattings_review"> <?php echo esc_html($avgRat); ?>  </span> <br/>
-                        <strong><?php echo esc_html__('SUPERB!', 'wp-ultimate-review'); ?></strong>
+
+						<?php
+
+						$condition = isset($return_data_display_setting['overview_avg_rating_if']) ? floatval($return_data_display_setting['overview_avg_rating_if']) : 3.75;
+
+						if(!empty($return_data_display_setting['overview_avg_rating_superb']) && $condition <= floatval($avgRat)) :
+
+							?>
+                            <strong><?php echo esc_html($return_data_display_setting['overview_avg_rating_superb']); ?></strong><?php
+						endif;
+						?>
+
                     </div>
                 </div>
 			<?php } ?>

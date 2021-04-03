@@ -12,11 +12,14 @@ use \Elementor\Group_Control_Border;
 use \Elementor\Group_Control_Box_Shadow;
 use \Elementor\Group_Control_Typography;
 use \Elementor\Utils;
+use Elementor\Modules\DynamicTags\Module as TagsModule;
 use \Elementor\Widget_Base;
+
+use \Essential_Addons_Elementor\Classes\Helper;
 
 class Cta_Box extends Widget_Base
 {
-    use \Essential_Addons_Elementor\Traits\Helper;
+    
 
     public function get_name()
     {
@@ -165,6 +168,13 @@ class Cta_Box extends Widget_Base
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
                 'default' => '',
+                'dynamic' => [
+                    'active' => true,
+                    'categories'   => [
+                        TagsModule::POST_META_CATEGORY,
+                        TagsModule::TEXT_CATEGORY,
+                    ],
+                ],
             ]
         );
         $this->add_control(
@@ -216,7 +226,7 @@ class Cta_Box extends Widget_Base
             [
                 'label' => __('Choose Template', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::SELECT,
-                'options' => $this->eael_get_page_templates(),
+                'options' => Helper::get_elementor_templates(),
                 'condition' => [
                     'eael_cta_title_content_type' => 'template',
                 ],
@@ -241,6 +251,7 @@ class Cta_Box extends Widget_Base
             [
                 'label' => esc_html__('Primary Button Text', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default' => esc_html__('Button Text', 'essential-addons-for-elementor-lite'),
             ]
@@ -251,6 +262,7 @@ class Cta_Box extends Widget_Base
             [
                 'label' => esc_html__('Primary Button Link', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::URL,
+                'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default' => [
                     'url' => 'http://',
@@ -276,6 +288,7 @@ class Cta_Box extends Widget_Base
             [
                 'label' => esc_html__('Secondary Button Text', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default' => esc_html__('Button Text Two', 'essential-addons-for-elementor-lite'),
                 'condition' => array(
@@ -289,6 +302,7 @@ class Cta_Box extends Widget_Base
             [
                 'label' => esc_html__('Secondary Button Link', 'essential-addons-for-elementor-lite'),
                 'type' => Controls_Manager::URL,
+                'dynamic' => ['active' => true],
                 'label_block' => true,
                 'default' => [
                     'url' => 'http://',
@@ -340,7 +354,7 @@ class Cta_Box extends Widget_Base
                     'type' => Controls_Manager::CHOOSE,
                     'options' => [
                         '1' => [
-                            'title' => __('', 'essential-addons-for-elementor-lite'),
+                            'title' => '',
                             'icon' => 'fa fa-unlock-alt',
                         ],
                     ],
@@ -690,8 +704,8 @@ class Cta_Box extends Widget_Base
             ]
         );
 
-        
-        
+
+
         $this->add_control(
             'eael_cta_btn_normal_bg_color',
             [
@@ -1048,7 +1062,7 @@ class Cta_Box extends Widget_Base
         // Button
         $target_primary     = $settings['eael_cta_btn_link']['is_external'] ? 'target="_blank"' : '';
         $nofollow_primary   = $settings['eael_cta_btn_link']['nofollow'] ? 'rel="nofollow"' : '';
-        
+
 
         if ('cta-bg-color' == $settings['eael_cta_color_type']) {
             $cta_class = 'bg-lite';
@@ -1080,7 +1094,7 @@ class Cta_Box extends Widget_Base
         if(!empty($sub_title)){
             $headingMarkup .='<h4 class="sub-title">'.$sub_title.'</h4>';
         }
-        $headingMarkup .='<'.$settings['title_tag'].' class="title">'.$settings['eael_cta_title'].'</'.$settings['title_tag'].'>';
+        $headingMarkup .='<'.Helper::eael_validate_html_tag($settings['title_tag']).' class="title">'.$settings['eael_cta_title'].'</'.Helper::eael_validate_html_tag($settings['title_tag']).'>';
 
         // content markup
         $contentMarkup = '';
@@ -1105,20 +1119,20 @@ class Cta_Box extends Widget_Base
     ?>
 	<?php if ('cta-basic' == $settings['eael_cta_type']): ?>
 	<div class="eael-call-to-action <?php echo esc_attr($cta_class); ?>">
-        <?php 
+        <?php
             print $headingMarkup;
             print $contentMarkup;
-            print $buttonMarkup; 
+            print $buttonMarkup;
         ?>
 	</div>
 	<?php endif;?>
 	<?php if ('cta-flex' == $settings['eael_cta_type']): ?>
 	<div class="eael-call-to-action cta-flex <?php echo esc_attr($cta_class); ?>">
 	    <div class="content">
-            <?php 
+            <?php
                 print $headingMarkup;
                 print $contentMarkup;
-            ?>            
+            ?>
 	    </div>
 	    <div class="action">
 	        <?php print $buttonMarkup; ?>
@@ -1139,10 +1153,10 @@ class Cta_Box extends Widget_Base
 			<?php }?>
 	    </div>
 	    <div class="content">
-            <?php 
+            <?php
                 print $headingMarkup;
                 print $contentMarkup;
-            ?> 
+            ?>
 	    </div>
 	    <div class="action">
             <?php print $buttonMarkup; ?>

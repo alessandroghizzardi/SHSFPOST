@@ -2,8 +2,8 @@
 Contributors: ThemeGrill, shivapoudel
 Tags: themegrill, theme demos, demo, importer, one click import
 Requires at least: 4.7
-Tested up to: 5.4
-Stable tag: 1.6.4
+Tested up to: 5.6
+Stable tag: 1.7.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -72,25 +72,10 @@ Yes you can! Join in on our [GitHub repository](https://github.com/themegrill/th
 3. Finally, Import the Demo with just one click.
 
 == Changelog ==
-= 1.6.4 - 04-06-2020 =
-* Fix       - `WooCommerce Setup Wizard` disabled when the plugin is active.
-* Fix       - `Live Preview` button link on successful demo import message in WordPress multisite install.
-* Tweak     - Add admin notice for `Plugin Review`.
-* Tweak     - Add admin notice for `Plugin Deactivate` if demo is already imported in their site.
-* Tweak     - Add refresh demo lists feature.
-* Tweak     - Add feature to restrict demo import process for specific demos to fix unwanted issues for unsupported demos.
-* Deprecate - `Upgrade to Pro` admin notice.
+= 1.7.1 - 18-01-2021 =
+* Remove - Admin notice for `Plugin Review`.
 
-= 1.6.3 - 18-02-2020 =
-* Enhancement - Secure reset button with nonce check.
-
-= 1.6.2 - 15-02-2020 =
-* Fix - Unauthenticated user vulnerability. Thanks webarxsecurity team
-
-= 1.6.1 - 12-11-2019 =
-* Tweak - Add admin notice for `Upgrade To Pro`.
-
-= 1.6.0 - 10-09-2019 =
-* Tweak - Support for Zakra Premium version demo import.
+= 1.7.0 - 11-01-2021 =
+* Tweak - Set FontAwesome 4 Shim feature to be enabled automatically on successful theme demo import.
 
 [See changelog for all versions](https://raw.githubusercontent.com/themegrill/themegrill-demo-importer/master/CHANGELOG.txt).

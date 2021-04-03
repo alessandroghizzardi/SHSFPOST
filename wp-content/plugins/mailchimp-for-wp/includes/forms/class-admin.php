@@ -39,7 +39,7 @@ class MC4WP_Forms_Admin {
 
 
 	public function enqueue_gutenberg_assets() {
-		wp_enqueue_script( 'mc4wp-form-block', MC4WP_PLUGIN_URL . 'assets/js/forms-block.js', array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-components' ) );
+		wp_enqueue_script( 'mc4wp-form-block', mc4wp_plugin_url( 'assets/js/forms-block.js' ), array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-components' ) );
 
 		$forms = mc4wp_get_forms();
 		$data  = array();
@@ -61,7 +61,7 @@ class MC4WP_Forms_Admin {
 			return;
 		}
 
-		wp_register_script( 'mc4wp-forms-admin', MC4WP_PLUGIN_URL . 'assets/js/forms-admin' . $suffix . '.js', array( 'mc4wp-admin' ), MC4WP_VERSION, true );
+		wp_register_script( 'mc4wp-forms-admin', mc4wp_plugin_url( 'assets/js/forms-admin' . $suffix . '.js' ), array( 'mc4wp-admin' ), MC4WP_VERSION, true );
 		wp_enqueue_script( 'mc4wp-forms-admin' );
 		wp_localize_script(
 			'mc4wp-forms-admin',
@@ -406,7 +406,7 @@ class MC4WP_Forms_Admin {
 			site_url( '/', 'admin' )
 		);
 
-		require dirname( __FILE__ ) . '/views/edit-form.php';
+		require __DIR__ . '/views/edit-form.php';
 	}
 
 	/**
@@ -418,7 +418,7 @@ class MC4WP_Forms_Admin {
 		$mailchimp       = new MC4WP_MailChimp();
 		$lists           = $mailchimp->get_lists();
 		$number_of_lists = count( $lists );
-		require dirname( __FILE__ ) . '/views/add-form.php';
+		require __DIR__ . '/views/add-form.php';
 	}
 
 	/**

@@ -1,15 +1,15 @@
 <?php
 /**
- * Plugin Name: OptinMonster API
+ * Plugin Name: OptinMonster
  * Plugin URI:  https://optinmonster.com
  * Description: OptinMonster is the best WordPress popup plugin that helps you grow your email list and sales with email popups, exit intent popups, floating bars and more!
  * Author:      OptinMonster Team
  * Author URI:  https://optinmonster.com
- * Version:     1.9.8
+ * Version:     2.3.1
  * Text Domain: optin-monster-api
  * Domain Path: languages
  * WC requires at least: 3.2.0
- * WC tested up to:      4.0.0
+ * WC tested up to:      4.7.0
  *
  * OptinMonster is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Autoload the class files.
 spl_autoload_register( 'OMAPI::autoload' );
 
-// Store base file location
+// Store base file location.
 define( 'OMAPI_FILE', __FILE__ );
 
 /**
@@ -62,7 +62,7 @@ class OMAPI {
 	 *
 	 * @var string
 	 */
-	public $version = '1.9.8';
+	public $version = '2.3.1';
 
 	/**
 	 * The name of the plugin.
@@ -71,7 +71,7 @@ class OMAPI {
 	 *
 	 * @var string
 	 */
-	public $plugin_name = 'OptinMonster API';
+	public $plugin_name = 'OptinMonster';
 
 	/**
 	 * Unique plugin slug identifier.
@@ -134,6 +134,27 @@ class OMAPI {
 	public $woocommerce;
 
 	/**
+	 * OMAPI_Elementor object.
+	 *
+	 * @var OMAPI_Elementor
+	 */
+	public $elementor;
+
+	/**
+	 * OMAPI_ClassicEditor object.
+	 *
+	 * @var OMAPI_ClassicEditor
+	 */
+	public $classicEditor;
+
+	/**
+	 * OMAPI_MailPoet object.
+	 *
+	 * @var OMAPI_MailPoet;
+	 */
+	public $mailpoet;
+
+	/**
 	 * OMAPI_Actions object (loaded only in the admin)
 	 *
 	 * @var OMAPI_Actions
@@ -146,13 +167,6 @@ class OMAPI {
 	 * @var OMAPI_Menu
 	 */
 	public $menu;
-
-	/**
-	 * OMAPI_Content object (loaded only in the admin)
-	 *
-	 * @var OMAPI_Content
-	 */
-	public $content;
 
 	/**
 	 * OMAPI_Save object (loaded only in the admin)
@@ -211,9 +225,9 @@ class OMAPI {
 	public $rest_api;
 
 	/**
-	 * AM_Notification object (loaded only in the admin)
+	 * OMAPI_Notifications object (loaded only in the admin/REST API)
 	 *
-	 * @var AM_Notification
+	 * @var OMAPI_Notifications
 	 */
 	public $notifications;
 
@@ -230,11 +244,17 @@ class OMAPI {
 		// Load the plugin widgets.
 		add_action( 'widgets_init', array( $this, 'widgets' ) );
 
+		// Define Constants.
+		add_action( 'init', array( $this, 'define_constants' ) );
+
 		// Load the plugin.
 		add_action( 'init', array( $this, 'init' ) );
 
 		// Hide the unrelated admin notices.
 		add_action( 'admin_print_scripts', array( $this, 'hide_unrelated_admin_notices' ) );
+
+		// PHP version check.
+		add_action( 'admin_init', array( $this, 'check_php_version' ) );
 
 		// Filter the WooCommerce category/tag REST API responses.
 		add_filter( 'woocommerce_rest_prepare_product_cat', 'OMAPI_WooCommerce::add_category_base_to_api_response' );
@@ -247,7 +267,6 @@ class OMAPI {
 	 * @since 1.0.0
 	 */
 	public function load_plugin_textdomain() {
-
 		$domain = 'optin-monster-api';
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
@@ -269,26 +288,56 @@ class OMAPI {
 	}
 
 	/**
-	 * Loads the plugin into WordPress.
+	 * Set the OM constants.
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.2
 	 */
-	public function init() {
+	public function define_constants() {
+		$this->url = plugin_dir_url( __FILE__ );
+
+		do_action( 'optin_monster_before_define_constants', $this );
 
 		// Define necessary plugin constants.
 		if ( ! defined( 'OPTINMONSTER_APP_URL' ) ) {
 			define( 'OPTINMONSTER_APP_URL', 'https://app.optinmonster.com' );
 		}
 
+		if ( ! defined( 'OPTINMONSTER_API_URL' ) ) {
+			define( 'OPTINMONSTER_API_URL', 'https://api.omwpapi.com' );
+		}
+
 		if ( ! defined( 'OPTINMONSTER_CDN_URL' ) ) {
-			define( 'OPTINMONSTER_CDN_URL', is_admin()
+			define(
+				'OPTINMONSTER_CDN_URL',
+				is_admin()
 					? 'https://a.omwpapi.com'
-					: 'https://a.omappapi.com' );
+				: 'https://a.omappapi.com'
+			);
+		}
+
+		if ( ! defined( 'OPTINMONSTER_VUE_ASSETS_URL' ) ) {
+			define( 'OPTINMONSTER_VUE_ASSETS_URL', OPTINMONSTER_CDN_URL . '/app/wp-plugin/build' );
+		}
+
+		if ( ! defined( 'OPTINMONSTER_VUE_ASSETS_PATH' ) ) {
+			define( 'OPTINMONSTER_VUE_ASSETS_PATH', '' );
 		}
 
 		if ( ! defined( 'OPTINMONSTER_APIJS_URL' ) ) {
 			define( 'OPTINMONSTER_APIJS_URL', OPTINMONSTER_CDN_URL . '/app/js/api.min.js' );
 		}
+
+		if ( ! defined( 'OPTINMONSTER_SHAREABLE_LINK' ) ) {
+			define( 'OPTINMONSTER_SHAREABLE_LINK', 'https://app.monstercampaigns.com' );
+		}
+	}
+
+	/**
+	 * Loads the plugin into WordPress.
+	 *
+	 * @since 1.0.0
+	 */
+	public function init() {
 
 		// Load our global option.
 		$this->load_option();
@@ -317,7 +366,7 @@ class OMAPI {
 		// Check/set the plugin options.
 		$option = get_option( 'optin_monster_api' );
 		if ( empty( $option ) ) {
-			$option = OMAPI::default_options();
+			$option = self::default_options();
 			update_option( 'optin_monster_api', $option );
 		}
 
@@ -355,11 +404,13 @@ class OMAPI {
 
 		// Register global components.
 		$this->ajax        = new OMAPI_Ajax();
+		$this->blocks      = new OMAPI_Blocks();
 		$this->type        = new OMAPI_Type();
 		$this->output      = new OMAPI_Output();
 		$this->shortcode   = new OMAPI_Shortcode();
 		$this->woocommerce = new OMAPI_WooCommerce();
-        $this->url         = plugin_dir_url( __FILE__ );
+		$this->elementor   = new OMAPI_Elementor();
+		$this->mailpoet    = new OMAPI_MailPoet();
 
 		// Fire a hook to say that the global classes are loaded.
 		do_action( 'optin_monster_api_global_loaded' );
@@ -374,10 +425,12 @@ class OMAPI {
 	public function load_rest() {
 
 		// Register global components.
-		$this->sites    = new OMAPI_Sites();
-		$this->rest_api = new OMAPI_RestApi();
-		$this->refresh  = new OMAPI_Refresh();
-		$this->save     = new OMAPI_Save();
+		$this->actions       = new OMAPI_Actions();
+		$this->sites         = new OMAPI_Sites();
+		$this->rest_api      = new OMAPI_RestApi();
+		$this->refresh       = new OMAPI_Refresh();
+		$this->save          = new OMAPI_Save();
+		$this->notifications = new OMAPI_Notifications();
 
 		// Fire a hook to say that the global classes are loaded.
 		do_action( 'optin_monster_api_rest_loaded' );
@@ -390,29 +443,22 @@ class OMAPI {
 	 */
 	public function load_admin() {
 
-		// Manually load notification api.
-		require_once plugin_dir_path( __FILE__ ) . 'includes/class-am-notification.php';
-
 		// Register admin components.
 		$this->actions       = new OMAPI_Actions();
 		$this->menu          = new OMAPI_Menu();
-		$this->content       = new OMAPI_Content();
 		$this->save          = new OMAPI_Save();
 		$this->refresh       = new OMAPI_Refresh();
 		$this->validate      = new OMAPI_Validate();
 		$this->welcome       = new OMAPI_Welcome();
 		$this->trustpulse    = new OMAPI_TrustPulse();
 		$this->review        = new OMAPI_Review();
-		$this->pointer       = new OMAPI_Pointer();
 		$this->sites         = new OMAPI_Sites();
-		$this->notifications = new AM_Notification( 'om', $this->version );
+		$this->notifications = new OMAPI_Notifications();
+		$this->classicEditor = new OMAPI_ClassicEditor();
 
-		if ( $this->menu->has_trial_link() ) {
+		if ( OMAPI_Partners::has_partner_url() ) {
 			$this->cc = new OMAPI_ConstantContact();
 		}
-
-		$this->save->maybe_save();
-		$this->refresh->maybe_refresh();
 
 		// Fire a hook to say that the admin classes are loaded.
 		do_action( 'optin_monster_api_admin_loaded' );
@@ -428,9 +474,7 @@ class OMAPI {
 	 * @return array|bool Array of optin data or false if none found.
 	 */
 	public function get_optin( $id ) {
-
-		return get_post( $id );
-
+		return get_post( absint( $id ) );
 	}
 
 	/**
@@ -442,9 +486,49 @@ class OMAPI {
 	 * @return array|bool  Array of optin data or false if none found.
 	 */
 	public function get_optin_by_slug( $slug ) {
+		return get_page_by_path( sanitize_text_field( $slug ), OBJECT, 'omapi' );
+	}
 
-		return get_page_by_path( $slug, OBJECT, 'omapi' );
+	/**
+	 * Get all data for given campaign (optin).
+	 *
+	 * @since  1.9.10
+	 *
+	 * @param  WP_Post $campaign The campaign post object.
+	 *
+	 * @return array
+	 */
+	public function collect_campaign_data( $campaign ) {
+		$meta = array();
+		$keys = get_post_meta( $campaign->ID );
 
+		if ( ! empty( $keys ) ) {
+			foreach ( $keys as $key => $x ) {
+				$val = get_post_meta( $campaign->ID, $key, true );
+				switch ( $key ) {
+					case '_omapi_never':
+					case '_omapi_only':
+						$val = OMAPI_Utils::unique_array( $val );
+						break;
+					case '_omapi_taxonomies':
+						$val = ! empty( $val )
+							? array_map( array( 'OMAPI_Utils', 'unique_array' ), $val )
+							: array();
+						break;
+				}
+				$meta[ $key ] = $val;
+			}
+		}
+
+		$type = get_post_meta( $campaign->ID, '_omapi_type', true );
+
+		return array(
+			'id'        => $campaign->post_name,
+			'post'      => $campaign,
+			'type'      => $type,
+			'inline'    => OMAPI_Utils::is_inline_type( $type ),
+			'post_meta' => $meta,
+		);
 	}
 
 	/**
@@ -474,8 +558,29 @@ class OMAPI {
 			return false;
 		}
 
+		foreach ( $optins as $optin ) {
+			$optin->campaign_type = get_post_meta( $optin->ID, '_omapi_type', true );
+			$optin->enabled       = ! ! get_post_meta( $optin->ID, '_omapi_enabled', true );
+		}
+
 		// Return the optin data.
 		return $optins;
+	}
+
+	/**
+	 * Returns all local campaigns. Cached.
+	 *
+	 * @since 2.2.0
+	 *
+	 * @return array|bool Array of optin data or false if none found.
+	 */
+	public function get_campaigns() {
+		static $campaigns = null;
+		if ( null === $campaigns ) {
+			$campaigns = $this->get_optins();
+		}
+
+		return $campaigns;
 	}
 
 	/**
@@ -483,19 +588,31 @@ class OMAPI {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array The main option array for the plugin.
+	 * @param  string $key      The option value to get for given key.
+	 * @param  string $subkey   The option value to get for given key and sub-key.
+	 * @param  mixed  $fallback The fallback value.
+	 *
+	 * @return mixed            The main option array for the plugin, or requsted value.
 	 */
-	public function get_option( $key = '', $subkey = '', $default = false ) {
+	public function get_option( $key = '', $subkey = '', $fallback = false ) {
 
 		$option = get_option( 'optin_monster_api' );
-		if ( ! empty( $key ) && ! empty( $subkey ) ) {
-			return isset( $option[ $key ][ $subkey ] ) ? $option[ $key ][ $subkey ] : $default;
-		} else if ( ! empty( $key ) ) {
-			return isset( $option[ $key ] ) ? $option[ $key ] : $default;
-		} else {
-			return $option;
+
+		if ( ! empty( $key ) ) {
+			if ( ! isset( $option[ $key ] ) ) {
+				return $fallback;
+			}
+
+			if ( ! empty( $subkey ) ) {
+				return isset( $option[ $key ], $option[ $key ][ $subkey ] )
+					? $option[ $key ][ $subkey ]
+					: $fallback;
+			}
+
+			return $option[ $key ];
 		}
 
+		return $option;
 	}
 
 	/**
@@ -513,7 +630,7 @@ class OMAPI {
 		$user   = false;
 		$apikey = false;
 
-		// Attempt to grab the new API Key
+		// Attempt to grab the new API Key.
 		if ( empty( $option['api']['apikey'] ) ) {
 			if ( defined( 'OPTINMONSTER_REST_API_LICENSE_KEY' ) ) {
 				$apikey = OPTINMONSTER_REST_API_LICENSE_KEY;
@@ -539,19 +656,20 @@ class OMAPI {
 			$user = $option['api']['user'];
 		}
 
-		// Check if we have any of the authentication data
+		// Check if we have any of the authentication data.
 		if ( ! $apikey ) {
-			// Do we at least have Legacy API Key and User
+			// Do we at least have Legacy API Key and User.
 			if ( ! $key || ! $user ) {
 				return false;
 			}
 		}
 
 		// Return the API credentials.
-		return apply_filters( 'optin_monster_api_creds',
+		return apply_filters(
+			'optin_monster_api_creds',
 			array(
-				'key'  => $key,
-				'user' => $user,
+				'key'    => $key,
+				'user'   => $user,
 				'apikey' => $apikey,
 			)
 		);
@@ -566,44 +684,7 @@ class OMAPI {
 	 * @return string The API url to use for embedding on the page.
 	 */
 	public function get_api_url() {
-		$customApiUrl = $this->get_option( 'customApiUrl' );
-		return ! empty( $customApiUrl ) ? $customApiUrl : OPTINMONSTER_APIJS_URL;
-	}
-
-	/**
-	 * Check to see if we have any optins to migrate to the SaaS
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return bool
-	 */
-	public function can_migrate() {
-		if ( false == ( $old_optins = get_transient( '_om_old_optins' ) ) ) {
-			$args = array(
-				'post_type' => 'optin',
-				'posts_per_page' => -1,
-			);
-			$old_optins = get_posts( $args );
-			set_transient( '_om_old_optins', $old_optins, DAY_IN_SECONDS );
-		}
-
-		if ( empty( $old_optins ) ) {
-			return false;
-		}
-
-		return true;
-
-	}
-
-	/**
-	 * Check for legacy Optin_Monster class
-	 *
-	 * @since 1.1.5
-	 *
-	 * @return bool
-	 */
-	public static function is_legacy_active() {
-		return class_exists( 'Optin_Monster' );
+		return OMAPI_Urls::om_api();
 	}
 
 	/**
@@ -654,7 +735,7 @@ class OMAPI {
 	 * @return bool
 	 */
 	public static function is_mailpoet_active() {
-		return class_exists( 'WYSIJA_object' ) || class_exists( 'MailPoet\\API\\API' );
+		return OMAPI_MailPoet::is_active();
 	}
 
 	/**
@@ -665,23 +746,8 @@ class OMAPI {
 	 * @return bool True if there are API key errors, false otherwise.
 	 */
 	public function get_api_key_errors() {
-
 		$option = $this->get_option();
 		return isset( $option['is_expired'] ) && $option['is_expired'] || isset( $option['is_disabled'] ) && $option['is_disabled'] || isset( $option['is_invalid'] ) && $option['is_invalid'];
-
-	}
-
-	/**
-	 * Retrieves the proper default view for the OptinMonster settings page.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return string $view The default view for the OptinMonster settings page.
-	 */
-	public function get_view() {
-
-		return $this->get_api_credentials() ? 'optins' : 'api';
-
 	}
 
 	/**
@@ -689,8 +755,8 @@ class OMAPI {
 	 *
 	 * @since  1.9.0
 	 *
-	 * @param  string  $file The view file.
-	 * @param  mixed   $data Arbitrary data to be made available to the view file.
+	 * @param  string $file The view file.
+	 * @param  mixed  $data Arbitrary data to be made available to the view file.
 	 *
 	 * @return void
 	 */
@@ -699,19 +765,70 @@ class OMAPI {
 	}
 
 	/**
+	 * Get view file output content.
+	 *
+	 * @since 2.3.0
+	 *
+	 * @param  string $file The view file.
+	 * @param  mixed  $data Arbitrary data to be made available to the view file.
+	 *
+	 * @return string The view html content.
+	 */
+	public function get_view_contents( $file, $data = array() ) {
+		ob_start();
+		$this->output_view( $file, $data );
+		return ob_get_clean();
+	}
+
+	/**
+	 * Get and include a view file with css and minify the output.
+	 *
+	 * @since 2.3.0
+	 *
+	 * @param  string $file The view file.
+	 * @param  mixed  $data Arbitrary data to be made available to the view file.
+	 *
+	 * @return void
+	 */
+	public function get_min_css_view_contents( $file, $data = array() ) {
+		$contents = $this->get_view_contents( $file, $data );
+		return str_replace( array( "\n", "\r", "\t" ), '', $contents );
+	}
+
+	/**
 	 * Get and include a view file with css and minify the output.
 	 *
 	 * @since  1.9.0
 	 *
-	 * @param  string  $file The view file.
-	 * @param  mixed   $data Arbitrary data to be made available to the view file.
+	 * @param  string $file The view file.
+	 * @param  mixed  $data Arbitrary data to be made available to the view file.
 	 *
 	 * @return void
 	 */
 	public function output_min_css( $file, $data = array() ) {
-		ob_start();
-		$this->output_view( $file, $data );
-		echo str_replace( array( "\n", "\r", "\t" ), '', ob_get_clean() );
+		echo $this->get_min_css_view_contents( $file, $data );
+	}
+
+	/**
+	 * Return the level of the OM user.
+	 *
+	 * @since  2.0.0
+	 *
+	 * @return string  The level.
+	 */
+	public function get_level() {
+		return $this->get_option( 'currentLevel', '', '' );
+	}
+
+	/**
+	 * Check if the OM user has a custom plan.
+	 *
+	 * @since  2.0.0
+	 *
+	 * @return string  The level.
+	 */
+	public function is_custom_plan() {
+		return 'vbp_custom' === $this->get_option( 'plan' );
 	}
 
 	/**
@@ -724,14 +841,18 @@ class OMAPI {
 	public static function default_options() {
 
 		$options = array(
-			'api'         => array(),
-			'optins'      => array(),
-			'is_expired'  => false,
-			'is_disabled' => false,
-			'is_invalid'  => false,
-			'installed'   => time(),
-			'connected'   => '',
-			'welcome'     => array(
+			'api'                => array(),
+			'optins'             => array(),
+			'is_expired'         => false,
+			'is_disabled'        => false,
+			'is_invalid'         => false,
+			'installed'          => time(),
+			'connected'          => '',
+			'beta'               => false,
+			'auto_updates'       => '',
+			'usage_tracking'     => false,
+			'hide_announcements' => false,
+			'welcome'            => array(
 				'status' => 'none',
 			),
 		);
@@ -749,7 +870,7 @@ class OMAPI {
 	public static function autoload( $classname ) {
 
 		// Return early if not the proper classname.
-		if ( 'OMAPI' !== mb_substr( $classname, 0, 5 ) ) {
+		if ( 'OMAPI' !== mb_substr( $classname, 0, 5, 'UTF-8' ) ) {
 			return;
 		}
 
@@ -759,6 +880,30 @@ class OMAPI {
 			require $filename;
 		}
 
+	}
+
+	/**
+	 * Gets all site IDs associated with this site
+	 *
+	 * @since 1.9.10
+	 *
+	 * @return array
+	 */
+	public function get_site_ids() {
+		$option = $this->get_option();
+		return ! empty( $option['siteIds'] ) ? (array) $option['siteIds'] : array();
+	}
+
+	/**
+	 * Gets the site ID associated with this site
+	 *
+	 * @since 1.9.10
+	 *
+	 * @return string
+	 */
+	public function get_site_id() {
+		$option = $this->get_option();
+		return ! empty( $option['siteId'] ) ? (string) $option['siteId'] : '';
 	}
 
 	/**
@@ -806,6 +951,160 @@ class OMAPI {
 		}
 	}
 
+	public function check_php_version() {
+
+		// Display for PHP below 5.6.
+		if ( version_compare( PHP_VERSION, '5.5', '>=' ) ) {
+			return;
+		}
+
+		// Display for admins only.
+		if ( ! is_super_admin() ) {
+			return;
+		}
+
+		// Display on Dashboard page only.
+		if ( isset( $GLOBALS['pagenow'] ) && 'index.php' !== $GLOBALS['pagenow'] ) {
+			return;
+		}
+
+		// Do not double up on WPForms notice.
+		if ( function_exists( 'wpforms_check_php_version' ) ) {
+			return;
+		}
+
+		// Display the notice, finally.
+		echo '<div id="message" class="notice notice-error">' .
+		'<p>' .
+		sprintf(
+			wp_kses(
+				/* translators: %1$s - OptinMonster API plugin name; %2$s - optinmonster.com URL to a related doc. */
+				__( 'Your site is running an outdated version of PHP that is no longer supported and may cause issues with the %1$s plugin. <a href="%2$s" target="_blank" rel="noopener noreferrer">Read more</a> for additional information.', 'optin-monster-api' ),
+				array(
+					'a' => array(
+						'href'   => array(),
+						'target' => array(),
+						'rel'    => array(),
+					),
+				)
+			),
+			'<strong>OptinMonster API</strong>',
+			'https://optinmonster.com/docs/supported-php-version/'
+		) .
+		'<br><br><em>' .
+		wp_kses(
+			__( '<strong>Please Note:</strong> Support for PHP 5.5 will be discontinued in 2020. After this, if no further action is taken, OptinMonster functionality will be disabled.', 'optin-monster-api' ),
+			array(
+				'strong' => array(),
+				'em'     => array(),
+			)
+		) .
+		'</em></p>' .
+		'</div>';
+	}
+
+	/**
+	 * Get the asset version for enqueued assets.
+	 *
+	 * @since  1.9.10
+	 *
+	 * @return mixed
+	 */
+	public function asset_version() {
+		if ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) {
+			return time();
+		}
+
+		if ( defined( 'OPTINMONSTER_ENV' ) && 'dev' === strtolower( OPTINMONSTER_ENV ) ) {
+			return time();
+		}
+
+		return $this->beta_enabled() && $this->beta_version( 'U' )
+			? $this->beta_version( 'U' )
+			: $this->version;
+	}
+
+	/**
+	 * Check if beta is enabled.
+	 *
+	 * @since  2.0.0
+	 *
+	 * @return bool
+	 */
+	public function beta_enabled() {
+		$option = $this->get_option();
+
+		return apply_filters( 'optin_monster_beta_enabled', ! empty( $option['beta'] ) );
+	}
+
+	/**
+	 * Get beta version.
+	 *
+	 * @since  2.0.0
+	 *
+	 * @param string $format The php date format.
+	 *
+	 * @return bool
+	 */
+	public function beta_version( $format = 'd M Y H:i:s' ) {
+		$version = false;
+		if ( false !== strpos( $this->version, 'beta' ) ) {
+			$file = plugin_dir_path( __FILE__ ) . '.betaversion';
+			if ( file_exists( $file ) ) {
+				ob_start();
+				include plugin_dir_path( __FILE__ ) . '.betaversion';
+				$timestamp = ob_get_clean();
+
+				if ( ! empty( $timestamp ) ) {
+					$version = date( $format, (int) $timestamp );
+				}
+			}
+		}
+
+		return $version;
+	}
+
+	/**
+	 * The access capability required for access to OptinMonster pages/settings.
+	 *
+	 * @since  2.0.0
+	 *
+	 * @param  string|null $slug The menu slug. Null by default.
+	 *
+	 * @return string The access capability.
+	 */
+	public function access_capability( $slug = null ) {
+		return apply_filters( 'optin_monster_api_menu_cap', 'manage_options', $slug );
+	}
+
+	/**
+	 * Check if user has access capability required for access to OptinMonster pages/settings.
+	 *
+	 * @since  2.0.0
+	 *
+	 * @param  string|null $slug The menu slug. Null by default.
+	 *
+	 * @return bool Whether user has access.
+	 */
+	public function can_access( $slug = null ) {
+		return current_user_can( $this->access_capability( $slug ) );
+	}
+
+	/**
+	 * Get app url, with proper query args set to ensure going to correct account, and setting return
+	 * query arg to come back (if relevant on the destination page).
+	 *
+	 * @since  2.0.0
+	 *
+	 * @param  string $path The path on the app.
+	 * @param  string $return_url Url to return. Will default to wp_get_referer().
+	 *
+	 * @return string        The app url.
+	 */
+	public function app_url( $path, $return_url = '' ) {
+		return OMAPI_Urls::om_app( $path, $return_url );
+	}
+
 	/**
 	 * Returns the singleton instance of the class.
 	 *
@@ -814,15 +1113,12 @@ class OMAPI {
 	 * @return OMAPI
 	 */
 	public static function get_instance() {
-
 		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof OMAPI ) ) {
 			self::$instance = new OMAPI();
 		}
 
 		return self::$instance;
-
 	}
-
 }
 
 register_activation_hook( __FILE__, 'optin_monster_api_activation_hook' );
@@ -838,9 +1134,9 @@ register_activation_hook( __FILE__, 'optin_monster_api_activation_hook' );
 function optin_monster_api_activation_hook( $network_wide ) {
 
 	global $wp_version;
-	if ( version_compare( $wp_version, '3.5.1', '<' ) && ! defined( 'OPTINMONSTER_FORCE_ACTIVATION' ) ) {
+	if ( version_compare( $wp_version, '4.7.0', '<' ) && ! defined( 'OPTINMONSTER_FORCE_ACTIVATION' ) ) {
 		deactivate_plugins( plugin_basename( __FILE__ ) );
-		wp_die( sprintf( __( 'Sorry, but your version of WordPress does not meet OptinMonster\'s required version of <strong>3.5.1</strong> to run properly. The plugin has been deactivated. <a href="%s">Click here to return to the Dashboard</a>.', 'optin-monster-api' ), get_admin_url() ) );
+		wp_die( sprintf( __( 'Sorry, but your version of WordPress does not meet OptinMonster\'s required version of <strong>4.7.0</strong> to run properly. The plugin has been deactivated. <a href="%s">Click here to return to the Dashboard</a>.', 'optin-monster-api' ), get_admin_url() ) );
 	}
 
 	$instance = OMAPI::get_instance();
@@ -863,7 +1159,7 @@ function optin_monster_api_activation_hook( $network_wide ) {
 
 	// If we don't have api credentials, set up the redirect on plugin activation.
 	if ( ! $instance->get_api_credentials() ) {
-		$options = $instance->get_option();
+		$options                      = $instance->get_option();
 		$options['welcome']['status'] = 'none';
 		update_option( 'optin_monster_api', $options );
 	}
@@ -940,8 +1236,8 @@ if ( ! function_exists( 'optin_monster_tag' ) ) {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int    $string The post name of the optin to load.
-	 * @param bool   $return Flag to echo or return the optin HTML.
+	 * @param int  $string The post name of the optin to load.
+	 * @param bool $return Flag to echo or return the optin HTML.
 	 */
 	function optin_monster_tag( $id, $return = false ) {
 

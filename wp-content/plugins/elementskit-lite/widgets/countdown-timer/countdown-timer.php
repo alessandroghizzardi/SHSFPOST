@@ -1,14 +1,14 @@
 <?php
 namespace Elementor;
 
-use \ElementsKit\Elementskit_Widget_Countdown_Timer_Handler as Handler;
-use \ElementsKit\Modules\Controls\Controls_Manager as ElementsKit_Controls_Manager;
+use \Elementor\ElementsKit_Widget_Countdown_Timer_Handler as Handler;
+use \ElementsKit_Lite\Modules\Controls\Controls_Manager as ElementsKit_Controls_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 
-class Elementskit_Widget_Countdown_Timer extends Widget_Base {
-    use \ElementsKit\Widgets\Widget_Notice;
+class ElementsKit_Widget_Countdown_Timer extends Widget_Base {
+    use \ElementsKit_Lite\Widgets\Widget_Notice;
 
 	public $base;
     
@@ -33,11 +33,14 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         return Handler::get_categories();
     }
 
+    public function get_help_url() {
+        return '';
+    }
 
     protected function _register_controls() {
         $this->start_controls_section(
             'section_tab', [
-                'label' =>esc_html__( 'Presets', 'elementskit' ),
+                'label' =>esc_html__( 'Presets', 'elementskit-lite' ),
             ]
         );
 
@@ -45,42 +48,42 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		$this->add_control(
             'ekit_countdown_timer_style',
             [
-                'label' => esc_html__('Choose Style', 'elementskit'),
+                'label' => esc_html__('Choose Style', 'elementskit-lite'),
                 'type' => ElementsKit_Controls_Manager::IMAGECHOOSE,
                 'default' => 'style1',
                 'options' => [
 					'style1' => [
-						'title' => esc_html__( 'image style 1', 'elementskit' ),
+						'title' => esc_html__( 'image style 1', 'elementskit-lite' ),
                         'imagelarge' => Handler::get_url() . 'assets/imagechoose/1.png',
                         'imagesmall' => Handler::get_url() . 'assets/imagechoose/1.png',
                         'width' => '100%',
 					],
 					'style2' => [
-						'title' => esc_html__( 'image style 2', 'elementskit' ),
+						'title' => esc_html__( 'image style 2', 'elementskit-lite' ),
                         'imagelarge' => Handler::get_url() . 'assets/imagechoose/2.png',
                         'imagesmall' => Handler::get_url() . 'assets/imagechoose/2.png',
                         'width' => '100%',
 					],
 					'style3' => [
-						'title' => esc_html__( 'image style 3', 'elementskit' ),
+						'title' => esc_html__( 'image style 3', 'elementskit-lite' ),
                         'imagelarge' => Handler::get_url() . 'assets/imagechoose/3.png',
                         'imagesmall' => Handler::get_url() . 'assets/imagechoose/3.png',
                         'width' => '100%',
 					],
 					'style4' => [
-						'title' => esc_html__( 'image style 4', 'elementskit' ),
+						'title' => esc_html__( 'image style 4', 'elementskit-lite' ),
                         'imagelarge' => Handler::get_url() . 'assets/imagechoose/4.png',
                         'imagesmall' => Handler::get_url() . 'assets/imagechoose/4.png',
                         'width' => '100%',
 					],
 					'style5' => [
-						'title' => esc_html__( 'image style 5', 'elementskit' ),
+						'title' => esc_html__( 'image style 5', 'elementskit-lite' ),
                         'imagelarge' => Handler::get_url() . 'assets/imagechoose/5.png',
                         'imagesmall' => Handler::get_url() . 'assets/imagechoose/5.png',
                         'width' => '100%',
 					],
 					'style6' => [
-						'title' => esc_html__( 'image style 6', 'elementskit' ),
+						'title' => esc_html__( 'image style 6', 'elementskit-lite' ),
                         'imagelarge' => Handler::get_url() . 'assets/imagechoose/6.png',
                         'imagesmall' => Handler::get_url() . 'assets/imagechoose/6.png',
                         'width' => '100%',
@@ -94,7 +97,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 
         $this->start_controls_section(
             'ekit_countdown_timer_timer_setting', [
-                'label' =>esc_html__( 'Timer Settings  ', 'elementskit' ),
+                'label' =>esc_html__( 'Timer Settings  ', 'elementskit-lite' ),
             ]
         );
 
@@ -102,16 +105,16 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		$this->add_control(
 			'ekit_countdown_timer_due_time',
 			[
-				'label' => esc_html__( 'Countdown Due Date', 'elementskit' ),
+				'label' => esc_html__( 'Countdown Due Date', 'elementskit-lite' ),
 				'type' => Controls_Manager::DATE_TIME,
 				'default' => date("Y-m-d", strtotime("+ 1 day")),
-                'description' => esc_html__( 'Set the due date and time', 'elementskit' ),
+                'description' => esc_html__( 'Set the due date and time', 'elementskit-lite' ),
 			]
 		);
         $this->add_control(
             'ekit_countdown_timer_content_setting',
             [
-                'label' => esc_html__( 'Custom Labels', 'elementskit' ),
+                'label' => esc_html__( 'Custom Labels', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -120,9 +123,9 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		$this->add_control(
 			'ekit_countdown_timer_weeks_label',
 			[
-				'label' => esc_html__( 'Weeks', 'elementskit' ),
+				'label' => esc_html__( 'Weeks', 'elementskit-lite' ),
 				'type' => Controls_Manager::TEXT,
-				'default' => esc_html__( 'Weeks', 'elementskit' ),
+				'default' => esc_html__( 'Weeks', 'elementskit-lite' ),
                 'condition' => ['ekit_countdown_timer_style' => 'style3'],
 			]
 		);
@@ -131,36 +134,36 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		$this->add_control(
 			'ekit_countdown_timer_days_label',
 			[
-				'label' => esc_html__( 'Days', 'elementskit' ),
+				'label' => esc_html__( 'Days', 'elementskit-lite' ),
 				'type' => Controls_Manager::TEXT,
-                'default' => esc_html__( 'Days', 'elementskit' ),
+                'default' => esc_html__( 'Days', 'elementskit-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'ekit_countdown_timer_hours_label',
 			[
-				'label' => esc_html__( 'Hours', 'elementskit' ),
+				'label' => esc_html__( 'Hours', 'elementskit-lite' ),
 				'type' => Controls_Manager::TEXT,
-                'default' => esc_html__( 'Hours', 'elementskit' ),
+                'default' => esc_html__( 'Hours', 'elementskit-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'ekit_countdown_timer_minutes_hours_label',
 			[
-				'label' => esc_html__( 'Minutes', 'elementskit' ),
+				'label' => esc_html__( 'Minutes', 'elementskit-lite' ),
 				'type' => Controls_Manager::TEXT,
-                'default' => esc_html__( 'Minutes', 'elementskit' ),
+                'default' => esc_html__( 'Minutes', 'elementskit-lite' ),
 			]
 		);
 
 		$this->add_control(
 			'ekit_countdown_timer_seconds_hours_label',
 			[
-				'label' => esc_html__( 'Seconds', 'elementskit' ),
+				'label' => esc_html__( 'Seconds', 'elementskit-lite' ),
 				'type' => Controls_Manager::TEXT,
-                'default' => esc_html__( 'Seconds', 'elementskit' ),
+                'default' => esc_html__( 'Seconds', 'elementskit-lite' ),
 			]
 		);
 
@@ -169,25 +172,25 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		$this->start_controls_section(
 			'ekit_countdown_timer_on_expire_settings',
 			[
-				'label' => esc_html__( 'Expire Action' , 'elementskit' )
+				'label' => esc_html__( 'Expire Action' , 'elementskit-lite' )
 			]
 		);
 
 		$this->add_control(
 			'ekit_countdown_timer_title',
 			[
-				'label'			=> esc_html__('On Expiry Title', 'elementskit'),
+				'label'			=> esc_html__('On Expiry Title', 'elementskit-lite'),
 				'type'			=> Controls_Manager::TEXTAREA,
-                'default'		=> esc_html__('Countdown is finished!','elementskit'),
+                'default'		=> esc_html__('Countdown is finished!','elementskit-lite'),
 			]
 		);
 
 		$this->add_control(
 			'ekit_countdown_timer_expiry_content',
 			[
-				'label'			=> esc_html__('On Expiry Content', 'elementskit'),
+				'label'			=> esc_html__('On Expiry Content', 'elementskit-lite'),
 				'type'			=> Controls_Manager::TEXTAREA,
-                'default'		=> esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s','elementskit'),
+                'default'		=> esc_html__('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s','elementskit-lite'),
 			]
 		);
 
@@ -198,7 +201,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		// content settings styles start
 		 $this->start_controls_section(
             'ekit_countdown_timer_content_style', [
-                'label'	 =>esc_html__( 'Content', 'elementskit' ),
+                'label'	 =>esc_html__( 'Content', 'elementskit-lite' ),
                 'tab'	 => Controls_Manager::TAB_STYLE,
 
             ]
@@ -207,7 +210,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_responsive_control(
 			'ekit_countdown_timer_days_width',
 			[
-				'label' => esc_html__( 'Width', 'elementskit' ),
+				'label' => esc_html__( 'Width', 'elementskit-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ 'px'],
 				'range' => [
@@ -222,12 +225,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 					'size' => '',
 				],
 				'selectors'		 => [
-                    '{{WRAPPER}} .elementskit-countdown-timer-4 .elementskit-timer-content .elementskit-timer-count,
-                    {{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-content .elementskit-timer-count,
-					{{WRAPPER}} .elementskit-countdown-timer-3.elementskit-version-box .elementskit-timer-content,
-					{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container .elementskit-inner-container,
-					{{WRAPPER}} .elementskit-flip-clock .elementskit-flip,
-					{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container '	=> 'width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .ekit-countdown-inner'	=> 'width: {{SIZE}}{{UNIT}};',
                 ],
 
 			]
@@ -235,7 +233,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		// set Height for Days
         $this->add_responsive_control(
             'ekit_countdown_timer_days_height', [
-                'label'			 =>esc_html__( 'Height', 'elementskit' ),
+                'label'			 =>esc_html__( 'Height', 'elementskit-lite' ),
                 'type'			 => Controls_Manager::SLIDER,
                 'default'		 => [
                     'size' => '',
@@ -250,12 +248,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
                 ],
                 'size_units'	 => ['px'],
                 'selectors'		 => [
-                    '{{WRAPPER}} .elementskit-countdown-timer-4 .elementskit-timer-content .elementskit-timer-count,
-                    {{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-content .elementskit-timer-count,
-					{{WRAPPER}} .elementskit-countdown-timer-3.elementskit-version-box  .elementskit-timer-content,
-					{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container .elementskit-inner-container,
-					{{WRAPPER}} .elementskit-flip-clock .elementskit-time,
-					{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container '	=> 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .ekit-countdown-inner'	=> 'height: {{SIZE}}{{UNIT}};',
                 ],
 
             ]
@@ -264,7 +257,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		// set Line Height for Days
         $this->add_responsive_control(
             'ekit_countdown_timer_days__line_height', [
-                'label'			 =>esc_html__( 'Line Height', 'elementskit' ),
+                'label'			 =>esc_html__( 'Line Height', 'elementskit-lite' ),
                 'type'			 => Controls_Manager::SLIDER,
                 'default'		 => [
                     'size' => '',
@@ -292,7 +285,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 
         $this->add_responsive_control(
             'ekit_countdown_timer_content_margin_bottom', [
-                'label'			 =>esc_html__( 'Margin Bottom', 'elementskit' ),
+                'label'			 =>esc_html__( 'Margin Bottom', 'elementskit-lite' ),
                 'type'			 => Controls_Manager::SLIDER,
                 'range'			 => [
                     'px' => [
@@ -314,9 +307,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 				],
                 'size_units'	 => ['px'],
                 'selectors'		 => [
-                    '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container:not(:last-child)'	=> 'margin-bottom: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container:not(:last-child)'	=> 'margin-bottom: {{SIZE}}{{UNIT}};',
-                    '{{WRAPPER}} .elementskit-flip-clock .elementskit-time'	=> 'margin-bottom: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .ekit-countdown-inner'	=> 'margin-bottom: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
@@ -328,7 +319,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		//weeks Style Section
         $this->start_controls_section(
             'ekit_countdown_timer_weeks_style', [
-                'label'	 =>esc_html__( 'Weeks', 'elementskit' ),
+                'label'	 =>esc_html__( 'Weeks', 'elementskit-lite' ),
                 'tab'	 => Controls_Manager::TAB_STYLE,
 				 'condition'		=> [
 					'ekit_countdown_timer_style' => 'style3'
@@ -340,14 +331,14 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_weeks_heading_digits',
             [
-                'label' => esc_html__( 'Digits', 'elementskit' ),
+                'label' => esc_html__( 'Digits', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
             ]
         );
 		// Set Digits color for weeks
         $this->add_control(
             'ekit_countdown_timer_weeks_digits_color', [
-                'label'		 =>esc_html__( 'Color', 'elementskit' ),
+                'label'		 =>esc_html__( 'Color', 'elementskit-lite' ),
                 'type'		 => Controls_Manager::COLOR,
                 'selectors'	 => [
                     '{{WRAPPER}} .elementskit-flip-clock  > .elementskit-wks  > .elementskit-count' => 'color: {{VALUE}};'
@@ -365,7 +356,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		// Set Digits margin for weeks
         $this->add_responsive_control(
             'ekit_countdown_timer_weeks_digits_margin_bottom', [
-                'label'			 =>esc_html__( 'Margin Bottom', 'elementskit' ),
+                'label'			 =>esc_html__( 'Margin Bottom', 'elementskit-lite' ),
                 'type'			 => Controls_Manager::SLIDER,
                 'default'		 => [
                     'size' => '',
@@ -386,14 +377,14 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_weeks_label_title',
             [
-                'label' => esc_html__( 'Label', 'elementskit' ),
+                'label' => esc_html__( 'Label', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
         );
         $this->add_control(
             'ekit_countdown_timer_weeks_label_color', [
-                'label'		 =>esc_html__( 'Color', 'elementskit' ),
+                'label'		 =>esc_html__( 'Color', 'elementskit-lite' ),
                 'type'		 => Controls_Manager::COLOR,
                 'selectors'	 => [
                     '{{WRAPPER}} .elementskit-flip-clock  > .elementskit-wks  > .elementskit-label' => 'color: {{VALUE}};'
@@ -421,7 +412,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'ekit_countdown_timer_weeks_label_background_group',
-                'label' => esc_html__( 'Background', 'elementskit' ),
+                'label' => esc_html__( 'Background', 'elementskit-lite' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .elementskit-flip-clock  > .elementskit-wks  > .elementskit-label',
                 'seperator' => 'before',
@@ -431,14 +422,14 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'ekit_countdown_timer_weeks_label_border_color',
-                'label' => esc_html__( 'Border', 'elementskit' ),
+                'label' => esc_html__( 'Border', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-flip-clock  > .elementskit-wks  > .elementskit-label',
             ]
         );
         $this->add_responsive_control(
             'ekit_countdown_timer_weeks_label_border_radious_open',
             [
-                'label' => esc_html__( 'Border Radius', 'elementskit' ),
+                'label' => esc_html__( 'Border Radius', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -451,7 +442,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'ekit_countdown_timer_weeks_label_box_shadow_group',
-                'label' => esc_html__( 'Box Shadow', 'elementskit' ),
+                'label' => esc_html__( 'Box Shadow', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-flip-clock  > .elementskit-wks  > .elementskit-label',
             ]
         );
@@ -460,7 +451,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		$this->add_responsive_control(
             'ekit_countdown_timer_weeks_lebel_margin',
             [
-                'label' => esc_html__( 'Margin', 'elementskit' ),
+                'label' => esc_html__( 'Margin', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
 
@@ -475,7 +466,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_weeks_heading_general',
             [
-                'label' => esc_html__( 'General', 'elementskit' ),
+                'label' => esc_html__( 'General', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -484,7 +475,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'ekit_countdown_timer_weeks_background_group',
-                'label' => esc_html__( 'Background', 'elementskit' ),
+                'label' => esc_html__( 'Background', 'elementskit-lite' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .elementskit-flip-clock  > .elementskit-wks .elementskit-count',
                 'seperator' => 'before'
@@ -494,7 +485,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'ekit_countdown_timer_weeks_border_color_group',
-                'label' => esc_html__( 'Border', 'elementskit' ),
+                'label' => esc_html__( 'Border', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-days .elementskit-timer-count,
 				{{WRAPPER}} .elementskit-flip-clock  > .elementskit-wks ',
 
@@ -503,7 +494,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_responsive_control(
             'ekit_countdown_timer_weeks_border_radious_open',
             [
-                'label' => esc_html__( 'Border Radius', 'elementskit' ),
+                'label' => esc_html__( 'Border Radius', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -517,7 +508,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'ekit_countdown_timer_weeks_box_shadow_group',
-                'label' => esc_html__( 'Box Shadow', 'elementskit' ),
+                'label' => esc_html__( 'Box Shadow', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-flip-clock > .elementskit-wks ',
 
             ]
@@ -531,7 +522,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		//Days Style Section
         $this->start_controls_section(
             'ekit_countdown_timer_days_style', [
-                'label'	 =>esc_html__( 'Days', 'elementskit' ),
+                'label'	 =>esc_html__( 'Days', 'elementskit-lite' ),
                 'tab'	 => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -540,14 +531,14 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_days_heading_digits',
             [
-                'label' => esc_html__( 'Digits', 'elementskit' ),
+                'label' => esc_html__( 'Digits', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
             ]
         );
 		// Set Digits color for Days
         $this->add_control(
             'ekit_countdown_timer_days_digits_color', [
-                'label'		 =>esc_html__( 'Color', 'elementskit' ),
+                'label'		 =>esc_html__( 'Color', 'elementskit-lite' ),
                 'type'		 => Controls_Manager::COLOR,
                 'selectors'	 => [
                     '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-days .elementskit-timer-content > span.elementskit-timer-count,
@@ -575,7 +566,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		// Set Digits margin for Days
         $this->add_responsive_control(
             'ekit_countdown_timer_days_digits_margin_bottom', [
-                'label'			 =>esc_html__( 'Margin Bottom', 'elementskit' ),
+                'label'			 =>esc_html__( 'Margin Bottom', 'elementskit-lite' ),
                 'type'			 => Controls_Manager::SLIDER,
                 'range'			 => [
                     'px' => [
@@ -598,14 +589,14 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_days_label_title',
             [
-                'label' => esc_html__( 'Label', 'elementskit' ),
+                'label' => esc_html__( 'Label', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
         );
         $this->add_control(
             'ekit_countdown_timer_days_label_color', [
-                'label'		 =>esc_html__( 'Color', 'elementskit' ),
+                'label'		 =>esc_html__( 'Color', 'elementskit-lite' ),
                 'type'		 => Controls_Manager::COLOR,
                 'selectors'	 => [
                     '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-days .elementskit-timer-content > span.elementskit-timer-title,
@@ -647,7 +638,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'ekit_countdown_timer_days_label_background_group',
-                'label' => esc_html__( 'Background', 'elementskit' ),
+                'label' => esc_html__( 'Background', 'elementskit-lite' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .elementskit-flip-clock .elementskit-days .elementskit-label,
 								{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-days .elementskit-timer-title,
@@ -664,7 +655,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'ekit_countdown_timer_days_label_border_color',
-                'label' => esc_html__( 'Border', 'elementskit' ),
+                'label' => esc_html__( 'Border', 'elementskit-lite' ),
                 'selector' => ' {{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-days .elementskit-timer-content > span.elementskit-timer-title,
 								{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-days .elementskit-timer-title,
 								{{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container.elementskit-days .elementskit-timer-title,
@@ -677,7 +668,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_responsive_control(
             'ekit_countdown_timer_days_label_border_radious_open',
             [
-                'label' => esc_html__( 'Border Radius', 'elementskit' ),
+                'label' => esc_html__( 'Border Radius', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -696,7 +687,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'ekit_countdown_timer_days_label_box_shadow_group',
-                'label' => esc_html__( 'Box Shadow', 'elementskit' ),
+                'label' => esc_html__( 'Box Shadow', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-days .elementskit-timer-content > span.elementskit-timer-title,
 								{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-days .elementskit-timer-title,
 								{{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container.elementskit-days .elementskit-timer-title,
@@ -710,7 +701,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		$this->add_responsive_control(
             'ekit_countdown_timer_days_lebel_margin',
             [
-                'label' => esc_html__( 'Margin', 'elementskit' ),
+                'label' => esc_html__( 'Margin', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
 
@@ -729,7 +720,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_days_heading_general',
             [
-                'label' => esc_html__( 'General', 'elementskit' ),
+                'label' => esc_html__( 'General', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -741,7 +732,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'ekit_countdown_timer_days_background_group',
-                'label' => esc_html__( 'Background', 'elementskit' ),
+                'label' => esc_html__( 'Background', 'elementskit-lite' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-days .elementskit-inner-container,
 								{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-days .elementskit-timer-count,
@@ -759,7 +750,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'ekit_countdown_timer_days_border_color_group',
-                'label' => esc_html__( 'Border', 'elementskit' ),
+                'label' => esc_html__( 'Border', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-days .elementskit-inner-container,
 				{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-days .elementskit-timer-count,
 				{{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container.elementskit-days .elementskit-timer-count,
@@ -771,7 +762,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_responsive_control(
             'ekit_countdown_timer_days_border_radious_open',
             [
-                'label' => esc_html__( 'Border Radius', 'elementskit' ),
+                'label' => esc_html__( 'Border Radius', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -789,7 +780,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'ekit_countdown_timer_days_box_shadow_group',
-                'label' => esc_html__( 'Box Shadow', 'elementskit' ),
+                'label' => esc_html__( 'Box Shadow', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-days .elementskit-inner-container,
 				{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-days .elementskit-timer-count,
 				{{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container.elementskit-days .elementskit-timer-count,
@@ -807,7 +798,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         //Hours Style Section start
         $this->start_controls_section(
             'ekit_countdown_timer_hours_style', [
-                'label'	 =>esc_html__( 'Hours', 'elementskit' ),
+                'label'	 =>esc_html__( 'Hours', 'elementskit-lite' ),
                 'tab'	 => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -815,14 +806,14 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_hours_heading_digits',
             [
-                'label' => esc_html__( 'Digits', 'elementskit' ),
+                'label' => esc_html__( 'Digits', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
         );
         $this->add_control(
             'ekit_countdown_timer_hours_digits_color', [
-                'label'		 =>esc_html__( 'Color', 'elementskit' ),
+                'label'		 =>esc_html__( 'Color', 'elementskit-lite' ),
                 'type'		 => Controls_Manager::COLOR,
 				'selectors'	 => [
 								'{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-hours .elementskit-timer-content > span.elementskit-timer-count,
@@ -848,7 +839,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         );
         $this->add_responsive_control(
             'ekit_countdown_timer_hours_digits_margin_bottom', [
-                'label'			 =>esc_html__( 'Margin Bottom', 'elementskit' ),
+                'label'			 =>esc_html__( 'Margin Bottom', 'elementskit-lite' ),
                 'type'			 => Controls_Manager::SLIDER,
                 'default'		 => [
                     'size' => '',
@@ -874,14 +865,14 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_hours_label_title',
             [
-                'label' => esc_html__( 'Label', 'elementskit' ),
+                'label' => esc_html__( 'Label', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
         );
         $this->add_control(
             'ekit_countdown_timer_hours_label_color', [
-                'label'		 =>esc_html__( 'Color', 'elementskit' ),
+                'label'		 =>esc_html__( 'Color', 'elementskit-lite' ),
                 'type'		 => Controls_Manager::COLOR,
 
 				 'selectors'	 => [
@@ -923,7 +914,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'ekit_countdown_timer_hours_label_background_group',
-                'label' => esc_html__( 'Background', 'elementskit' ),
+                'label' => esc_html__( 'Background', 'elementskit-lite' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .elementskit-flip-clock .elementskit-hrs .elementskit-label,
                 {{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-hours .elementskit-timer-title,
@@ -940,7 +931,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'ekit_countdown_timer_hours_label_border_color',
-                'label' => esc_html__( 'Border', 'elementskit' ),
+                'label' => esc_html__( 'Border', 'elementskit-lite' ),
                 'selector' => ' {{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-hours .elementskit-timer-content > span.elementskit-timer-title,
                 {{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-hours .elementskit-timer-title,
                 {{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container.elementskit-hours .elementskit-timer-title,
@@ -953,7 +944,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_responsive_control(
             'ekit_countdown_timer_hours_label_border_radious_open',
             [
-                'label' => esc_html__( 'Border Radius', 'elementskit' ),
+                'label' => esc_html__( 'Border Radius', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -972,7 +963,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'ekit_countdown_timer_hours_label_box_shadow_group',
-                'label' => esc_html__( 'Box Shadow', 'elementskit' ),
+                'label' => esc_html__( 'Box Shadow', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-hours .elementskit-timer-content > span.elementskit-timer-title,
 								{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-hours .elementskit-timer-title,
 								{{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container.elementskit-hours .elementskit-timer-title,
@@ -987,7 +978,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		$this->add_responsive_control(
             'ekit_countdown_timer_hours_lebel_margin',
             [
-                'label' => esc_html__( 'Margin', 'elementskit' ),
+                'label' => esc_html__( 'Margin', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
 
@@ -1007,7 +998,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_hours_heading_general',
             [
-                'label' => esc_html__( 'General', 'elementskit' ),
+                'label' => esc_html__( 'General', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -1016,7 +1007,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'ekit_countdown_timer_hours_background',
-                'label' => esc_html__( 'Background', 'elementskit' ),
+                'label' => esc_html__( 'Background', 'elementskit-lite' ),
                 'types' => [ 'classic', 'gradient' ],
 
 				'selector' => '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-hours .elementskit-inner-container,
@@ -1032,7 +1023,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'ekit_countdown_timer_hours_border_color_group',
-                'label' => esc_html__( 'Border', 'elementskit' ),
+                'label' => esc_html__( 'Border', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-hours .elementskit-inner-container,
 				{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-hours .elementskit-timer-count,
 				{{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container.elementskit-hours .elementskit-timer-count,
@@ -1045,7 +1036,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		$this->add_responsive_control(
             'ekit_countdown_timer_hours_border_radious_open',
             [
-                'label' => esc_html__( 'Border Radius', 'elementskit' ),
+                'label' => esc_html__( 'Border Radius', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -1062,7 +1053,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'ekit_countdown_timer_hours_box_shadow_group',
-                'label' => esc_html__( 'Box Shadow', 'elementskit' ),
+                'label' => esc_html__( 'Box Shadow', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-hours .elementskit-inner-container,
 				{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-hours .elementskit-timer-count,
 				{{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container.elementskit-hours .elementskit-timer-count,
@@ -1079,7 +1070,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 
         $this->start_controls_section(
             'ekit_countdown_timer_minutes_style', [
-                'label'	 =>esc_html__( 'Minutes', 'elementskit' ),
+                'label'	 =>esc_html__( 'Minutes', 'elementskit-lite' ),
                 'tab'	 => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1088,14 +1079,14 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_minutes_heading_digits',
             [
-                'label' => esc_html__( 'Digits', 'elementskit' ),
+                'label' => esc_html__( 'Digits', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
             ]
         );
 		// Set Digits color for Days
         $this->add_control(
             'ekit_countdown_timer_minutes_digits_color', [
-                'label'		 =>esc_html__( 'Color', 'elementskit' ),
+                'label'		 =>esc_html__( 'Color', 'elementskit-lite' ),
                 'type'		 => Controls_Manager::COLOR,
                 'selectors'	 => [
                     '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-minutes .elementskit-timer-content > span.elementskit-timer-count,
@@ -1123,7 +1114,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		// Set Digits margin for Days
         $this->add_responsive_control(
             'ekit_countdown_timer_minutes_digits_margin_bottom', [
-                'label'			 =>esc_html__( 'Margin Bottom', 'elementskit' ),
+                'label'			 =>esc_html__( 'Margin Bottom', 'elementskit-lite' ),
                 'type'			 => Controls_Manager::SLIDER,
                 'default'		 => [
                     'size' => '',
@@ -1149,14 +1140,14 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_minutes_label_title',
             [
-                'label' => esc_html__( 'Label', 'elementskit' ),
+                'label' => esc_html__( 'Label', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
         );
         $this->add_control(
             'ekit_countdown_timer_minutes_label_color', [
-                'label'		 =>esc_html__( 'Color', 'elementskit' ),
+                'label'		 =>esc_html__( 'Color', 'elementskit-lite' ),
                 'type'		 => Controls_Manager::COLOR,
                 'selectors'	 => [
                     '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-minutes .elementskit-timer-content > span.elementskit-timer-title,
@@ -1196,7 +1187,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'ekit_countdown_timer_minutes_label_background_group',
-                'label' => esc_html__( 'Background', 'elementskit' ),
+                'label' => esc_html__( 'Background', 'elementskit-lite' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .elementskit-flip-clock .elementskit-mins .elementskit-label,
 								{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-minutes .elementskit-timer-title,
@@ -1213,7 +1204,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'ekit_countdown_timer_minutes_label_border_color',
-                'label' => esc_html__( 'Border', 'elementskit' ),
+                'label' => esc_html__( 'Border', 'elementskit-lite' ),
                 'selector' => ' {{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-minutes .elementskit-timer-content > span.elementskit-timer-title,
 								{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-minutes .elementskit-timer-title,
 								{{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container.elementskit-minutes .elementskit-timer-title,
@@ -1226,7 +1217,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_responsive_control(
             'ekit_countdown_timer_minutes_label_border_radious_open',
             [
-                'label' => esc_html__( 'Border Radius', 'elementskit' ),
+                'label' => esc_html__( 'Border Radius', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -1245,7 +1236,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'ekit_countdown_timer_minutes_label_box_shadow_group',
-                'label' => esc_html__( 'Box Shadow', 'elementskit' ),
+                'label' => esc_html__( 'Box Shadow', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-minutes .elementskit-timer-content > span.elementskit-timer-title,
 								{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-minutes .elementskit-timer-title,
 								{{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container.elementskit-minutes .elementskit-timer-title,
@@ -1259,7 +1250,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		$this->add_responsive_control(
             'ekit_countdown_timer_minutes_lebel_margin',
             [
-                'label' => esc_html__( 'Margin', 'elementskit' ),
+                'label' => esc_html__( 'Margin', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
 
@@ -1280,7 +1271,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_minutes_heading_general',
             [
-                'label' => esc_html__( 'General', 'elementskit' ),
+                'label' => esc_html__( 'General', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -1289,7 +1280,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'ekit_countdown_timer_minutes_background',
-                'label' => esc_html__( 'Background', 'elementskit' ),
+                'label' => esc_html__( 'Background', 'elementskit-lite' ),
                 'types' => [ 'classic', 'gradient' ],
 
 				'selector' => '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-minutes .elementskit-inner-container,
@@ -1305,7 +1296,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'ekit_countdown_timer_minutes_border_color_group',
-                'label' => esc_html__( 'Border', 'elementskit' ),
+                'label' => esc_html__( 'Border', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-minutes .elementskit-inner-container,
 				{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-minutes .elementskit-timer-count,
 				{{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container.elementskit-minutes .elementskit-timer-count,
@@ -1318,7 +1309,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		$this->add_responsive_control(
             'ekit_countdown_timer_minutes_border_radious_open',
             [
-                'label' => esc_html__( 'Border Radius', 'elementskit' ),
+                'label' => esc_html__( 'Border Radius', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -1335,7 +1326,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'ekit_countdown_timer_minutes_box_shadow_group',
-                'label' => esc_html__( 'Box Shadow', 'elementskit' ),
+                'label' => esc_html__( 'Box Shadow', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-minutes .elementskit-inner-container,
 				{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-minutes .elementskit-timer-count,
 				{{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container.elementskit-minutes .elementskit-timer-count,
@@ -1355,7 +1346,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 
         $this->start_controls_section(
             'ekit_countdown_timer_seconds_style', [
-                'label'	 =>esc_html__( 'Seconds', 'elementskit' ),
+                'label'	 =>esc_html__( 'Seconds', 'elementskit-lite' ),
                 'tab'	 => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1364,14 +1355,14 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_seconds_heading_digits',
             [
-                'label' => esc_html__( 'Digits', 'elementskit' ),
+                'label' => esc_html__( 'Digits', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
             ]
         );
 		// Set Digits color for Days
         $this->add_control(
             'ekit_countdown_timer_seconds_digits_color', [
-                'label'		 =>esc_html__( 'Color', 'elementskit' ),
+                'label'		 =>esc_html__( 'Color', 'elementskit-lite' ),
                 'type'		 => Controls_Manager::COLOR,
                 'selectors'	 => [
                     '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-seconds .elementskit-timer-content > span.elementskit-timer-count,
@@ -1399,7 +1390,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		// Set Digits margin for Days
         $this->add_responsive_control(
             'ekit_countdown_timer_seconds_digits_margin_bottom', [
-                'label'			 =>esc_html__( 'Margin Bottom', 'elementskit' ),
+                'label'			 =>esc_html__( 'Margin Bottom', 'elementskit-lite' ),
                 'type'			 => Controls_Manager::SLIDER,
                 'default'		 => [
                     'size' => '',
@@ -1425,14 +1416,14 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_seconds_label_title',
             [
-                'label' => esc_html__( 'Label', 'elementskit' ),
+                'label' => esc_html__( 'Label', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
         );
         $this->add_control(
             'ekit_countdown_timer_seconds_label_color', [
-                'label'		 =>esc_html__( 'Color', 'elementskit' ),
+                'label'		 =>esc_html__( 'Color', 'elementskit-lite' ),
                 'type'		 => Controls_Manager::COLOR,
                 'selectors'	 => [
                     '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-seconds .elementskit-timer-content > span.elementskit-timer-title,
@@ -1472,7 +1463,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'ekit_countdown_timer_seconds_label_background_group',
-                'label' => esc_html__( 'Background', 'elementskit' ),
+                'label' => esc_html__( 'Background', 'elementskit-lite' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .elementskit-flip-clock .elementskit-secs .elementskit-label,
 								{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-seconds .elementskit-timer-title,
@@ -1489,7 +1480,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'ekit_countdown_timer_seconds_label_border_color',
-                'label' => esc_html__( 'Border', 'elementskit' ),
+                'label' => esc_html__( 'Border', 'elementskit-lite' ),
                 'selector' => ' {{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-seconds .elementskit-timer-content > span.elementskit-timer-title,
 								{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-seconds .elementskit-timer-title,
 								{{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container.elementskit-seconds .elementskit-timer-title,
@@ -1502,7 +1493,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_responsive_control(
             'ekit_countdown_timer_seconds_label_border_radious_open',
             [
-                'label' => esc_html__( 'Border Radius', 'elementskit' ),
+                'label' => esc_html__( 'Border Radius', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -1521,7 +1512,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'ekit_countdown_timer_seconds_label_box_shadow_group',
-                'label' => esc_html__( 'Box Shadow', 'elementskit' ),
+                'label' => esc_html__( 'Box Shadow', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-seconds .elementskit-timer-content > span.elementskit-timer-title,
 								{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-seconds .elementskit-timer-title,
 								{{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container.elementskit-seconds .elementskit-timer-title,
@@ -1535,7 +1526,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		$this->add_responsive_control(
             'ekit_countdown_timer_seconds_lebel_margin',
             [
-                'label' => esc_html__( 'Margin', 'elementskit' ),
+                'label' => esc_html__( 'Margin', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
 
@@ -1555,7 +1546,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_seconds_heading_general',
             [
-                'label' => esc_html__( 'General', 'elementskit' ),
+                'label' => esc_html__( 'General', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -1564,7 +1555,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'ekit_countdown_timer_seconds_background',
-                'label' => esc_html__( 'Background', 'elementskit' ),
+                'label' => esc_html__( 'Background', 'elementskit-lite' ),
                 'types' => [ 'classic', 'gradient' ],
 
 				'selector' => '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-seconds .elementskit-inner-container,
@@ -1580,7 +1571,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'ekit_countdown_timer_seconds_border_color_group',
-                'label' => esc_html__( 'Border', 'elementskit' ),
+                'label' => esc_html__( 'Border', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-seconds .elementskit-inner-container,
 				{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-seconds .elementskit-timer-count,
 				{{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container.elementskit-seconds .elementskit-timer-count,
@@ -1593,7 +1584,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 		$this->add_responsive_control(
             'ekit_countdown_timer_seconds_border_radious_open',
             [
-                'label' => esc_html__( 'Border Radius', 'elementskit' ),
+                'label' => esc_html__( 'Border Radius', 'elementskit-lite' ),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', '%', 'em' ],
                 'selectors' => [
@@ -1610,7 +1601,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Box_Shadow::get_type(),
             [
                 'name' => 'ekit_countdown_timer_seconds_box_shadow_group',
-                'label' => esc_html__( 'Box Shadow', 'elementskit' ),
+                'label' => esc_html__( 'Box Shadow', 'elementskit-lite' ),
                 'selector' => '{{WRAPPER}} .elementskit-countdown-timer .elementskit-timer-container.elementskit-seconds .elementskit-inner-container,
 				{{WRAPPER}} .elementskit-countdown-timer-2 .elementskit-timer-container.elementskit-seconds .elementskit-timer-count,
 				{{WRAPPER}} .elementskit-countdown-timer-3 .elementskit-timer-container.elementskit-seconds .elementskit-timer-count,
@@ -1626,7 +1617,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 
         $this->start_controls_section(
             'ekit_countdown_timer_bg_style', [
-                'label'	 =>esc_html__( 'Background', 'elementskit' ),
+                'label'	 =>esc_html__( 'Background', 'elementskit-lite' ),
                 'tab'	 => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'ekit_countdown_timer_style' => 'style6'
@@ -1636,7 +1627,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 
         $this->add_responsive_control(
             'ekit_countdown_timer_content_height', [
-                'label'			 =>esc_html__( 'Height', 'elementskit' ),
+                'label'			 =>esc_html__( 'Height', 'elementskit-lite' ),
                 'type'			 => Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%' ],
                 'range'			 => [
@@ -1665,7 +1656,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 
         $this->add_responsive_control(
             'ekit_countdown_timer_content_line_height', [
-                'label'			 =>esc_html__( 'Line Height', 'elementskit' ),
+                'label'			 =>esc_html__( 'Line Height', 'elementskit-lite' ),
                 'type'			 => Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%' ],
                 'range'			 => [
@@ -1695,7 +1686,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_outer_section_bg_style',
             [
-                'label' => esc_html__( 'Outer Part', 'elementskit' ),
+                'label' => esc_html__( 'Outer Part', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -1704,7 +1695,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'ekit_countdown_timer_outer_background_group',
-                'label' => esc_html__( 'Outer Background', 'elementskit' ),
+                'label' => esc_html__( 'Outer Background', 'elementskit-lite' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .elementskit-countdown-container .elementskit-countdown-timer-4',
             ]
@@ -1712,7 +1703,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
         $this->add_control(
             'ekit_countdown_timer_inner_section_bg_style',
             [
-                'label' => esc_html__( 'Inner Part', 'elementskit' ),
+                'label' => esc_html__( 'Inner Part', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -1721,7 +1712,7 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'ekit_countdown_timer_inner_background_group',
-                'label' => esc_html__( 'Inner Background', 'elementskit' ),
+                'label' => esc_html__( 'Inner Background', 'elementskit-lite' ),
                 'types' => [ 'classic', 'gradient' ],
                 'selector' => '{{WRAPPER}} .elementskit-countdown-container',
             ]
@@ -1744,51 +1735,50 @@ class Elementskit_Widget_Countdown_Timer extends Widget_Base {
 
 	   $data = '';
 		if(isset($ekit_countdown_timer_weeks_label)){
-			$data .= 'data-date-ekit-week="'.$ekit_countdown_timer_weeks_label.'"';
+			$data .= ' data-date-ekit-week="'.esc_attr($ekit_countdown_timer_weeks_label).'"';
 		}
 		if(isset($ekit_countdown_timer_days_label)){
-			$data .= 'data-date-ekit-day="'.$ekit_countdown_timer_days_label.'"';
+			$data .= ' data-date-ekit-day="'.esc_attr($ekit_countdown_timer_days_label).'"';
 		}
 		if(isset($ekit_countdown_timer_hours_label)){
-			$data .= 'data-date-ekit-hour="'.$ekit_countdown_timer_hours_label.'"';
+			$data .= ' data-date-ekit-hour="'.esc_attr($ekit_countdown_timer_hours_label).'"';
 		}
 		if(isset($ekit_countdown_timer_minutes_hours_label)){
-			$data .= 'data-date-ekit-minute="'.$ekit_countdown_timer_minutes_hours_label.'"';
+			$data .= ' data-date-ekit-minute="'.esc_attr($ekit_countdown_timer_minutes_hours_label).'"';
 		}
 		if(isset($ekit_countdown_timer_seconds_hours_label)){
-			$data .= 'data-date-ekit-second="'.$ekit_countdown_timer_seconds_hours_label.'"';
+			$data .= ' data-date-ekit-second="'.esc_attr($ekit_countdown_timer_seconds_hours_label).'"';
 		}
 		if(isset($ekit_countdown_timer_due_time)){
-			$data .= 'data-ekit-countdown="'.$ekit_countdown_timer_due_time.'"';
+			$data .= ' data-ekit-countdown="'.esc_attr($ekit_countdown_timer_due_time).'"';
         }
 
-        $data .= 'data-finish-title="'.$ekit_countdown_timer_title.'"';
-        $data .= 'data-finish-content="'.$ekit_countdown_timer_expiry_content.'"';
+        $data .= ' data-finish-title="'.esc_attr($ekit_countdown_timer_title).'"';
+        $data .= ' data-finish-content="'.esc_attr($ekit_countdown_timer_expiry_content).'"';
 
         switch ( $ekit_countdown_timer_style ) {
             case 'style1':
-                ?><div class="elementskit-countdown-timer text-center" <?php echo \ElementsKit\Utils::render($data); ?>></div><?php
+                ?><div class="elementskit-countdown-timer ekit-countdown text-center" <?php echo \ElementsKit_Lite\Utils::render($data); ?>></div><?php
                 break;
             case 'style2':
-                ?><div class="elementskit-countdown-timer-2 text-center" <?php echo \ElementsKit\Utils::render($data); ?>></div><?php
+                ?><div class="elementskit-countdown-timer-2 ekit-countdown text-center" <?php echo \ElementsKit_Lite\Utils::render($data); ?>></div><?php
                 break;
             case 'style3':
-                ?><div class="elementskit-flip-clock text-center" <?php echo \ElementsKit\Utils::render($data); ?>></div><?php
+                ?><div class="elementskit-flip-clock text-center" <?php echo \ElementsKit_Lite\Utils::render($data); ?>></div><?php
                 break;
             case 'style4':
-                ?><div class="elementskit-countdown-timer-3 text-center" <?php echo \ElementsKit\Utils::render($data); ?>></div><?php
+                ?><div class="elementskit-countdown-timer-3 ekit-countdown text-center" <?php echo \ElementsKit_Lite\Utils::render($data); ?>></div><?php
                 break;
             case 'style5':
-                ?><div class="elementskit-countdown-timer-3 elementskit-version-box text-center" <?php echo \ElementsKit\Utils::render($data); ?>></div>
+                ?><div class="elementskit-countdown-timer-3 ekit-countdown elementskit-version-box text-center align-items-end" <?php echo \ElementsKit_Lite\Utils::render($data); ?>></div>
                 <?php
                 break;
             case 'style6':
                 ?><div class="elementskit-countdown-container text-center">
-                    <div class="elementskit-countdown-timer-4" <?php echo \ElementsKit\Utils::render($data); ?>></div>
+                    <div class="elementskit-countdown-timer-4 ekit-countdown" <?php echo \ElementsKit_Lite\Utils::render($data); ?>></div>
                 </div><?php
                 break;
 
         }
     }
-    protected function _content_template() { }
 }

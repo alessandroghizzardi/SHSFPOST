@@ -122,11 +122,7 @@ class Settings {
 			}
 		}
 
-		// output for display settings
 		$return_data_display_setting = get_option($display_setting_optionKey, '');
-		//echo '<pre>'; print_r($return_data_display_setting); echo '</pre>';
-
-		$this->page_enable;
 
 		require_once(WUR_REVIEW_PLUGIN_PATH . 'views/admin/global-settings-html.php');
 	}

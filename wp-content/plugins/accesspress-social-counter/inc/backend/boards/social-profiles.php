@@ -13,20 +13,20 @@
                </div>
                <div class="apsc-option-inner-wrapper ">
                     <label for="apsc-facebook-method">
-                         <?php _e( 'Facebook Counter Extraction', 'ap-social-pro' ) ?>
+                         <?php _e( 'Facebook Counter Extraction', 'accesspress-social-counter' ) ?>
                     </label>
                     <div class="apsc-option-field">
                          <label class="apsc-fb-method">
                               <input type="radio" name="social_profile[facebook][method]" value="1" class="apss-facebook-method" id="" <?php echo isset( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'method' ] ) && $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'method' ] == '1' ? ' checked="checked" ' : '1111'; ?>/>
-                              <?php _e( 'Method 1', 'ap-social-pro' ); ?>
+                              <?php _e( 'Method 1', 'accesspress-social-counter' ); ?>
                          </label>
-                         <div class="apsc-option-note"><?php _e( 'Method 1 you will require to enter your app id and app secret. Due to recent changes in Facebook API, most of our clients have been complaining that "Method 1" does not work.  ', 'ap-social-pro' ); ?></div>
+                         <div class="apsc-option-note"><?php _e( 'Method 1 you will require to enter your app id and app secret. Due to recent changes in Facebook API, most of our clients have been complaining that "Method 1" does not work.  ', 'accesspress-social-counter' ); ?></div>
 
                          <label class="apsc-fb-method">
                               <input type="radio" name="social_profile[facebook][method]" value="2" class="apss-facebook-method" id="" <?php echo isset( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'method' ] ) && $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'method' ] == '2' ? 'checked="checked"' : '2222'; ?>/>
-                              <?php _e( 'Method 2', 'ap-social-pro' ); ?>
+                              <?php _e( 'Method 2', 'accesspress-social-counter' ); ?>
                          </label>
-                         <div class="apsc-option-note"><?php _e( 'Method 2 makes use of a third party API "WidgetPack" to do the work. Please login to your Facebook account using the "FB Connect" button and connect WidgetPack to Facebook. Once done, you will notice that the image and name of your page will be displayed beneath the "FB Connect" button in the plugin settings. When you click on it, All the details will automatically be entered in the fields beneath the "FB Connect Button". Note: Your FB login details will NOT be stored.', 'ap-social-pro' ); ?></div>
+                         <div class="apsc-option-note"><?php _e( 'Method 2 makes use of a third party API "WidgetPack" to do the work. Please login to your Facebook account using the "FB Connect" button and connect WidgetPack to Facebook. Once done, you will notice that the image and name of your page will be displayed beneath the "FB Connect" button in the plugin settings. When you click on it, All the details will automatically be entered in the fields beneath the "FB Connect Button". Note: Your FB login details will NOT be stored.', 'accesspress-social-counter' ); ?></div>
                     </div>
                </div>
                <div class="apss-facebook-method-1" id="apss-facebook-method-1" <?php echo ( isset( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'method' ] ) && $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'method' ] == '1' ) ? 'style=display:block;' : 'style=display:none;'; ?>>
@@ -97,46 +97,46 @@
                          }
                     </style>
                     <div class="apsc-option-inner-wrapper apsc-row-even">
-                         <label><?php _e( 'Facebook Login', 'ap-social-pro' ); ?></label>
+                         <label><?php _e( 'Facebook Login', 'accesspress-social-counter' ); ?></label>
                          <div class="apsc-option-field">
-                              <button type="button" id="apsc_fb_connect"><?php _e( 'FB Connect', 'ap-social-pro' ); ?></button>
+                              <button type="button" id="apsc_fb_connect"><?php _e( 'FB Connect', 'accesspress-social-counter' ); ?></button>
                               <div class="apsc-fb-pages-list"></div>
                          </div>
                     </div>
                     <div class="apsc-option-inner-wrapper apsc-row-even">
-                         <label><?php _e( 'Page Name', 'ap-social-pro' ); ?></label>
+                         <label><?php _e( 'Page Name', 'accesspress-social-counter' ); ?></label>
                          <div class="apsc-option-field">
-                              <input type="text" id="" class="apsc-page-name" name="social_profile[facebook][page_name]" value="<?php (isset( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'page_name' ] ) && ! empty( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'page_name' ] )) ? esc_attr_e( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'page_name' ] ) : ''; ?>" class="apsc-page-name" placeholder="<?php _e( 'Page Name', 'ap-social-pro' ); ?>" readonly />
-                              <div class="apsc-option-note"><?php _e( ' ', 'ap-social-pro' ); ?></div>
+                              <input type="text" id="" class="apsc-page-name" name="social_profile[facebook][page_name]" value="<?php (isset( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'page_name' ] ) && ! empty( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'page_name' ] )) ? esc_attr_e( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'page_name' ] ) : ''; ?>" class="apsc-page-name" placeholder="<?php _e( 'Page Name', 'accesspress-social-counter' ); ?>" readonly />
+                              <div class="apsc-option-note"><?php _e( ' ', 'accesspress-social-counter' ); ?></div>
                          </div>
                     </div>
                     <div class="apsc-option-inner-wrapper apsc-row-even">
-                         <label><?php _e( 'Page ID', 'ap-social-pro' ); ?></label>
+                         <label><?php _e( 'Page ID', 'accesspress-social-counter' ); ?></label>
                          <div class="apsc-option-field">
-                              <input type="text" class="apsc-page-id" id="" name="social_profile[facebook][fb_page_id]" value="<?php (isset( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'fb_page_id' ] ) && ! empty( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'fb_page_id' ] )) ? esc_attr_e( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'fb_page_id' ] ) : ''; ?>" class="apsc-page-name" placeholder="<?php _e( 'Page ID', 'ap-social-pro' ); ?>" readonly />
-                              <div class="apsc-option-note"><?php _e( ' ', 'ap-social-pro' ); ?></div>
+                              <input type="text" class="apsc-page-id" id="" name="social_profile[facebook][fb_page_id]" value="<?php (isset( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'fb_page_id' ] ) && ! empty( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'fb_page_id' ] )) ? esc_attr_e( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'fb_page_id' ] ) : ''; ?>" class="apsc-page-name" placeholder="<?php _e( 'Page ID', 'accesspress-social-counter' ); ?>" readonly />
+                              <div class="apsc-option-note"><?php _e( ' ', 'accesspress-social-counter' ); ?></div>
                          </div>
                     </div>
                     <div class="apsc-option-inner-wrapper apsc-row-even">
-                         <label><?php _e( 'Access Token', 'ap-social-pro' ); ?></label>
+                         <label><?php _e( 'Access Token', 'accesspress-social-counter' ); ?></label>
                          <div class="apsc-option-field">
-                              <input type="text" id="" class="apsc-page-token" name="social_profile[facebook][access_token]" value="<?php (isset( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'access_token' ] ) && ! empty( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'access_token' ] )) ? esc_attr_e( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'access_token' ] ) : ''; ?>" class="apsc-page-name" placeholder="<?php _e( 'Access Token', 'ap-social-pro' ); ?>" readonly />
-                              <div class="apsc-option-note"><?php _e( ' ', 'ap-social-pro' ); ?></div>
+                              <input type="text" id="" class="apsc-page-token" name="social_profile[facebook][access_token]" value="<?php (isset( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'access_token' ] ) && ! empty( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'access_token' ] )) ? esc_attr_e( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'access_token' ] ) : ''; ?>" class="apsc-page-name" placeholder="<?php _e( 'Access Token', 'accesspress-social-counter' ); ?>" readonly />
+                              <div class="apsc-option-note"><?php _e( ' ', 'accesspress-social-counter' ); ?></div>
                          </div>
                     </div>
                     <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-widget-id="<?php echo 'apss-facebook-method-2'; ?>" onload="fbrev_init({widgetId: this.getAttribute('data-widget-id')})" style="display:none">
                </div>
                <div class="apsc-option-inner-wrapper apsc-row-odd">
-                    <label><?php _e( 'Default Count', 'ap-social-pro' ); ?></label>
+                    <label><?php _e( 'Default Count', 'accesspress-social-counter' ); ?></label>
                     <div class="apsc-option-field">
                          <input type="text" name="social_profile[facebook][default_count]" value="<?php
                          if ( isset( $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'default_count' ] ) ) {
-                              echo $apsc_settings[ 'social_profile' ][ 'facebook' ][ 'default_count' ];
+                              echo esc_attr($apsc_settings[ 'social_profile' ][ 'facebook' ][ 'default_count' ]);
                          } else {
                               echo '';
                          }
                          ?>"/>
-                         <div class="apsc-option-note"><?php _e( 'Please enter the default count to show instead of 0 when API\'s are not available.', 'ap-social-pro' ); ?></div>
+                         <div class="apsc-option-note"><?php _e( 'Please enter the default count to show instead of 0 when API\'s are not available.', 'accesspress-social-counter' ); ?></div>
                     </div>
                </div>
                <div class="apsc-extra-note"><?php _e( 'Please use: [aps-get-count social_media="facebook"] to get the Facebook Count only.You can also pass count_format parameter too in this shortcode to format your count.Formats are "short" for abbreviated format and "comma" for comma separated formats.' ); ?></div>
@@ -207,10 +207,10 @@
                          </div>
                     </div>
                     <div class="apsc-option-inner-wrapper apsc-row-odd">
-                         <label><?php _e( 'Default Count', 'ap-social-pro' ); ?></label>
+                         <label><?php _e( 'Default Count', 'accesspress-social-counter' ); ?></label>
                          <div class="apsc-option-field">
-                              <input type="text" name="social_profile[twitter][default_count]" value="<?php echo isset( $apsc_settings[ 'social_profile' ][ 'twitter' ][ 'default_count' ] ) && $apsc_settings[ 'social_profile' ][ 'twitter' ][ 'default_count' ] != '' ? $apsc_settings[ 'social_profile' ][ 'twitter' ][ 'default_count' ] : ''; ?>"/>
-                              <div class="apsc-option-note"><?php _e( 'Please enter the default count to show instead of 0 when API\'s are not available.', 'ap-social-pro' ); ?></div>
+                              <input type="text" name="social_profile[twitter][default_count]" value="<?php echo isset( $apsc_settings[ 'social_profile' ][ 'twitter' ][ 'default_count' ] ) && $apsc_settings[ 'social_profile' ][ 'twitter' ][ 'default_count' ] != '' ? esc_attr($apsc_settings[ 'social_profile' ][ 'twitter' ][ 'default_count' ]) : ''; ?>"/>
+                              <div class="apsc-option-note"><?php _e( 'Please enter the default count to show instead of 0 when API\'s are not available.', 'accesspress-social-counter' ); ?></div>
                          </div>
                     </div>
                </div>
@@ -220,12 +220,54 @@
 
           <!--Instagram-->
           <div class="apsc-option-outer-wrapper">
+              <div class="apsc-extra-note">
+                       <p><?php _e('Note: After the latest changes in instagram api, your instagram account should be business account in order to get follower count.
+                                   According to this changes, you need to go to <a href="https://developers.facebook.com">this</a> link to create app. Setup facebook login and put (https://demo.accesspressthemes.com/wordpress-plugins/insta-feed/graph/access_token.php) as valid oauth redirect url.Then, enter
+                                   your app id and app secret in backend and first save it.Then, click on get access token.After few steps of selecting
+                                   your facebook page and instagram account you should be redirected to backend with your user id and access token', 'accesspress-social-counter'); ?></p>
+                   </div>
                <h4><?php _e( 'Instagram', 'accesspress-social-counter' ) ?></h4>
                <div class="apsc-option-inner-wrapper">
                     <label><?php _e( 'Display Counter', 'accesspress-social-counter' ) ?></label>
                     <div class="apsc-option-field"><label><input type="checkbox" name="social_profile[instagram][active]" value="1" class="apsc-counter-activation-trigger" <?php if ( isset( $apsc_settings[ 'social_profile' ][ 'instagram' ][ 'active' ] ) ) { ?>checked="checked"<?php } ?>/><?php _e( 'Show/Hide', 'accesspress-social-counter' ); ?></label></div>
                </div>
                <div class="apsc-option-extra">
+                   
+                   <div class="apsc-option-inner-wrapper">
+                    <label><?php _e('Facebook App ID', 'accesspress-social-counter'); ?></label>
+                    <div class="apsc-option-field">
+                        <input type="text" name="social_profile[instagram][app_id]" placeholder="Enter your facebook app id" value="<?php echo isset($apsc_settings['social_profile']['instagram']['app_id']) && $apsc_settings['social_profile']['instagram']['app_id'] != '' ? esc_attr($apsc_settings['social_profile']['instagram']['app_id']) : ''; ?>"/>
+                        <div class="apsc-option-note"><?php _e('Please enter your facebook app id from developers page.', 'accesspress-social-counter'); ?></div>
+                    </div>
+                </div>
+                <div class="apsc-option-inner-wrapper">
+                    <label><?php _e('Facebook App Secret', 'accesspress-social-counter'); ?></label>
+                    <div class="apsc-option-field">
+                        <input type="text" name="social_profile[instagram][app_secret]" placeholder="Enter your facebook app secret" value="<?php echo isset($apsc_settings['social_profile']['instagram']['app_secret']) ? esc_attr($apsc_settings['social_profile']['instagram']['app_secret']) : ''; ?>"/>
+                        <div class="apsc-option-note"><?php _e('Please enter your facebook app secret from developers page.', 'accesspress-social-counter'); ?></div>
+                    </div>
+                </div>
+                   <?php
+                //$dribbble_url='https://dribbble.com/oauth/authorize?'.$apsc_settings[ 'social_profile' ][ 'dribbble' ][ 'client_id' ].'';
+                if (isset($apsc_settings['social_profile']['instagram']['app_id'])) {
+                    $instagram_app_id = $apsc_settings['social_profile']['instagram']['app_id'];
+                } else {
+                    $instagram_app_id = '';
+                }
+                if (isset($apsc_settings['social_profile']['instagram']['app_secret'])) {
+                    $instagram_app_secret = $apsc_settings['social_profile']['instagram']['app_secret'];
+                } else {
+                    $instagram_app_secret = '';
+                }
+                ?>
+                   <div class="apsc-option-inner-wrapper apsc-row-even">
+                    <label><?php _e('Get Instagram Access Token', 'accesspress-social-counter'); ?></label>
+                    <div class="apsc-option-field">
+                        <a target="_self" id="get_token" href="https://demo.accesspressthemes.com/wordpress-plugins/insta-feed/graph/access_token.php?app_id=<?php echo esc_attr($instagram_app_id);?>&app_secret=<?php echo esc_attr($instagram_app_secret); ?>&back_url=<?php echo admin_url('admin.php?page=ap-social-counter'); ?>">Get access token</a>
+                        <div class="apsc-option-note"><?php _e('Note: After entering your app id and app secret remember to save changes first,then only proceed toward getting access token.', 'accesspress-social-counter'); ?>
+                        </div>
+                    </div>
+                </div>
                     <div class="apsc-option-inner-wrapper">
                          <label><?php _e( 'Instagram Username', 'accesspress-social-counter' ); ?></label>
                          <div class="apsc-option-field">
@@ -236,22 +278,38 @@
                     <div class="apsc-option-inner-wrapper">
                          <label><?php _e( 'Instagram User ID', 'accesspress-social-counter' ); ?></label>
                          <div class="apsc-option-field">
-                              <input type="text" name="social_profile[instagram][user_id]" value="<?php echo esc_attr( $apsc_settings[ 'social_profile' ][ 'instagram' ][ 'user_id' ] ); ?>"/>
-                              <div class="apsc-option-note"><?php _e( 'Please enter the instagram user ID.You can get this information from <a href="http://instagram.pixelunion.net/" target="_blank">http://www.pinceladasdaweb.com.br/instagram/access-token/</a>', 'accesspress-social-counter' ); ?></div>
+                              <input type="text" name="social_profile[instagram][user_id]" value="<?php
+                        if (isset($_GET["instaid"])) {
+                            echo esc_attr($_GET["instaid"]);
+                        } elseif (isset($apsc_settings['social_profile']['instagram']['user_id'])) {
+                            echo esc_attr($apsc_settings['social_profile']['instagram']['user_id']);
+                        } else {
+                            echo '';
+                        }
+                        ?>"/>
+                              <div class="apsc-option-note"><?php _e( 'Note: If not loaded automatically after clicking Get Access Token button provided above, please check if you have followed all steps properly.', 'accesspress-social-counter' ); ?></div>
                          </div>
                     </div>
                     <div class="apsc-option-inner-wrapper">
                          <label><?php _e( 'Instagram Access Token', 'accesspress-social-counter' ); ?></label>
                          <div class="apsc-option-field">
-                              <input type="text" name="social_profile[instagram][access_token]" value="<?php echo esc_attr( $apsc_settings[ 'social_profile' ][ 'instagram' ][ 'access_token' ] ); ?>"/>
-                              <div class="apsc-option-note"><?php _e( 'Please enter the instagram Access Token.You can get this information from <a href="http://instagram.pixelunion.net/" target="_blank">http://instagram.pixelunion.net/</a>', 'accesspress-social-counter' ); ?></div>
+                              <input type="text" name="social_profile[instagram][access_token]" value="<?php
+                        if (isset($_GET["access_token"])) {
+                            echo esc_attr($_GET["access_token"]);
+                        } elseif (isset($apsc_settings['social_profile']['instagram']['access_token']) && $apsc_settings['social_profile']['instagram']['access_token'] != '') {
+                            echo esc_attr($apsc_settings['social_profile']['instagram']['access_token']);
+                        } else {
+                            echo '';
+                        }
+                        ?>"/>
+                              <div class="apsc-option-note"><?php _e( 'Note: If not loaded automatically after clicking Get Access Token button provided above, please check if you have followed all steps properly.', 'accesspress-social-counter' ); ?></div>
                          </div>
                     </div>
                     <div class="apsc-option-inner-wrapper apsc-row-odd">
-                         <label><?php _e( 'Default Count', 'ap-social-pro' ); ?></label>
+                         <label><?php _e( 'Default Count', 'accesspress-social-counter' ); ?></label>
                          <div class="apsc-option-field">
-                              <input type="text" name="social_profile[instagram][default_count]" value="<?php echo isset( $apsc_settings[ 'social_profile' ][ 'instagram' ][ 'default_count' ] ) && $apsc_settings[ 'social_profile' ][ 'instagram' ][ 'default_count' ] != '' ? $apsc_settings[ 'social_profile' ][ 'instagram' ][ 'default_count' ] : ''; ?>"/>
-                              <div class="apsc-option-note"><?php _e( 'Please enter the default count to show instead of 0 when API\'s are not available.', 'ap-social-pro' ); ?></div>
+                              <input type="text" name="social_profile[instagram][default_count]" value="<?php echo isset( $apsc_settings[ 'social_profile' ][ 'instagram' ][ 'default_count' ] ) && $apsc_settings[ 'social_profile' ][ 'instagram' ][ 'default_count' ] != '' ? esc_attr($apsc_settings[ 'social_profile' ][ 'instagram' ][ 'default_count' ]) : ''; ?>"/>
+                              <div class="apsc-option-note"><?php _e( 'Please enter the default count to show instead of 0 when API\'s are not available.', 'accesspress-social-counter' ); ?></div>
                          </div>
                     </div>
                </div>
@@ -311,7 +369,7 @@
                     <div class="apsc-option-inner-wrapper">
                          <label><?php _e( 'SoundCloud Username', 'accesspress-social-counter' ); ?></label>
                          <div class="apsc-option-field">
-                              <input type="text" name="social_profile[soundcloud][username]" value="<?php echo $apsc_settings[ 'social_profile' ][ 'soundcloud' ][ 'username' ]; ?>"/>
+                              <input type="text" name="social_profile[soundcloud][username]" value="<?php echo esc_attr($apsc_settings[ 'social_profile' ][ 'soundcloud' ][ 'username' ]); ?>"/>
                               <div class="apsc-option-note"><?php _e( 'Please enter the SoundCloud username.For example:bchettri', 'accesspress-social-counter' ); ?></div>
                          </div>
                     </div>
@@ -323,10 +381,10 @@
                          </div>
                     </div>
                     <div class="apsc-option-inner-wrapper apsc-row-even">
-                         <label><?php _e( 'Default Count', 'ap-social-pro' ); ?></label>
+                         <label><?php _e( 'Default Count', 'accesspress-social-counter' ); ?></label>
                          <div class="apsc-option-field">
-                              <input type="text" name="social_profile[soundcloud][default_count]" value="<?php echo isset( $apsc_settings[ 'social_profile' ][ 'soundcloud' ][ 'default_count' ] ) && $apsc_settings[ 'social_profile' ][ 'soundcloud' ][ 'default_count' ] != '' ? $apsc_settings[ 'social_profile' ][ 'soundcloud' ][ 'default_count' ] : ''; ?>"/>
-                              <div class="apsc-option-note"><?php _e( 'Please enter the default count to show instead of 0 when API\'s are not available.', 'ap-social-pro' ); ?></div>
+                              <input type="text" name="social_profile[soundcloud][default_count]" value="<?php echo isset( $apsc_settings[ 'social_profile' ][ 'soundcloud' ][ 'default_count' ] ) && $apsc_settings[ 'social_profile' ][ 'soundcloud' ][ 'default_count' ] != '' ? esc_attr($apsc_settings[ 'social_profile' ][ 'soundcloud' ][ 'default_count' ]) : ''; ?>"/>
+                              <div class="apsc-option-note"><?php _e( 'Please enter the default count to show instead of 0 when API\'s are not available.', 'accesspress-social-counter' ); ?></div>
                          </div>
                     </div>
                </div>
@@ -349,27 +407,90 @@
                               <div class="apsc-option-note"><?php _e( 'Please enter your dribbble username.For example:Creativedash', 'accesspress-social-counter' ); ?></div>
                          </div>
                     </div>
-               </div>
-               <div class="apsc-option-inner-wrapper apsc-row-odd">
-                    <label><?php _e( 'Access Token', 'ap-social-pro' ); ?></label>
+                   <div class="apsc-option-inner-wrapper apsc-row-odd">
+                    <label><?php _e('Dribbble Client id', 'accesspress-social-counter'); ?></label>
                     <div class="apsc-option-field">
-                         <input type="text" name="social_profile[dribbble][access_token]" value="<?php
-                         if ( isset( $apsc_settings[ 'social_profile' ][ 'dribbble' ][ 'access_token' ] ) ) {
-                              echo $apsc_settings[ 'social_profile' ][ 'dribbble' ][ 'access_token' ];
-                         }
-                         ?>"/>
-                         <div class="apsc-option-note"><?php _e( 'Please enter access token from your dribbble app.', 'ap-social-pro' ); ?></div>
-                         <div class="apsc-option-note">
-                              How to get access token? <br />
-                              please login to your dribbble account first and go to <a href='https://dribbble.com/account/applications/new' target='_blank'>this</a> link and create an app. There you will need to enter your app name, Description, Website URL, Callback URL and need to accept the dribbble API terms and conditions and Click on Register Application button. Upon Registration after page reload you will get your client access token. This is the required access token.
-                         </div>
+                        <input type="text" name="social_profile[dribbble][client_id]" value="<?php echo isset($apsc_settings['social_profile']['dribbble']['client_id']) && $apsc_settings['social_profile']['dribbble']['client_id'] != '' ? esc_attr($apsc_settings['social_profile']['dribbble']['client_id']) : ''; ?>"/>
+                        <div class="apsc-option-note"><?php _e('Please enter your dribbble client id', 'accesspress-social-counter'); ?></div>
                     </div>
-               </div>
-               <div class="apsc-option-inner-wrapper apsc-row-even">
-                    <label><?php _e( 'Default Count', 'ap-social-pro' ); ?></label>
+                </div>
+                <div class="apsc-option-inner-wrapper apsc-row-even">
+                    <label><?php _e('Dribbble Client secret', 'accesspress-social-counter'); ?></label>
                     <div class="apsc-option-field">
-                         <input type="text" name="social_profile[dribbble][default_count]" value="<?php echo isset( $apsc_settings[ 'social_profile' ][ 'dribbble' ][ 'default_count' ] ) && $apsc_settings[ 'social_profile' ][ 'dribbble' ][ 'default_count' ] != '' ? $apsc_settings[ 'social_profile' ][ 'dribbble' ][ 'default_count' ] : ''; ?>"/>
-                         <div class="apsc-option-note"><?php _e( 'Please enter the default count to show instead of 0 when API\'s are not available.', 'ap-social-pro' ); ?></div>
+                        <input type="text" name="social_profile[dribbble][client_secret]" value="<?php echo isset($apsc_settings['social_profile']['dribbble']['client_secret']) && $apsc_settings['social_profile']['dribbble']['client_secret'] != '' ? esc_attr($apsc_settings['social_profile']['dribbble']['client_secret']) : ''; ?>"/>
+                        <div class="apsc-option-note"><?php _e('Please enter your dribbble client secret', 'accesspress-social-counter'); ?></div>
+                    </div>
+                </div>
+                <?php
+                //$dribbble_url='https://dribbble.com/oauth/authorize?'.$apsc_settings[ 'social_profile' ][ 'dribbble' ][ 'client_id' ].'';
+                if (isset($apsc_settings['social_profile']['dribbble']['client_id'])) {
+                    $dribble_client_id = $apsc_settings['social_profile']['dribbble']['client_id'];
+                } else {
+                    $dribble_client_id = '';
+                }
+                if (isset($apsc_settings['social_profile']['dribbble']['client_secret'])) {
+                    $dribble_client_secret = $apsc_settings['social_profile']['dribbble']['client_secret'];
+                } else {
+                    $dribble_client_secret = '';
+                }
+                ?>
+                <div class="apsc-option-inner-wrapper apsc-row-odd">
+                    <label><?php _e('Get Dribbble access token', 'accesspress-social-counter'); ?></label>
+                    <!-- <div class="apsc-option-field"> -->
+                    <div class="apsc-option-field">
+                        <a target="_self" id="get_token" href="https://dribbble.com/oauth/authorize?client_id=<?php echo esc_attr($dribble_client_id); ?>&client_secret=<?php echo esc_attr($dribble_client_secret); ?>">Get access token</a>
+                        <div class="apsc-option-note">
+                        <?php $back_url = admin_url('admin.php?page=ap-social-counter');
+                        ?>
+                        <?php _e('Note: After entering your app id and app secret remember to save changes first,then only proceed toward getting access token. Please enter (' . $back_url . ') as callback url', 'accesspress-social-counter'); ?>
+                    </div>
+                    </div>
+                </div>
+                <?php
+                if (isset($_GET['code']) && $_GET['code'] != '') {
+                    $redirect_url = admin_url('admin.php?page=ap-social-counter-pro');
+                    $curl = curl_init('https://dribbble.com/oauth/token');
+                    curl_setopt($curl, CURLOPT_POST, true);
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, array(
+                        'client_id' => $dribble_client_id,
+                        'client_secret' => $dribble_client_secret,
+                        'code' => $_GET['code'],
+                            // The code from the previous request
+                            //'redirect_uri' => $redirect_url,
+                            // 'grant_type' => 'authorization_code'
+                    ));
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                    $auth = curl_exec($curl);
+                    $secret = json_decode($auth);
+                    //die(print_r($secret));
+                    $accessToken = $secret->access_token;
+                }
+                ?>
+
+                <div class="apsc-option-inner-wrapper apsc-row-even">
+                    <label><?php _e('Access Token', 'accesspress-social-counter'); ?></label>
+                    <div class="apsc-option-field">
+                        <input type="text" name="social_profile[dribbble][access_token]" value="<?php
+                        if (isset($accessToken)) {
+                            echo esc_attr($accessToken);
+                        } elseif (isset($apsc_settings['social_profile']['dribbble']['access_token'])) {
+                            echo esc_attr($apsc_settings['social_profile']['dribbble']['access_token']);
+                        }
+                        ?>"/>
+                        <div class="apsc-option-note"><?php _e('Note: If not loaded automatically after clicking Get Access Token button provided above, please check if you have followed all steps properly.', 'accesspress-social-counter'); ?></div>
+                        <div class="apsc-option-note">
+                            How to create application? <br />
+                            please login to your dribbble account first and go to <a href='https://dribbble.com/account/applications/new' target='_blank'>this</a> link and create an app. There you will need to enter your app name, Description, Website URL, Callback URL and need to accept the dribbble API terms and conditions and Click on Register Application button. Upon Registration after page reload you will get your client id and client secret.
+                        </div>
+                    </div>
+                </div>
+               </div>
+               
+               <div class="apsc-option-inner-wrapper apsc-row-even">
+                    <label><?php _e( 'Default Count', 'accesspress-social-counter' ); ?></label>
+                    <div class="apsc-option-field">
+                         <input type="text" name="social_profile[dribbble][default_count]" value="<?php echo isset( $apsc_settings[ 'social_profile' ][ 'dribbble' ][ 'default_count' ] ) && $apsc_settings[ 'social_profile' ][ 'dribbble' ][ 'default_count' ] != '' ? esc_attr($apsc_settings[ 'social_profile' ][ 'dribbble' ][ 'default_count' ]) : ''; ?>"/>
+                         <div class="apsc-option-note"><?php _e( 'Please enter the default count to show instead of 0 when API\'s are not available.', 'accesspress-social-counter' ); ?></div>
                     </div>
                </div>
                <div class="apsc-extra-note"><?php _e( 'Please use: [aps-get-count social_media="dribbble"] to get the Dribbble Count only.You can also pass count_format parameter too in this shortcode to format your count.Formats are "short" for abbreviated format and "comma" for comma separated formats.' ); ?></div>

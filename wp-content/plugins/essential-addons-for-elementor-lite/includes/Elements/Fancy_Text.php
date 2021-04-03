@@ -6,11 +6,12 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-use \Elementor\Controls_Manager as Controls_Manager;
-use \Elementor\Group_Control_Border as Group_Control_Border;
-use \Elementor\Group_Control_Typography as Group_Control_Typography;
-use \Elementor\Scheme_Typography as Scheme_Typography;
-use \Elementor\Widget_Base as Widget_Base;
+use \Elementor\Controls_Manager;
+use \Elementor\Group_Control_Background;
+use \Elementor\Group_Control_Border;
+use \Elementor\Group_Control_Typography;
+use \Elementor\Scheme_Typography;
+use \Elementor\Widget_Base;
 use \Elementor\Repeater;
 
 class Fancy_Text extends Widget_Base {
@@ -31,7 +32,7 @@ class Fancy_Text extends Widget_Base {
     public function get_categories() {
 		return [ 'essential-addons-elementor' ];
 	}
-    
+
     public function get_keywords() {
         return [
 			'ea fancy text',
@@ -92,7 +93,7 @@ class Fancy_Text extends Widget_Base {
 				'label'       => __( 'Fancy Text Strings', 'essential-addons-for-elementor-lite'),
 				'type'        => Controls_Manager::REPEATER,
 				'show_label'  => true,
-				'fields'      => array_values( $repeater->get_controls() ),
+				'fields'      =>  $repeater->get_controls(),
 				'title_field' => '{{{ eael_fancy_text_strings_text_field }}}',
 				'default'     => [
 					[
@@ -128,7 +129,7 @@ class Fancy_Text extends Widget_Base {
   				'label' => esc_html__( 'Fancy Text Settings', 'essential-addons-for-elementor-lite')
   			]
 		);
-		
+
 		$style_options = apply_filters(
 			'fancy_text_style_types',
 			[
@@ -139,7 +140,7 @@ class Fancy_Text extends Widget_Base {
 				'conditions'	=> ['style-2']
 			]
 		);
-		
+
   		$this->add_control(
 			'eael_fancy_text_style',
 			[
@@ -258,7 +259,7 @@ class Fancy_Text extends Widget_Base {
 
 		$this->end_controls_section();
 
-       
+
 		if(!apply_filters('eael/pro_enabled', false)) {
 			$this->start_controls_section(
 				'eael_section_pro',
@@ -266,7 +267,7 @@ class Fancy_Text extends Widget_Base {
 					'label' => __( 'Go Premium for More Features', 'essential-addons-for-elementor-lite')
 				]
 			);
-	
+
 			$this->add_control(
 				'eael_control_get_pro',
 				[
@@ -274,7 +275,7 @@ class Fancy_Text extends Widget_Base {
 					'type' => Controls_Manager::CHOOSE,
 					'options' => [
 						'1' => [
-							'title' => __( '', 'essential-addons-for-elementor-lite'),
+							'title' => '',
 							'icon' => 'fa fa-unlock-alt',
 						],
 					],
@@ -282,7 +283,7 @@ class Fancy_Text extends Widget_Base {
 					'description' => '<span class="pro-feature"> Get the  <a href="https://wpdeveloper.net/in/upgrade-essential-addons-elementor" target="_blank">Pro version</a> for more stunning elements and customization options.</span>'
 				]
 			);
-			
+
 			$this->end_controls_section();
 		}
 
@@ -311,13 +312,18 @@ class Fancy_Text extends Widget_Base {
 			[
              'name' => 'typography',
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'fields_options' => [
+					'typography' => ['default' => 'yes'],
+					'font_size' => ['default' => ['size' => 22]],
+					'font_weight' => ['default' => 600],
+					'line_height' => ['default' => ['size' => 1]],
+				],
 				'selector' => '{{WRAPPER}} .eael-fancy-text-prefix',
 			]
 		);
 
 
 		$this->end_controls_section();
-
 
 
 		$this->start_controls_section(
@@ -329,13 +335,86 @@ class Fancy_Text extends Widget_Base {
 		);
 
 		$this->add_control(
+			'eael_fancy_text_color_selector',
+			[
+				'label' => esc_html__('Color Selector', 'essential-addons-for-elementor-lite'),
+				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'solid-color' => [
+						'title' => __('Color', 'essential-addons-for-elementor-lite'),
+						'icon' => 'eicon-paint-brush',
+					],
+					'gradient-color' => [
+						'title' => __('Gradient', 'essential-addons-for-elementor-lite'),
+						'icon' => 'eicon-barcode',
+					],
+				],
+				'toggle' => true,
+				'default' => 'solid-color',
+                'condition' => [
+                    'eael_fancy_text_style' => 'style-1',
+                ]
+			]
+		);
+
+		$this->add_control(
 			'eael_fancy_text_strings_color',
 			[
-				'label' => esc_html__( 'Fancy Text Color', 'essential-addons-for-elementor-lite'),
+				'label' => esc_html__( 'Solid Color', 'essential-addons-for-elementor-lite'),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => [
 					'{{WRAPPER}} .eael-fancy-text-strings' => 'color: {{VALUE}};',
 				],
+				'conditions' => [
+					'relation' => 'or',
+					'terms' => [
+						[
+							'terms' => [
+								[
+									'name' => 'eael_fancy_text_color_selector',
+									'operator' => '==',
+									'value' => 'solid-color',
+								],
+								[
+									'name' => 'eael_fancy_text_style',
+									'operator' => '==',
+									'value' => 'style-1',
+								]
+							],
+						],
+						[
+							'name' => 'eael_fancy_text_style',
+							'operator' => '==',
+							'value' => 'style-2',
+						],
+					],
+				],
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'     => 'eael_fancy_text_color_gradient',
+				'types'    => ['gradient'],
+				'fields_options' => [
+					'background' => [
+						'label' => _x( 'Gradient Color', 'Text Shadow Control', 'elementor' ),
+						'toggle' => false,
+						'default' => 'gradient',
+					],
+					'color' => [
+						'default' => '#062ACA',
+					],
+					'color_b' => [
+						'default' => '#9401D9',
+					]
+				],
+				'selector' => '{{WRAPPER}} .eael-fancy-text-strings',
+				'condition' => [
+					'eael_fancy_text_color_selector' => 'gradient-color',
+					'eael_fancy_text_style' => 'style-1',
+				]
 			]
 		);
 
@@ -344,6 +423,11 @@ class Fancy_Text extends Widget_Base {
 			[
             'name' => 'eael_fancy_text_strings_typography',
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'fields_options' => [
+					'typography' => ['default' => 'yes'],
+					'font_size' => ['default' => ['size' => 22]],
+					'font_weight' => ['default' => 600],
+				],
 				'selector' => '{{WRAPPER}} .eael-fancy-text-strings, {{WRAPPER}} .typed-cursor',
 			]
 		);
@@ -356,6 +440,25 @@ class Fancy_Text extends Widget_Base {
 				'default' => '',
 				'selectors' => [
 					'{{WRAPPER}} .eael-fancy-text-strings' => 'background: {{VALUE}};',
+				],
+				'conditions' => [
+					'relation' => 'or',
+					'terms' => [
+						[
+							'terms' => [
+								[
+									'name' => 'eael_fancy_text_color_selector',
+									'operator' => '==',
+									'value' => 'solid-color',
+								],
+							],
+						],
+						[
+							'name' => 'eael_fancy_text_style',
+							'operator' => '==',
+							'value' => 'style-2',
+						],
+					],
 				],
 			]
 		);
@@ -455,6 +558,12 @@ class Fancy_Text extends Widget_Base {
 			[
              'name' => 'ending_typography',
 				'scheme' => Scheme_Typography::TYPOGRAPHY_1,
+				'fields_options' => [
+					'typography' => ['default' => 'yes'],
+					'font_size' => ['default' => ['size' => 22]],
+					'font_weight' => ['default' => 600],
+					'line_height' => ['default' => ['size' => 1]],
+				],
 				'selector' => '{{WRAPPER}} .eael-fancy-text-suffix',
 			]
 		);
@@ -498,11 +607,12 @@ class Fancy_Text extends Widget_Base {
 		<?php endif; ?>
 
 		<?php if ( $settings['eael_fancy_text_transition_type']  == 'fancy' ) : ?>
-			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings"></span>
+			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings
+			<?php echo $settings['eael_fancy_text_color_selector']?>"></span>
 		<?php endif; ?>
 
 		<?php if ( $settings['eael_fancy_text_transition_type']  != 'fancy' ) : ?>
-			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings">
+			<span id="eael-fancy-text-<?php echo esc_attr($this->get_id()); ?>" class="eael-fancy-text-strings <?php echo $settings['eael_fancy_text_color_selector']?>">
 				<noscript>
 					<?php
 						$eael_fancy_text_strings_list = "";

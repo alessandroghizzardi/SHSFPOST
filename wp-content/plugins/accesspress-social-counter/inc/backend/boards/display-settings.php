@@ -20,7 +20,7 @@
                         if ($social_profile != 'googlePlus') {
                             ?>
                             <li><span class="left-icon"><i class="fa fa-arrows"></i></span><span class="social-name"><?php _e($social_profiles_ref[$social_profile], 'accesspress-social-counter'); ?></span>
-                                <input type="hidden" name="profile_order[]" value="<?php echo $social_profile; ?>"/>
+                                <input type="hidden" name="profile_order[]" value="<?php echo esc_attr($social_profile); ?>"/>
                             </li>
                             <?php
                         }
@@ -34,23 +34,23 @@
             <div class="apsc-option-field">
                 <label>
                     <input type="radio" name="social_profile_theme" value="theme-1" <?php if ($apsc_settings['social_profile_theme'] == 'theme-1') { ?>checked="checked"<?php } ?>/><?php _e('Theme 1', 'accesspress-social-counter'); ?>
-                    <div class="apsc-theme-image"><img src="<?php echo SC_IMAGE_DIR . '/themes/theme-1.jpg'; ?>"/></div>
+                    <div class="apsc-theme-image"><img src="<?php echo esc_attr(SC_IMAGE_DIR) . '/themes/theme-1.jpg'; ?>"/></div>
                 </label>
                 <label>
                     <input type="radio" name="social_profile_theme" value="theme-2" <?php if ($apsc_settings['social_profile_theme'] == 'theme-2') { ?>checked="checked"<?php } ?>/><?php _e('Theme 2', 'accesspress-social-counter'); ?>
-                    <div class="apsc-theme-image"><img src="<?php echo SC_IMAGE_DIR . '/themes/theme-2.jpg'; ?>"/></div>
+                    <div class="apsc-theme-image"><img src="<?php echo esc_attr(SC_IMAGE_DIR) . '/themes/theme-2.jpg'; ?>"/></div>
                 </label>
                 <label>
                     <input type="radio" name="social_profile_theme" value="theme-3" <?php if ($apsc_settings['social_profile_theme'] == 'theme-3') { ?>checked="checked"<?php } ?>/><?php _e('Theme 3', 'accesspress-social-counter'); ?>
-                    <div class="apsc-theme-image"><img src="<?php echo SC_IMAGE_DIR . '/themes/theme-3.jpg'; ?>"/></div>
+                    <div class="apsc-theme-image"><img src="<?php echo esc_attr(SC_IMAGE_DIR) . '/themes/theme-3.jpg'; ?>"/></div>
                 </label>
                 <label>
                     <input type="radio" name="social_profile_theme" value="theme-4" <?php if ($apsc_settings['social_profile_theme'] == 'theme-4') { ?>checked="checked"<?php } ?>/><?php _e('Theme 4', 'accesspress-social-counter'); ?>
-                    <div class="apsc-theme-image"><img src="<?php echo SC_IMAGE_DIR . '/themes/theme-4.jpg'; ?>"/></div>
+                    <div class="apsc-theme-image"><img src="<?php echo esc_attr(SC_IMAGE_DIR) . '/themes/theme-4.jpg'; ?>"/></div>
                 </label>
                 <label>
                     <input type="radio" name="social_profile_theme" value="theme-5" <?php if ($apsc_settings['social_profile_theme'] == 'theme-5') { ?>checked="checked"<?php } ?>/><?php _e('Theme 5', 'accesspress-social-counter'); ?>
-                    <div class="apsc-theme-image"><img src="<?php echo SC_IMAGE_DIR . '/themes/theme-5.jpg'; ?>"/></div>
+                    <div class="apsc-theme-image"><img src="<?php echo esc_attr(SC_IMAGE_DIR) . '/themes/theme-5.jpg'; ?>"/></div>
                 </label>
             </div>
         </div>

@@ -9,7 +9,7 @@ $apsc_settings = $this->apsc_settings;
         <div class="apsc-panel">
             <div class="apsc-settings-header">
                 <div class="apsc-logo">
-                    <img src="<?php echo SC_IMAGE_DIR; ?>/logo.png" alt="<?php esc_attr_e('AccessPress Social Counter', 'accesspress-social-counter'); ?>" />
+                    <img src="<?php echo esc_attr(SC_IMAGE_DIR); ?>/logo.png" alt="<?php esc_attr_e('AccessPress Social Counter', 'accesspress-social-counter'); ?>" />
                 </div>
 
                 <div class="apsc-socials">
@@ -51,12 +51,11 @@ $apsc_settings = $this->apsc_settings;
                     <a href="javascript:void(0)" id="system-status" class="nav-tab apsc-tabs-trigger"><?php _e('System Status', 'accesspress-social-counter'); ?></a>
                     <a href="javascript:void(0)" id="how_to_use-settings" class="nav-tab apsc-tabs-trigger"><?php _e('How to use', 'accesspress-social-counter'); ?></a>
                     <a href="javascript:void(0)" id="about-settings" class="nav-tab apsc-tabs-trigger"><?php _e('About', 'accesspress-social-counter'); ?></a>
-                    <a href="http://wpall.club" target="_blank" id="about-settings" class="nav-tab apsc-tabs-trigger"><?php _e('More WP Resources', 'accesspress-social-counter'); ?></a>
                 </h2>
                 
                 <div class="metabox-holder">
                     <div id="optionsframework" class="postbox" style="float: left;">
-                        <form class="apsc-settings-form" method="post" action="<?php echo admin_url() . 'admin-post.php' ?>">
+                        <form class="apsc-settings-form" method="post" action="<?php echo esc_url(admin_url()) . 'admin-post.php' ?>">
                             <input type="hidden" name="action" value="apsc_settings_action"/>
                             <?php
                             /**
@@ -124,22 +123,22 @@ $apsc_settings = $this->apsc_settings;
         </div> -->
 
         <div class="apsc-upgrade-wrapper">
-            <a href="<?php echo APSC_PRO_LINK ?>" target="_blank">
-                <img src="<?php echo SC_IMAGE_DIR . '/upgrade-to-pro/upgrade-to-pro.png' ?>" style="width:100%;">
+            <a href="<?php echo esc_url(APSC_PRO_LINK); ?>" target="_blank">
+                <img src="<?php echo esc_attr(SC_IMAGE_DIR) . '/upgrade-to-pro/upgrade-to-pro.png' ?>" style="width:100%;">
             </a>
 
             <div class="apsc-upgrade-button-wrap-backend">
 
-                <a href="<?php echo APSC_PRO_DEMO; ?>" class="smls-demo-btn" target="_blank">Demo</a>
+                <a href="<?php echo esc_attr(APSC_PRO_DEMO); ?>" class="smls-demo-btn" target="_blank">Demo</a>
 
-                <a href="<?php echo APSC_PRO_LINK; ?>" target="_blank" class="smls-upgrade-btn">Upgrade</a>
+                <a href="<?php echo esc_url(APSC_PRO_LINK); ?>" target="_blank" class="smls-upgrade-btn">Upgrade</a>
 
-                <a href="<?php echo APSC_PRO_DETAIL; ?>" target="_blank" class="smls-upgrade-btn">Plugin Information</a>
+                <a href="<?php echo esc_attr(APSC_PRO_DETAIL); ?>" target="_blank" class="smls-upgrade-btn">Plugin Information</a>
 
             </div>
 
-            <a href="<?php echo APSC_PRO_LINK ?>" target="_blank">
-                <img src="<?php echo SC_IMAGE_DIR; ?>/upgrade-to-pro/upgrade-to-pro-feature.png" alt="<?php _e( 'AccessPress Social Pro', 'accesspress-social-counter' ); ?>" style="width:100%;">
+            <a href="<?php echo esc_url(APSC_PRO_LINK); ?>" target="_blank">
+                <img src="<?php echo esc_attr(SC_IMAGE_DIR); ?>/upgrade-to-pro/upgrade-to-pro-feature.png" alt="<?php _e( 'AccessPress Social Pro', 'accesspress-social-counter' ); ?>" style="width:100%;">
             </a>
         </div>
     </div>

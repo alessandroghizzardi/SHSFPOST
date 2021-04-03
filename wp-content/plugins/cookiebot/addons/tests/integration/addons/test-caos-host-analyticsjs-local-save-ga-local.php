@@ -2,7 +2,7 @@
 
 namespace cookiebot_addons\tests\integration\addons;
 
-class Test_Caos_Host_Analyticsjs_Local_Save_Ga_Local extends \WP_UnitTestCase {
+class Test_Caos_Host_Analyticsjs_Local_Save_Ga_Local extends Addons_Base {
 
 	/**
 	 * This will validate if the hook "caos_analytics_render_tracking_code" still exists
@@ -12,7 +12,7 @@ class Test_Caos_Host_Analyticsjs_Local_Save_Ga_Local extends \WP_UnitTestCase {
 	 * @since 2.1.0
 	 */
 	public function test_host_analyticsjs_local() {
-		$content = file_get_contents( 'http://plugins.svn.wordpress.org/host-analyticsjs-local/tags/2.0.0/save-ga-local.php' );
+		$content = $this->curl_get_content( 'http://plugins.svn.wordpress.org/host-analyticsjs-local/tags/1.97/save-ga-local.php' );
 
 		$this->assertNotFalse( strpos( $content,
 			'add_action(\'wp_footer\', \'caos_analytics_render_tracking_code\', $sgal_enqueue_order);' ) );

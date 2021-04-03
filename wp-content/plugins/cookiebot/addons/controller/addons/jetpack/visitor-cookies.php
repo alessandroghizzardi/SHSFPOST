@@ -241,7 +241,7 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 		 * Show message to accept preferences consent to save
 		 */
 		if ( $this->is_widget_placeholder_enabled() ) {
-			add_action( 'wp_mobile_theme_footer', array( $this, 'view_accept_preferences_consent' ) );
+			add_action( 'wp_footer', array( $this, 'view_accept_preferences_consent' ) );
 		}
 	}
 
@@ -251,7 +251,7 @@ class Visitor_Cookies implements Jetpack_Widget_Interface {
 	 * @since 1.2.0
 	 */
 	public function view_accept_preferences_consent() {
-		echo '<div class="cookieconsent-optout-' . cookiebot_addons_get_one_cookie_type( $this->get_widget_cookie_types() ) . '">
+		echo '<div class="' . cookiebot_addons_cookieconsent_optout( $this->get_widget_cookie_types() ) . '">
 						  ' . $this->get_default_placeholder() . '
 						</div>';
 	}

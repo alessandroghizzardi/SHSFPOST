@@ -2,8 +2,8 @@
 Contributors: Ataurr, wpmet, emrnco, golaphazi
 Tags: Wp ultimate Review, review, review plugin, product review, WordPress review, rating,  product review,  woocommerce review 
 Requires at least: 4.6
-Tested up to: 5.3.2
-Stable tag: 1.2.2
+Tested up to: 5.6
+Stable tag: 1.4.2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -39,6 +39,29 @@ You can set global product review also users can review by self in your post.
 
 
 == Changelog ==
+
+Version 1.4.2
+- Fix: missing pot file added 
+
+
+Version 1.4.1
+- Fix: review form not coming using shortcode issue resolved
+- Fix: language file added
+
+
+Version 1.4.0
+- Added: Global option "Enable user review" to turn off/on user review form
+- Added: Global option "Enable author review" to turn off/on author review
+- Fix: mobile responsive issue
+- Tweak: Pie chart design improved
+- Tweak: CSS and JS improved
+
+
+Version 1.3.0
+- Added: Global option "Overview average rating text" added for changing the word SUPERB!
+- Added: Global option added for showing the "overview average rating text" if the rating is grater than or equal the given value
+- Fix: Typo is correct
+- Tweak: CSS and JS improved
 
 Version 1.2.2
 - Fix: Custom post types can be selected from settings

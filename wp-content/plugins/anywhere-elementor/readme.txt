@@ -1,9 +1,9 @@
 === AnyWhere Elementor ===
-Contributors: wpvibes, webtechstreet, tejwanihemant
+Contributors: wpvibes, anandau14, tejwanihemant
 Tags: page-builder, elementor
 Requires at least: 4.4
-Tested up to: 5.4.2
-Stable tag: 4.9
+Tested up to: 5.6
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,23 +47,26 @@ Note: This plugin is an addon of Elementor Page Builder (https://wordpress.org/p
 
 == Changelog ==
 
-== 1.2.2 ==
+= 1.2.3 = 
+* Added compatibility fix for Elementor 3.1
+
+= 1.2.2 =
 * Checked compatibility with latest versions of WordPress and Elementor
 * Fixed double shortcode boxed when this plugin is activated along with AnyWhere Elementor Pro (Pro version) 
 
-== 1.2.1 ==
+= 1.2.1 =
 * Added filter 'ae_multilingual_support' to manage support for WPML & Polylang compatibility.
 
-== 1.2 ==
+= 1.2 =
 * Added WPML Compatibility.
 
-== 1.1 ==
+= 1.1 =
 * Option to view and copy shortcode from All Template view (without opening template to edit.).
 
-== 1.0 ==
+= 1.0 =
 * Updated compatibility with latest version of WordPress and Elementor
 
-== 0.5 ==
+= 0.5 =
 * Compatibility with Elementor 1.5
 
 

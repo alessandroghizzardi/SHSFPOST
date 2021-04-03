@@ -1,18 +1,20 @@
 <?php
 namespace Elementor;
 
-use \ElementsKit\Elementskit_Widget_Image_Comparison_Handler as Handler;
-use \ElementsKit\Modules\Controls\Controls_Manager as ElementsKit_Controls_Manager;
+use \Elementor\ElementsKit_Widget_Image_Comparison_Handler as Handler;
+use \ElementsKit_Lite\Modules\Controls\Controls_Manager as ElementsKit_Controls_Manager;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-class Elementskit_Widget_Image_Comparison extends Widget_Base {
-	use \ElementsKit\Widgets\Widget_Notice;
+class ElementsKit_Widget_Image_Comparison extends Widget_Base {
+	use \ElementsKit_Lite\Widgets\Widget_Notice;
 
     public $base;
     
     public function __construct( $data = [], $args = null ) {
-		parent::__construct( $data, $args );
+
+        parent::__construct( $data, $args );
+
 		$this->add_script_depends('event.move');
 		$this->add_script_depends('twentytwenty');
 		$this->add_script_depends('imagesloaded');
@@ -34,12 +36,16 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
         return Handler::get_categories();
     }
 
+    public function get_help_url() {
+        return '';
+    }
+
     protected function _register_controls() {
 
         $this->start_controls_section(
             'ekit_img_comparison_section_items',
             [
-                'label' => esc_html__( 'Items', 'elementskit' ),
+                'label' => esc_html__( 'Items', 'elementskit-lite' ),
             ]
         );
 
@@ -47,11 +53,11 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
         $this->add_control(
             'ekit_img_comparison_container_style',
             [
-                'label' => esc_html__( 'Container Style', 'elementskit' ),
+                'label' => esc_html__( 'Container Style', 'elementskit-lite' ),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'horizontal' => esc_html__( 'Horizontal', 'elementskit' ),
-                    'vertical' => esc_html__( 'Vertical', 'elementskit' ),
+                    'horizontal' => esc_html__( 'Horizontal', 'elementskit-lite' ),
+                    'vertical' => esc_html__( 'Vertical', 'elementskit-lite' ),
                 ],
                 'default' => 'vertical',
             ]
@@ -59,7 +65,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
         $this->add_control(
             'ekit_img_comparison_before_heading_section',
             [
-                'label' => esc_html__( 'Before', 'elementskit' ),
+                'label' => esc_html__( 'Before', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -67,7 +73,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
         $this->add_control(
             'ekit_img_comparison_image_before',
             [
-                'label' => esc_html__( 'Choose Image', 'elementskit' ),
+                'label' => esc_html__( 'Choose Image', 'elementskit-lite' ),
                 'type' => Controls_Manager::MEDIA,
                 'default' => [
                     'url' => Utils::get_placeholder_image_src(),
@@ -77,7 +83,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
         $this->add_control(
             'ekit_img_comparison_label_before',
             [
-                'label' => esc_html__( 'Label', 'elementskit' ),
+                'label' => esc_html__( 'Label', 'elementskit-lite' ),
                 'type' => Controls_Manager::TEXT,
                 'default' => 'Before',
             ]
@@ -85,7 +91,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
         $this->add_control(
             'ekit_img_comparison_after_heading_section',
             [
-                'label' => esc_html__( 'After', 'elementskit' ),
+                'label' => esc_html__( 'After', 'elementskit-lite' ),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -93,7 +99,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
         $this->add_control(
             'ekit_img_comparison_image_after',
             [
-                'label' => esc_html__( 'Choose Image', 'elementskit' ),
+                'label' => esc_html__( 'Choose Image', 'elementskit-lite' ),
                 'type' => Controls_Manager::MEDIA,
                 'default' => [
                     'url' => Utils::get_placeholder_image_src(),
@@ -103,7 +109,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
         $this->add_control(
             'ekit_img_comparison_label_after',
             [
-                'label' => esc_html__( 'Label', 'elementskit' ),
+                'label' => esc_html__( 'Label', 'elementskit-lite' ),
                 'type' => Controls_Manager::TEXT,
                 'default' => 'After',
             ]
@@ -114,13 +120,13 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
         $this->start_controls_section(
             'ekit_img_comparison_section_settings',
             [
-                'label' => esc_html__( 'Settings', 'elementskit' ),
+                'label' => esc_html__( 'Settings', 'elementskit-lite' ),
             ]
         );
         $this->add_control(
 			'ekit_img_comparison_offset',
 			[
-				'label' => esc_html__( 'Offset', 'elementskit' ),
+				'label' => esc_html__( 'Offset', 'elementskit-lite' ),
 				'type' => Controls_Manager::SLIDER,
 				'size_units' => [ '%' ],
 				'range' => [
@@ -133,43 +139,43 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 					'unit' => '%',
 					'size' => 50,
 				],
-                'description' => esc_html__('How much of the before image is visible when the page loads', 'elementskit'),
+                'description' => esc_html__('How much of the before image is visible when the page loads', 'elementskit-lite'),
 			]
 		);
         $this->add_control(
             'ekit_img_comparison_overlay',
             [
-                'label' => esc_html__( 'Remove overlay?', 'elementskit' ),
+                'label' => esc_html__( 'Remove overlay?', 'elementskit-lite' ),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => esc_html__( 'Yes', 'elementskit' ),
-                'label_off' => esc_html__( 'No', 'elementskit' ),
+                'label_on' => esc_html__( 'Yes', 'elementskit-lite' ),
+                'label_off' => esc_html__( 'No', 'elementskit-lite' ),
                 'return_value' => true,
                 'default' => false,
-                'description' => esc_html__('Do not show the overlay with before and after', 'elementskit'),
+                'description' => esc_html__('Do not show the overlay with before and after', 'elementskit-lite'),
             ]
         );
         $this->add_control(
             'ekit_img_comparison_move_slider_on_hover',
             [
-                'label' => esc_html__( 'Move slider on hover?', 'elementskit' ),
+                'label' => esc_html__( 'Move slider on hover?', 'elementskit-lite' ),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => esc_html__( 'Yes', 'elementskit' ),
-                'label_off' => esc_html__( 'No', 'elementskit' ),
+                'label_on' => esc_html__( 'Yes', 'elementskit-lite' ),
+                'label_off' => esc_html__( 'No', 'elementskit-lite' ),
                 'return_value' => true,
                 'default' => false,
-                'description' => esc_html__('Move slider on mouse hover?', 'elementskit'),
+                'description' => esc_html__('Move slider on mouse hover?', 'elementskit-lite'),
             ]
         );
         $this->add_control(
             'ekit_img_comparison_click_to_move',
             [
-                'label' => esc_html__( 'Click to move?', 'elementskit' ),
+                'label' => esc_html__( 'Click to move?', 'elementskit-lite' ),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => esc_html__( 'Yes', 'elementskit' ),
-                'label_off' => esc_html__( 'No', 'elementskit' ),
+                'label_on' => esc_html__( 'Yes', 'elementskit-lite' ),
+                'label_off' => esc_html__( 'No', 'elementskit-lite' ),
                 'return_value' => true,
                 'default' => false,
-                'description' => esc_html__('Allow a user to click (or tap) anywhere on the image to move the slider to that location.', 'elementskit'),
+                'description' => esc_html__('Allow a user to click (or tap) anywhere on the image to move the slider to that location.', 'elementskit-lite'),
             ]
         );
         $this->end_controls_section();
@@ -180,7 +186,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->start_controls_section(
 			'ekit_img_comparison_general_style',
 			array(
-				'label'      => esc_html__( 'General', 'elementskit' ),
+				'label'      => esc_html__( 'General', 'elementskit-lite' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'show_label' => false,
 			)
@@ -190,7 +196,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 			Group_Control_Border::get_type(),
 			array(
 				'name'        => 'ekit_img_comparison_container_border',
-				'label'       => esc_html__( 'Border', 'elementskit' ),
+				'label'       => esc_html__( 'Border', 'elementskit-lite' ),
 				'placeholder' => '1px',
 				'default'     => '1px',
 				'selector'  => '{{WRAPPER}} .elementskit-image-comparison',
@@ -200,7 +206,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_img_comparison_container_border_radius',
 			array(
-				'label'      => esc_html__( 'Border Radius', 'elementskit' ),
+				'label'      => esc_html__( 'Border Radius', 'elementskit-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -212,7 +218,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_img_comparison_container_padding',
 			array(
-				'label'      => esc_html__( 'Padding', 'elementskit' ),
+				'label'      => esc_html__( 'Padding', 'elementskit-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -240,7 +246,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->start_controls_section(
 			'ekit_img_comparison_label_style',
 			array(
-				'label'      => esc_html__( 'Label', 'elementskit' ),
+				'label'      => esc_html__( 'Label', 'elementskit-lite' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'show_label' => false,
 				'condition' => ['ekit_img_comparison_overlay!' => 'true'],
@@ -252,14 +258,14 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->start_controls_tab(
 			'ekit_img_comparison_tab_label_before',
 			array(
-				'label' => esc_html__( 'Before', 'elementskit' ),
+				'label' => esc_html__( 'Before', 'elementskit-lite' ),
 			)
 		);
 
 		$this->add_responsive_control(
 			'ekit_img_comparison_before_label_color',
 			array(
-				'label' => esc_html__( 'Color', 'elementskit' ),
+				'label' => esc_html__( 'Color', 'elementskit-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .elementskit-image-comparison .twentytwenty-before-label:before' => 'color: {{VALUE}}',
@@ -288,7 +294,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_img_comparison_before_label_margin',
 			array(
-				'label'      => esc_html__( 'Margin', 'elementskit' ),
+				'label'      => esc_html__( 'Margin', 'elementskit-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -300,7 +306,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_img_comparison_before_label_padding',
 			array(
-				'label'      => esc_html__( 'Padding', 'elementskit' ),
+				'label'      => esc_html__( 'Padding', 'elementskit-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -313,14 +319,14 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->start_controls_tab(
 			'ekit_img_comparison_tab_label_after',
 			array(
-				'label' => esc_html__( 'After', 'elementskit' ),
+				'label' => esc_html__( 'After', 'elementskit-lite' ),
 			)
 		);
 
 		$this->add_responsive_control(
 			'ekit_img_comparison_after_label_color',
 			array(
-				'label' => esc_html__( 'Color', 'elementskit' ),
+				'label' => esc_html__( 'Color', 'elementskit-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'selectors' => array(
 					'{{WRAPPER}} .elementskit-image-comparison .twentytwenty-after-label:before' => 'color: {{VALUE}}',
@@ -348,7 +354,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_img_comparison_after_label_margin',
 			array(
-				'label'      => esc_html__( 'Margin', 'elementskit' ),
+				'label'      => esc_html__( 'Margin', 'elementskit-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -360,7 +366,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_img_comparison_after_label_padding',
 			array(
-				'label'      => esc_html__( 'Padding', 'elementskit' ),
+				'label'      => esc_html__( 'Padding', 'elementskit-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -381,7 +387,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->start_controls_section(
 			'ekit_img_comparison_handle_style',
 			array(
-				'label'      => esc_html__( 'Handle', 'elementskit' ),
+				'label'      => esc_html__( 'Handle', 'elementskit-lite' ),
 				'tab'        => Controls_Manager::TAB_STYLE,
 				'show_label' => false,
 			)
@@ -390,7 +396,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_img_comparison_handle_control_width',
 			array(
-				'label'      => esc_html__( 'Control Width', 'elementskit' ),
+				'label'      => esc_html__( 'Control Width', 'elementskit-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px' ),
 				'range'      => array(
@@ -408,7 +414,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_img_comparison_handle_control_height',
 			array(
-				'label'      => esc_html__( 'Height', 'elementskit' ),
+				'label'      => esc_html__( 'Height', 'elementskit-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px' ),
 				'range'      => array(
@@ -428,7 +434,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->start_controls_tab(
 			'ekit_img_comparison_tab_handle_normal',
 			array(
-				'label' => esc_html__( 'Normal', 'elementskit' ),
+				'label' => esc_html__( 'Normal', 'elementskit-lite' ),
 			)
 		);
 
@@ -443,7 +449,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_img_comparison_handle_arrow_color',
 			array(
-				'label' => esc_html__( 'Arrow Color', 'elementskit' ),
+				'label' => esc_html__( 'Arrow Color', 'elementskit-lite' ),
 				'type' => Controls_Manager::COLOR,
 				'default'     => '#000',
 				'selectors' => array(
@@ -459,7 +465,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_img_comparison_handle_arrow_color_vertical',
 			array(
-				'label' => esc_html__( 'Arrow Color', 'elementskit' ),
+				'label' => esc_html__( 'Arrow Color', 'elementskit-lite' ),
 				'type' => Controls_Manager::COLOR,
                 'default'     => '#000',
 				'selectors' => array(
@@ -485,7 +491,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->start_controls_tab(
 			'ekit_img_comparison_tab_handle_hover',
 			array(
-				'label' => esc_html__( 'Hover', 'elementskit' ),
+				'label' => esc_html__( 'Hover', 'elementskit-lite' ),
 			)
 		);
 
@@ -500,7 +506,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_img_comparison_handle_arrow_color_hover',
 			array(
-				'label' => esc_html__( 'Arrow Color', 'elementskit' ),
+				'label' => esc_html__( 'Arrow Color', 'elementskit-lite' ),
 				'type' => Controls_Manager::COLOR,
 
 				'selectors' => array(
@@ -516,7 +522,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_img_comparison_handle_arrow_color_hover_vertical',
 			array(
-				'label' => esc_html__( 'Arrow Color', 'elementskit' ),
+				'label' => esc_html__( 'Arrow Color', 'elementskit-lite' ),
 				'type' => Controls_Manager::COLOR,
 
 				'selectors' => array(
@@ -544,7 +550,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_img_comparison_handle_divider_margin',
 			array(
-				'label'      => esc_html__( 'Margin', 'elementskit' ),
+				'label'      => esc_html__( 'Margin', 'elementskit-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -557,7 +563,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_img_comparison_handle_divider_radius',
 			array(
-				'label'      => esc_html__( 'Border Radius', 'elementskit' ),
+				'label'      => esc_html__( 'Border Radius', 'elementskit-lite' ),
 				'type'       => Controls_Manager::DIMENSIONS,
 				'size_units' => array( 'px', '%' ),
 				'selectors'  => array(
@@ -569,7 +575,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_control(
 			'ekit_img_comparison_heading_handle_divider_style',
 			array(
-				'label'     => esc_html__( 'Handle Divider', 'elementskit' ),
+				'label'     => esc_html__( 'Handle Divider', 'elementskit-lite' ),
 				'type'      => Controls_Manager::HEADING,
 				'separator' => 'before',
 			)
@@ -578,7 +584,7 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_img_comparison_handle_divider_width',
 			array(
-				'label'      => esc_html__( 'Divider Thickness', 'elementskit' ),
+				'label'      => esc_html__( 'Divider Thickness', 'elementskit-lite' ),
 				'type'       => Controls_Manager::SLIDER,
 				'size_units' => array( 'px' ),
 				'range'      => array(
@@ -588,7 +594,8 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 					),
 				),
 				'selectors'  => array(
-					'{{WRAPPER}} .elementskit-image-comparison .twentytwenty-handle:before,{{WRAPPER}} .elementskit-image-comparison .twentytwenty-handle:after' => 'height: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .twentytwenty-horizontal .twentytwenty-handle:before, {{WRAPPER}} .twentytwenty-horizontal .twentytwenty-handle:after' => 'width: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .twentytwenty-vertical .twentytwenty-handle:before, {{WRAPPER}} .twentytwenty-vertical .twentytwenty-handle:after' => 'height: {{SIZE}}{{UNIT}};',
 				)
 			)
 		);
@@ -596,10 +603,10 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 		$this->add_responsive_control(
 			'ekit_img_comparison_handle_divider_color',
 			array(
-				'label'   => esc_html__( 'Divider Color', 'elementskit' ),
+				'label'   => esc_html__( 'Divider Color', 'elementskit-lite' ),
 				'type'    => Controls_Manager::COLOR,
 				'selectors' => array(
-					'{{WRAPPER}} .elementskit-image-comparison .twentytwenty-handle:before,{{WRAPPER}} .elementskit-image-comparison .twentytwenty-handle:after' => 'background-color: {{VALUE}};',
+					'{{WRAPPER}} .elementskit-image-comparison .twentytwenty-handle:before, {{WRAPPER}} .elementskit-image-comparison .twentytwenty-handle:after' => 'background-color: {{VALUE}};',
 				),
 			)
 		);
@@ -635,19 +642,17 @@ class Elementskit_Widget_Image_Comparison extends Widget_Base {
 
         }
 
-        $data = 'data-offset='.($settings['ekit_img_comparison_offset']['size'] / 100).'
-        data-overlay="'.($settings['ekit_img_comparison_overlay']).'"
-        data-label_after="'.($settings['ekit_img_comparison_label_after']).'"
-        data-label_before="'.($settings['ekit_img_comparison_label_before']).'"
-        data-move_slider_on_hover="'.($settings['ekit_img_comparison_move_slider_on_hover']).'"
-        data-click_to_move="'.($settings['ekit_img_comparison_click_to_move']).'"';
+        $data = 'data-offset='.esc_attr($settings['ekit_img_comparison_offset']['size'] / 100).'
+        data-overlay="'.esc_attr($settings['ekit_img_comparison_overlay']).'"
+        data-label_after="'.esc_attr($settings['ekit_img_comparison_label_after']).'"
+        data-label_before="'.esc_attr($settings['ekit_img_comparison_label_before']).'"
+        data-move_slider_on_hover="'.esc_attr($settings['ekit_img_comparison_move_slider_on_hover']).'"
+        data-click_to_move="'.esc_attr($settings['ekit_img_comparison_click_to_move']).'"';
         ?>
 
-        <div <?php echo \ElementsKit\Utils::render($this->get_render_attribute_string( 'image_comparison_wrapper' )); ?> <?php echo \ElementsKit\Utils::render($data); ?>>
-            <?php echo  \ElementsKit\Utils::kses($image_html); ?>
+        <div <?php echo \ElementsKit_Lite\Utils::render($this->get_render_attribute_string( 'image_comparison_wrapper' )); ?> <?php echo \ElementsKit_Lite\Utils::render($data); ?>>
+            <?php echo  \ElementsKit_Lite\Utils::kses($image_html); ?>
         </div>
 
-
     <?php }
-    protected function _content_template() { }
 }

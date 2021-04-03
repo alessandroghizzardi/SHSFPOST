@@ -1,14 +1,14 @@
 === Essential Addons for Elementor ===
 Contributors: wpdevteam, Codetic, re_enter_rupok, Asif2BD, priyomukul, mahfuz01, nazsabuz, manzurahammed
 Tags: elementor, elements, addons, elementor addon, elementor widget, elementor form, woocommerce elementor, page builder, builder, visual editor, wordpress page builder
-Requires at least: 4.0
-Tested up to: 5.4
-Requires PHP: 5.4
-Stable tag: 4.0.3
+Requires at least: 5.0
+Tested up to: 5.7
+Requires PHP: 5.6
+Stable tag: 4.6.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-The Essential plugin you install after Elementor! 70+ Premium elements, including WooCommerce, Event Calender, Data Table, Post Grid. Your ultimate elements library. 
+The Essential plugin you install after Elementor! Packed with 40+ stunning free elements including Advanced Data Table, Event Calendar, Filterable Gallery, WooCommerce, and many more.
 
 == Description ==
 
@@ -43,7 +43,7 @@ We have extra-ordinary support team ready to help you. Ask your questions in the
 
 ### 40+ FREE WIDGETS AND COUNTING
 
-We have designed 39 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
+We have designed 42 of the most useful widgets to enhance your Elementor Page Building experience and allow you to climb the top of your design capabilities.
 
 1. [Post Grid](https://essential-addons.com/elementor/post-grid/) - Showcase your blog posts in 4 unique styles 
 2. [Post Timeline](https://essential-addons.com/elementor/post-timeline/) - Create stunning timeline for your Posts, Pages or any Custom Post. 
@@ -84,7 +84,11 @@ We have designed 39 of the most useful widgets to enhance your Elementor Page Bu
 37. [Event Calendar](https://essential-addons.com/elementor/event-calendar) - Create your own customized Event page by custom events, Google Calendar events and many more third party plugin integrations. 
 38. [Formstack](https://essential-addons.com/elementor/formstack/) - Design your Formstack forms within Elementor. 
 39. [Woo Checkout](https://essential-addons.com/elementor/woo-checkout/) - Create your own WooCommerce Checkout page and customize and design everything. 
-40. [Typeform](https://essential-addons.com/elementor/typeform/) - Embed and Design your Typeform forms within Elementor. 
+40. [Typeform](https://essential-addons.com/elementor/typeform/) - Embed and Design your Typeform forms within Elementor.
+41. [Login | Register Form](https://essential-addons.com/elementor/login-register-form/) - Create amazing and attractive login or registration forms in Elementor 
+42. [Woo Product Compare](https://essential-addons.com/elementor/woo-product-compare/) - Create stunning WooCommerce Product Compare table instantly
+43. [Woo Product Carousel](https://essential-addons.com/elementor/woo-product-carousel/) - Design amazing WooCommerce Product Carousel with ease
+
 
 
 ### More elements (29+) on [Premium Version](https://wpdeveloper.net/in/upgrade-essential-addons-elementor)
@@ -124,7 +128,7 @@ Extensions (Free):
 
 1. [Reading Progress Bar](https://essential-addons.com/elementor/reading-progress/) - Add a reading progress bar to your page/post to indicate the current reading position.
 2. [Page/Post Duplicator](https://essential-addons.com/elementor/post-duplicator/) - Duplicate any page or post in a single click.
-3. [Table of Content](https://essential-addons.com/elementor/table-of-content/) - Display Table of Content automatically on any page, post or custom post type. You can control globally. 
+3. [Table of Contents](https://essential-addons.com/elementor/table-of-content/) - Display Table of Content automatically on any page, post or custom post type. You can control globally. 
 
 Extensions (Pro): 
 
@@ -223,6 +227,221 @@ Your existing elements/content will work with premium version. So you won't lose
 
 
 == Changelog ==
+
+
+= 4.6.0 - 04/01/2021 =
+
+- Added: EA Woo Product Carousel
+- Few minor bug fix and improvements
+
+
+= 4.5.5 - 23/03/2021 =
+
+- Fixed: PHP error related to HTML tags validation
+- Few minor bug fix and improvements
+
+= 4.5.4 - 22/03/2021 =
+
+- Added: Compatibility with Elementor latest versions
+- Fixed: Sanitized options in the Elementor HTML Tags
+- Few minor bug fix and improvements
+
+= 4.5.3 - 10/03/2021 =
+
+- Fixed: EA Typeform | Redirect Issue while connecting your account
+- Fixed: EA Image Accordion | Enable Title Link is not working properly
+- Fixed: EA Woo Product Grid | HTML tags are not working on Product Title
+- Fixed: EA Twitter Feed | Throws PHP Warning
+- Few minor bug fix and improvements
+
+= 4.5.2 - 03/03/2021 =
+
+- Added: Dynamic query option for EA Woo Product Grid
+- Fixed: EA Login/Register Form | Error/Success message not appearing after Registration
+- Fixed: EA Advanced Accordion | Showing a border around the tab
+- Fixed: EA Facebook Feed | Preview content settings not working properly
+- Few minor bug fix and improvements
+
+= 4.5.1 - 23/02/2021 =
+- Fixed: EA Login Register Form | ‘Security Token Does Not Match’ error
+- Fixed: EA Product Grid | Pagination disappearing with the latest update
+- Fixed: EA Product Grid | ‘Filtered by Sale’ not working for variable products
+- Fixed: EA Image Accordion | toggle option to add link in the content
+- Fixed: EA Event Calendar | Date showing invalid for All day events
+- Fixed: EA Advanced Data Table | Sorting not working on Mozilla Firefox
+- Fixed: EA Post Grid | ‘Dynamic’ query not working
+- Fixed: EA Event Calendar | 24 Hours format not working correctly
+- Fixed: EA Product Grid | ‘Filtered by Sale’ not working for variable products
+- Fixed: EA Sticky Video | Copy Link button not working
+- Fixed: EA Creative Button | Icon color not changing
+- Few minor bug fix and improvements
+
+= 4.5.0 - 08/02/2021 =
+- Added: Quick Setup wizard for new installations
+- Few minor bug fix and improvements
+
+= 4.4.1 - 29/01/2021 =
+- Fixed: EA Filterable Gallery | style controls not working after Elementor update
+- Fixed: EA Fancy Text | not working inside Elementor Editor
+- Few minor bug fix and improvements
+
+
+= 4.4.0 - 26/01/2021 =
+- Added: EA Woo Product Compare
+- Added: EA Woo Product Compare integration with EA Product Grid
+- Fixed: EA Login | Register | Showing Invalid Username message for Invalid Password
+- Fixed: EA Login | Register | added "Remember Me" text controller
+- Few minor bug fix and improvements
+
+
+= 4.3.10 - 07/01/2021 =
+- Fixed: EA Info Box | Throwing PHP Notice when Image option is enabled
+- Fixed: EA Filterable Gallery | Dropdown menu not disappearing on Safari
+- Fixed: EA Woo Checkout | Added String Controller for returning customers
+- Fixed: EA Gravity Forms | removed extra padding
+- Fixed: EA Data Table | Throwing PHP Notice
+- Few minor bug fix and improvements
+
+= 4.3.9 - 23/12/2020 =
+- Fixed: Custom JS not working after first reload
+- Fixed: EA Advanced Data Table | sorting not working for nested elements in table header
+- Fixed: Missing Background color option for EA Testimonial
+- Fixed: EA Pricing Table | Style 5 Ribbon Text color not changing
+- Fixed: EA Info box | Dynamic tags not working
+- Few minor bug fix and improvements
+
+= 4.3.8 - 10/12/2020 =
+- Fixed: EA Fancy Text & Adv. Data Table  | not working on WordPress 5.6
+- Fixed: EA Product Grid | Rating controller not working with Default Style
+- Fixed: EA Flip Box | Button icon not displaying
+- Added: EA Event Calendar | 24 Hours format option
+- Few minor bug fix and improvements
+
+= 4.3.7 - 19/11/2020 =
+- Fixed: Broken style if Object Cache is enabled
+- Fixed: Pages showing blank after updating with Elementor
+- Added: RTL Support 
+- Improved: EA Product Grid | New Presets, Quick View & Pagination
+- Improved: EA Woo Checkout | added text change options
+- Improved: EA Flip Box | Default Appearance & added 3D Effect 
+- Improved: EA Dual Color Heading | Gradient Text Color & SVG not showing in Content
+- Fixed: EA Woo Checkout | Invalid Recurring Shipping Method & not updating properly
+- Fixed: EA Image Accordion | Border Radius not working & Missing content alignment controls
+- Few minor bug fix and improvements
+
+= 4.3.6 - 12/11/2020 =
+- Added: Dynamic Tag/ACF Support for most widgets
+- Added: EA Woo Checkout | String Translation options
+- Tweaked: Updated Repeater Control with Elementor 3.0
+- Fixed: Double Slash in EA URI inside WordPress Dashboard
+- Fixed: EA BetterDocs Category Grid | not showing Sub-category items
+- Few minor bug fix and improvements
+
+= 4.3.5 - 03/11/2020 =
+- Fixed: EA Post Grid | PHP notice for Title Tag
+- Few minor bug fix and improvements
+
+= 4.3.4 - 02/11/2020 =
+- Fixed: EA Post Grid | Title Tag not working
+- Fixed: EA Product Grid | Displaying 'Out of Stock' products even if it's disabled from WooCommerce
+- Fixed: EA Product Grid | PHP Notices
+- Few minor bug fix and improvements
+
+= 4.3.3 - 22/10/2020 =
+- Fixed: Assets not generating on Multi-sites
+- Fixed: Critical Errors related to Template queries
+- Few minor bug fix and improvements
+
+= 4.3.2 - 18/10/2020 =
+- Fixed: Assets not generating properly
+- Fixed: Fatal error with BuddyPress plugin
+- Fixed: EA Twitter Feed | content not loading properly
+- Fixed: EA Table of Contents | not working correctly for posts
+- Fixed: PHP notices with EA Post Grid, Post Timeline & Post Carousel
+- Fixed: EA FormStack | Auth error in PHP 5.6
+- Few minor bug fix and improvements
+
+= 4.3.1 - 14/10/2020 =
+- Few minor bug fix
+
+= 4.3.0 - 12/10/2020 =
+- Revamped: Code Structure for better performance
+- Improved: Asset Generator method
+- Improved: Slow queries for Dynamic widgets
+- Added: Dynamic support for Post Widgets
+- Added: Translation compatibility with more widgets
+- Added: Custom Template support for BetterDocs, Product & Post widgets
+- Fixed: EA BetterDocs widgets | 404 page not found error with Multiple-KB
+- Fixed: EA Widgets not loading properly inside Elementor Popups
+- Fixed: EA TOC & Reading Progress Bar not showing in Non-Elementor pages
+- Fixed: EA TOC & Reading Progress Bar not working correctly inside Elementor
+- Fixed: EA Creative Buttons throwing PHP error
+- Few minor bug fix and improvements
+
+= 4.2.4 - 13/09/2020 =
+- Fixed: get_elements_data on bool error
+- Fixed: PHP error notice for 'Search & Filter' option in EA Filterable Gallery
+- Fixed: Unable to format quiz field in EA Contact Form 7
+- Fixed: EA Sticky Video not working when it's used multiple times on a page
+- Fixed: Sale badge and Overlay issues with EA Product Grid
+- Improved: New Design and Style controls for EA Dual Color Heading
+- Improved: Styling controls for EA Product Grid
+- Few minor bugfix and improvements
+
+= 4.2.3 - 03/09/2020 =
+- Removed: Dashboard widget 
+- Fixed: EA Filterable Gallery | Showing Duplicate Images in Gallery View
+- Few minor bugfix and improvements
+
+= 4.2.2 - 27/08/2020 =
+- Fixed: Sorting not working when Pagination is disabled in EA Advanced Data Table
+- Added: Styling controls for reCAPTCHA in EA Login | Register Form
+- Added: Translatable Strings in EA Login | Register Form
+- Added: Options to change the Error Messages in EA Login | Register Form
+- Few minor bugfix and improvements
+
+= 4.2.1 - 20/08/2020 =
+- Added: Google reCAPTCHA option in EA Login | Register Form
+- Added: Compatibility with WooCommerce 4.4.1
+- Fixed: User Role not setting correctly in EA Login | Register Form
+- Few minor bugfix and improvements
+
+= 4.2.0 - 06/08/2020 =
+- Added: EA Login | Register Widget
+- Removed: Upsell Notices
+- Added: Compatibility with WooCommerce 4.3.1
+- Fixed: SSL Issue
+- Few minor bugfix and improvements
+
+= 4.1.2 - 30/07/2020 =
+- Fixed: EA Twitter Feed | Content length issue
+- Fixed: EA Woo Checkout Coupons showing despite disabling from Woo Settings
+- Few minor bugfix and improvements
+
+= 4.1.1 - 23/07/2020 =
+- Improved: EA Typeform with auth2 authentication
+- Fixed: EA Sticky Video PHP error with Image Overlay option
+- Fixed: EA Reading Progress Bar & EA TOC not working inside Elementor Editor
+- Fixed: EA Filterable Gallery- broken link issue
+- Few minor bugfix and improvements
+
+= 4.1.0 - 16/07/2020 =
+- Added EA Custom JS Extension
+- Added: New Asset Embed Method with External/Internal JS & CSS support
+- Removed: Quick Tools from admin bar
+- Removed: Fallback scripts
+- Removed: Unnecessary form scripts
+- Few minor bugfix and improvements
+
+= 4.0.4 - 22/06/2020 =
+- Improved: EA BetterDocs Category Grid & EA BetterDocs Category Box
+- Added: Single Click play option with EA Stick Video when image overlay is enabled
+- Added: HTML Heading Tags for EA Image Accordion
+- Fixed: EA Post Grid not showing in Elementor panel
+- Fixed: EA Event Calendar not showing Full month in 'List' view
+- Fixed: EA Event Calendar translation issue with 'All-day' and 'Today' texts
+- Fixed: EA Sticky Video play icon not disappearing
+- Few minor bug fix and improvements
 
 = 4.0.3 - 11/06/2020 =
 - Fixed: EA Filterable Gallery Image Overlapping issue with Lazyload- WP Rocket

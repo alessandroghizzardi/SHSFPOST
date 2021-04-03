@@ -23,6 +23,9 @@
   "Hubspot_Tracking_Code": {
     "class": "cookiebot_addons\\controller\\addons\\hubspot_tracking_code\\Hubspot_Tracking_Code"
   },
+  "Custom_Facebook_Feed_Old": {
+    "class": "cookiebot_addons\\controller\\addons\\custom_facebook_feed_old\\Custom_Facebook_Feed_Old"
+  },
   "Custom_Facebook_Feed": {
     "class": "cookiebot_addons\\controller\\addons\\custom_facebook_feed\\Custom_Facebook_Feed"
   },
@@ -85,5 +88,18 @@
   },
   "Simple_Share_Buttons_Adder": {
     "class": "cookiebot_addons\\controller\\addons\\simple_share_buttons_adder\\Simple_Share_Buttons_Adder"
+  },
+  "Official_Facebook_Pixel": {
+    "class": "cookiebot_addons\\controller\\addons\\official_facebook_pixel\\Official_Facebook_Pixel"
+  },
+  "Woocommerce_Google_Analytics_Pro": {
+    "class": "cookiebot_addons\\controller\\addons\\woocommerce_google_analytics_pro\\Woocommerce_Google_Analytics_Pro"
+  },
+  "Google_Site_Kit": {
+    "class": "cookiebot_addons\\controller\\addons\\google_site_kit\\Google_Site_Kit"
+  },
+  "Enfold": {
+    "class": "cookiebot_addons\\controller\\addons\\enfold\\Enfold",
+    "is_theme": true
   }
 }

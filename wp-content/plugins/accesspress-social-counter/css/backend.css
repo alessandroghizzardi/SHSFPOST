@@ -852,7 +852,17 @@ span.apsc-option-trigger {
 .nav-tab {
     margin-top: 0.5em;
 }
-
+#get_token {
+    text-decoration: none;
+    background-color: #3d74f1;
+    color: #fff;
+    border: 1px solid #3d74f1;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    margin: 10px 0px 10px 0;
+    display: inline-block;
+}
 @media screen and (max-width: 1076px) {
     .nav-tab {
         width: 40%;

@@ -54,8 +54,8 @@ if (!class_exists('PP_Module')) {
                 $loader     = new Twig_Loader_Filesystem($this->twigPath);
                 $this->twig = new Twig_Environment(
                     $loader, [
-                    'debug' => $this->debug,
-                ]
+                               'debug' => $this->debug,
+                           ]
                 );
 
                 if ($this->debug) {
@@ -304,11 +304,12 @@ if (!class_exists('PP_Module')) {
             // Timepicker needs to come after jquery-ui-datepicker and jquery
             wp_enqueue_script(
                 'publishpress-timepicker',
-                PUBLISHPRESS_URL . 'common/js/jquery-ui-timepicker-addon.js',
+                PUBLISHPRESS_URL . 'common/libs/timepicker-v1.6.3.1/jquery-ui-timepicker-addon.min.js',
                 ['jquery', 'jquery-ui-datepicker'],
                 PUBLISHPRESS_VERSION,
                 true
             );
+
             wp_enqueue_script(
                 'publishpress-date_picker',
                 PUBLISHPRESS_URL . 'common/js/pp_date.js',
@@ -318,6 +319,13 @@ if (!class_exists('PP_Module')) {
             );
 
             // Now styles
+            wp_enqueue_style(
+                'publishpress-timepicker',
+                PUBLISHPRESS_URL . 'common/libs/timepicker-v1.6.3.1/jquery-ui-timepicker-addon.min.css',
+                ['wp-jquery-ui-dialog'],
+                PUBLISHPRESS_VERSION,
+                'screen'
+            );
             wp_enqueue_style(
                 'jquery-ui-datepicker',
                 PUBLISHPRESS_URL . 'common/css/jquery.ui.datepicker.css',
@@ -438,7 +446,6 @@ if (!class_exists('PP_Module')) {
          */
         public function is_whitelisted_functional_view($module_name = null)
         {
-            // @todo complete this method
             return true;
         }
 
@@ -562,6 +569,29 @@ if (!class_exists('PP_Module')) {
             return maybe_unserialize(base64_decode($string_to_unencode));
         }
 
+        public function get_path_base()
+        {
+            return PUBLISHPRESS_BASE_PATH;
+        }
+
+        public function get_publishpress_url()
+        {
+            return PUBLISHPRESS_URL;
+        }
+
+        /**
+         * This method looks redundant but it is just an abstraction needed to make it possible to
+         * test Windows paths on a *unix machine. If not used and overridden in stubs on the tests
+         * it always return "." because Windows paths are not valid on *unix machines.
+         *
+         * @param $file
+         * @return string
+         */
+        public function dirname($file)
+        {
+            return dirname($file);
+        }
+
         /**
          * Get the publicly accessible URL for the module based on the filename
          *
@@ -573,9 +603,10 @@ if (!class_exists('PP_Module')) {
          */
         public function get_module_url($file)
         {
-            $module_url = plugins_url('/', $file);
+            $file = str_replace($this->get_path_base(), '', $this->dirname($file));
+            $module_url = untrailingslashit($this->get_publishpress_url()) . $file;
 
-            return trailingslashit($module_url);
+            return str_replace('\\', '/', trailingslashit($module_url));
         }
 
         /**
@@ -601,7 +632,7 @@ if (!class_exists('PP_Module')) {
             $today = time(); /* Current unix time  */
             $since = $today - $original;
 
-            if ($since > $chunks[2][0]) {
+            if ($since > $chunks[2][0] || $original > $today) {
                 $dateFormat = get_option('date_format', 'Y-m-d');
 
                 $print = date($dateFormat, $original);
@@ -692,7 +723,7 @@ if (!class_exists('PP_Module')) {
             ?>
 
             <?php if (!empty($users) || !empty($roles) || !empty($emails)) : ?>
-            <select class="chosen-select" name="to_notify[]" multiple>
+            <select id="to_notify" class="chosen-select" name="to_notify[]" multiple="multiple">
                 <?php if (!empty($roles)) : ?>
                     <optgroup label="<?php echo esc_attr__('Roles', 'publishpress'); ?>">
                         <?php foreach ($roles as $role => $data) : ?>
@@ -826,4 +857,4 @@ if (!class_exists('PP_Module')) {
                 && $publishpress->{$module_slug}->module->options->enabled === 'on';
         }
     }
-}// End if().
+}
